@@ -1,0 +1,22 @@
+{
+  "name": "auth",
+  "version": "0.0.0",
+  "main": "./index.tx",
+  "types": "./**/*.ts",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "@lucia-auth/adapter-prisma": "^4.0.1",
+    "arctic": "^1.4.0",
+    "database": "workspace:*",
+    "eslint-config-custom": "workspace:*",
+    "h3": "^1.11.1",
+    "lucia": "^3.2.0",
+    "mail": "workspace:*",
+    "oslo": "^1.2.0",
+    "tsconfig": "workspace:*",
+    "utils": "workspace:*",
+    "zod": "^3.23.0"
+  }
+}
