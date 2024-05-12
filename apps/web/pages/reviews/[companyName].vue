@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const runtimeConfig = useRuntimeConfig();
-const localePath = useLocalePath();
-await navigateTo(localePath(runtimeConfig.public.auth.redirectPath));
+  const companyName = useRoute("reviews-companyName").params.companyName;
 </script>
 
 <template>
-    <div />
+  <div>
+    <h1>Company Profile for {{ companyName }}</h1>
+  </div>
 </template>
