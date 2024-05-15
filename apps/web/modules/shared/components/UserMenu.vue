@@ -62,24 +62,6 @@
 
       <DropdownMenuSeparator />
 
-      <!-- Locale selection -->
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <LanguagesIcon class="size-4" />
-
-          <div class="ml-2">
-            {{ $t("dashboard.userMenu.language") }}
-          </div>
-        </DropdownMenuSubTrigger>
-        <DropdownMenuPortal>
-          <DropdownMenuSubContent avoid-collisions>
-            <LocaleSwitchRadioGroup />
-          </DropdownMenuSubContent>
-        </DropdownMenuPortal>
-      </DropdownMenuSub>
-
-      <DropdownMenuSeparator />
-
       <DropdownMenuItem asChild>
         <NuxtLinkLocale to="/app/settings/account/general">
           <SettingsIcon class="mr-2 size-4" />
