@@ -109,8 +109,8 @@ importers:
         specifier: ^3.1.9
         version: 3.1.10(@nuxt/devtools@1.2.0)(@vue/compiler-core@3.4.21)(nuxt@3.11.2)(postcss@8.4.38)(rollup@4.13.2)(vite@5.2.8)(vue@3.4.21)(webpack@5.91.0)
       radix-vue:
-        specifier: ^1.7.1
-        version: 1.7.1(vue@3.4.21)
+        specifier: ^1.8.0
+        version: 1.8.0(vue@3.4.21)
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
@@ -1827,6 +1827,12 @@ packages:
     resolution: {integrity: sha512-vo1yOMUt2hzp63IutEaTUxROdvQg1qlMRsbCvbay2AK2Gai7wIgCyK5weEX3nHkiLgo4qCXHijFNC/ILhlRpOQ==}
     dependencies:
       '@swc/helpers': 0.5.8
+
+  /@internationalized/number@3.5.2:
+    resolution: {integrity: sha512-4FGHTi0rOEX1giSkt5MH4/te0eHBq3cvAYsfLlpguV6pzJAReXymiYpE5wPCqKqjkUO3PIsyvk+tBiIV1pZtbA==}
+    dependencies:
+      '@swc/helpers': 0.5.8
+    dev: true
 
   /@intlify/bundle-utils@7.5.1(vue-i18n@9.10.2):
     resolution: {integrity: sha512-UovJl10oBIlmYEcWw+VIHdKY5Uv5sdPG0b/b6bOYxGLln3UwB75+2dlc0F3Fsa0RhoznQ5Rp589/BZpABpE4Xw==}
@@ -11429,14 +11435,15 @@ packages:
     requiresBuild: true
     dev: true
 
-  /radix-vue@1.7.1(vue@3.4.21):
-    resolution: {integrity: sha512-6TxeuDIMxe9L7IXsUEhomuuXscpYW/EhLeFPnu5fI0Tnry/lCRohrVDoofHWBDgZ0F7k5thVkADyCWj5YGv98g==}
+  /radix-vue@1.8.0(vue@3.4.21):
+    resolution: {integrity: sha512-RT98WcrsHMG4P4DuN4G4EeHnSV2Lk+J2k2LWr/UF/7oF2STxUFEjg2Zg0uxFG8B/evutOmp9S5kqujJVmp3sgQ==}
     peerDependencies:
       vue: '>= 3.2.0'
     dependencies:
       '@floating-ui/dom': 1.6.3
       '@floating-ui/vue': 1.0.6(vue@3.4.21)
       '@internationalized/date': 3.5.2
+      '@internationalized/number': 3.5.2
       '@tanstack/vue-virtual': 3.2.1(vue@3.4.21)
       '@vueuse/core': 10.9.0(vue@3.4.21)
       '@vueuse/shared': 10.9.0(vue@3.4.21)
