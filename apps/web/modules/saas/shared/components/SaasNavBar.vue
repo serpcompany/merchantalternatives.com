@@ -62,8 +62,12 @@
         : []),
     ];
   });
-  const isActiveMenuItem = (href: string | null) => {
-    return href && route.path.includes(href);
+  const isActiveMenuItem = (to: string | null) => {
+    if (!to) return false;
+    if (to === "/dashboard") {
+      return route.path === to;
+    }
+    return route.path.includes(to);
   };
 </script>
 
@@ -162,7 +166,7 @@
                             :to="item.to"
                             @click="sidebarOpen = false"
                             :class="[
-                              route.path === item.to
+                              isActiveMenuItem(item.to)
                                 ? 'bg-slate-200 text-slate-900'
                                 : 'text-slate-800  ',
                               'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
@@ -207,7 +211,7 @@
                   <NuxtLinkLocale
                     :to="item.to"
                     :class="[
-                      item.to === route.path
+                      isActiveMenuItem(item.to)
                         ? 'bg-slate-200 text-slate-900'
                         : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900',
                       'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
@@ -226,7 +230,7 @@
             <li class="mt-auto">
               <NuxtLinkLocale
                 :class="[
-                  route.path === '/dashboard/profile'
+                  isActiveMenuItem('/dashboard/profile')
                     ? 'bg-slate-200 text-slate-900'
                     : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900',
                   'group flex items-center gap-x-4 rounded-md px-3 py-2 text-sm font-semibold leading-6',

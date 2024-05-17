@@ -61,7 +61,7 @@
           v-slot="{ active }"
         >
           <button
-            @click="switchTeam(teamMembership.team.id)"
+            @click="() => switchTeam(teamMembership.team.id)"
             :class="[
               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
               'group flex items-center gap-3 px-4 py-3 text-sm w-full',

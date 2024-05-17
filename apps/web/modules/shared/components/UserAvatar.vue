@@ -14,7 +14,7 @@
 
 <template>
   <Avatar>
-    <AvatarImage v-if="props.avatarUrl" :src="props.avatarUrl" />
+    <AvatarImage v-if="avatarUrl" :src="avatarUrl" />
     <AvatarFallback
       class="flex size-full items-center justify-center bg-primary/10 text-primary"
     >

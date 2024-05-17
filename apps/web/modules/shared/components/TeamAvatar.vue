@@ -7,7 +7,7 @@
 
 <template>
   <Avatar>
-    <AvatarImage v-if="props.avatarUrl" :src="props.avatarUrl" />
+    <AvatarImage v-if="avatarUrl" :src="avatarUrl" />
     <AvatarFallback class="bg-primary/10 text-primary">
       <BoringAvatar :size="84" :name="name" variant="marble" />
     </AvatarFallback>

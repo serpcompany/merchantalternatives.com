@@ -20,20 +20,19 @@
     }),
   );
 
-  const { defineInputBinds, handleSubmit, isSubmitting } = useForm({
+  const { defineField, handleSubmit, isSubmitting } = useForm({
     validationSchema: formSchema,
     initialValues: {
       name: props.initialValue || "",
     },
   });
 
-  const name = defineInputBinds("name");
+  const [name, nameAttrs] = defineField("name");
+  console.log(name);
 
   const isSubmitDisabled = computed(() => {
     return (
-      !name.value.value ||
-      name.value.value.length < 3 ||
-      name.value.value === props.initialValue
+      !name.value || name.value.length < 3 || name.value === props.initialValue
     );
   });
 
@@ -68,9 +67,10 @@
     <template #title>{{ $t("settings.team.changeName.title") }}</template>
     <div>
       <Input
-        v-bind="name"
+        name="name"
+        v-bind="nameAttrs"
+        v-model="name"
         type="text"
-        id="name"
         required
         autocomplete="name"
         class="max-w-sm"
