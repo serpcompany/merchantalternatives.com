@@ -231,8 +231,8 @@
               <NuxtLinkLocale
                 :class="[
                   isActiveMenuItem('/dashboard/profile')
-                    ? 'bg-slate-200 text-slate-900'
-                    : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900',
+                    ? 'bg-slate-200 '
+                    : ' hover:bg-slate-200',
                   'group flex items-center gap-x-4 rounded-md px-3 py-2 text-sm font-semibold leading-6',
                 ]"
                 to="/dashboard/profile"
