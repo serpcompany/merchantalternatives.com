@@ -11,14 +11,14 @@
     return [
       {
         title: t("admin.menu.users"),
-        to: "/app/admin/users",
+        to: "/dashboard/admin/users",
       },
     ];
   });
 </script>
 
 <template>
-  <div class="container max-w-6xl py-8">
+  <div>
     <div class="flex flex-col items-start gap-8 md:flex-row">
       <div class="w-full md:max-w-[200px]">
         <SaasAdminMenu :items="menuItems" />

@@ -21,7 +21,7 @@ const lightVariables = {
     "destructive-foreground": "#ffffff",
     success: "#39a561",
     "success-foreground": "#ffffff",
-    muted: "#f8fafc",
+    muted: "#f1f5f9",
     "muted-foreground": "#64748b",
     accent: "#f1f5f9",
     "accent-foreground": "#0f172a",

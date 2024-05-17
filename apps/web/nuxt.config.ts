@@ -3,10 +3,6 @@ import { getBaseUrl } from "utils";
 const baseUrl = getBaseUrl();
 
 export default defineNuxtConfig({
-  devtools: {
-    enabled: true,
-  },
-
   experimental: {
     typedPages: true,
   },
@@ -22,7 +18,7 @@ export default defineNuxtConfig({
         umamiTrackingId: process.env.NUXT_PUBLIC_UMAMI_TRACKING_ID,
       },
       auth: {
-        redirectPath: "/app/dashboard",
+        redirectPath: "/dashboard",
       },
     },
   },

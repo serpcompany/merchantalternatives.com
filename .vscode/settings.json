@@ -17,5 +17,12 @@
   ],
   "i18n-ally.localesPaths": ["apps/web/locales"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.enabledFrameworks": ["vue"]
+  "i18n-ally.enabledFrameworks": ["vue"],
+  "editor.fontLigatures": false,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
 }

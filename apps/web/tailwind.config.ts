@@ -9,6 +9,7 @@ const config: Config = {
     "./pages/**/*.{vue,ts}",
   ],
   safelist: ["ml-2", "ml-4", "ml-6", "ml-8"],
+  plugins: [require("@tailwindcss/forms")],
 };
 
 export default config;

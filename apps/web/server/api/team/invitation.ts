@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
       throw new Error("Team not found");
     }
 
-    return createResponse("/app/dashboard");
+    return createResponse("/dashboard");
   } catch (e) {
     console.error(e);
     return createResponse("/");

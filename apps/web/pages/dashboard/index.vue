@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <div class="container max-w-6xl py-8">
+  <div>
     <SaasPageHeader>
       <template #title>{{
         t("dashboard.welcome", { name: user?.name })

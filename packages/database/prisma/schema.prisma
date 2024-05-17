@@ -86,12 +86,13 @@ model UserOneTimePassword {
 }
 
 model Team {
-  id           String           @id @default(cuid())
-  name         String
-  avatarUrl    String?
-  memberships  TeamMembership[]
-  subscription Subscription?
-  invitations  TeamInvitation[]
+  id             String           @id @default(cuid())
+  name           String
+  avatarUrl      String?
+  memberships    TeamMembership[]
+  subscription   Subscription?
+  invitations    TeamInvitation[]
+  companyProfile CompanyProfile?
 }
 
 enum TeamMemberRole {
@@ -143,4 +144,32 @@ model Subscription {
   planId          String
   variantId       String
   nextPaymentDate DateTime?
+}
+
+model CompanyProfile {
+  id        String  @id @default(cuid())
+  team      Team    @relation(fields: [teamId], references: [id])
+  teamId    String  @unique
+  name      String
+  avatarUrl String?
+  website   String?
+  bio       String?
+  bestFor   String?
+}
+
+model glossary {
+  id                BigInt   @id @default(autoincrement())
+  created_at        DateTime @default(now())
+  term              String
+  definition        String?
+  video             String?
+  short_description String?
+  content           String?
+  example           String?
+  ELIM              String?
+  updated_at        DateTime @updatedAt
+  faqs              Json?
+  slug              String   @unique
+
+  @@index([slug])
 }

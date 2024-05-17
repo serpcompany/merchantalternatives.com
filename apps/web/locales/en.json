@@ -168,12 +168,12 @@
   "dashboard": {
     "menu": {
       "admin": "Admin",
-      "aiDemo": "AI Demo",
+      "company": "Company",
       "dashboard": "Dashboard",
       "settings": "Settings"
     },
     "sidebar": {
-      "createTeam": "Create a new team"
+      "createCompany": "Create a new company"
     },
     "subtitle": "See the latest stats of your awesome business.",
     "userMenu": {

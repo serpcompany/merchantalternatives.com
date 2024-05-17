@@ -13,7 +13,7 @@
   }
 
   if (user.value!.onboardingComplete) {
-    await navigateTo(localePath("/app/dashboard"));
+    await navigateTo(localePath("/dashboard"));
   }
 </script>
 

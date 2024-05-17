@@ -22,7 +22,7 @@
 
       await reloadUser();
 
-      navigateTo(localePath(`/app/dashboard`), {
+      navigateTo(localePath(`/dashboard`), {
         replace: true,
       });
     } catch {}

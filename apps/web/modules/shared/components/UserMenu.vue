@@ -1,10 +1,5 @@
 <script setup lang="ts">
-  import {
-    LanguagesIcon,
-    LogOutIcon,
-    SettingsIcon,
-    UserMinusIcon,
-  } from "lucide-vue-next";
+  import { LogOutIcon, SettingsIcon, UserMinusIcon } from "lucide-vue-next";
   import { useToast } from "@/modules/ui/components/toast";
 
   const { user, logout } = useUser();
@@ -63,7 +58,7 @@
       <DropdownMenuSeparator />
 
       <DropdownMenuItem asChild>
-        <NuxtLinkLocale to="/app/settings/account/general">
+        <NuxtLinkLocale to="/dashboard/settings">
           <SettingsIcon class="mr-2 size-4" />
           {{ $t("dashboard.userMenu.accountSettings") }}
         </NuxtLinkLocale>

@@ -32,11 +32,10 @@
 <template>
   <div class="min-h-screen bg-muted">
     <SaasNavBar />
-
-    <main>
-      <slot />
-    </main>
-
-    <SaasFooter />
+    <div class="pl-72">
+      <main class="py-8 container max-w-5xl px-4">
+        <slot />
+      </main>
+    </div>
   </div>
 </template>

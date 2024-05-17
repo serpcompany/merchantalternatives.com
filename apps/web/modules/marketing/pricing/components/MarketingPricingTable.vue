@@ -11,7 +11,7 @@
     :plans="props.plans"
     :onSelectPlan="
       () => {
-        navigateTo('/app/settings/team/billing');
+        navigateTo('/dashboard/settings/billing');
       }
     "
   />
