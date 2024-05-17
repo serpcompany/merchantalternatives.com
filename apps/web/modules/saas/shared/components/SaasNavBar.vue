@@ -242,7 +242,7 @@
                   :name="user.name || ''"
                 />
                 <span class="sr-only">Your profile</span>
-                <span aria-hidden="true">Tom Cook</span>
+                <span aria-hidden="true">{{ user.name || "User" }}</span>
               </NuxtLinkLocale>
             </li>
           </ul>
