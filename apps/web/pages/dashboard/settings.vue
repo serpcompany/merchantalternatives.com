@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import PageTabs from "~/modules/ui/components/tabs/PageTabs.vue";
+
   const { t } = useTranslations();
   const { currentTeam } = useUser();
 
@@ -27,7 +29,7 @@
       <p class="mt-1 opacity-50">All your company settings</p>
     </div>
     <div class="flex flex-col gap-7">
-      <TabsTUI :tabs="tabs" />
+      <PageTabs :tabs="tabs" />
       <NuxtPage />
     </div>
   </div>

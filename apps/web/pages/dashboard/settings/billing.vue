@@ -1,6 +1,6 @@
 <script setup lang="ts">
   definePageMeta({
-    layout: "saas-app",
+    layout: "saas-dashboard",
   });
 
   const { t } = useTranslations();

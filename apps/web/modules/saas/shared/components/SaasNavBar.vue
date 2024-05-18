@@ -72,7 +72,7 @@
 </script>
 
 <template>
-  <nav v-if="user" class="bg-muted">
+  <nav v-if="user" class="">
     <!-- Mobile Top Navbar -->
     <div
       class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-sm sm:px-6 lg:hidden"
@@ -168,7 +168,7 @@
                             :class="[
                               isActiveMenuItem(item.to)
                                 ? 'bg-slate-200 text-slate-900'
-                                : 'text-slate-800  ',
+                                : 'text-slate-800',
                               'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                             ]"
                           >
@@ -212,8 +212,8 @@
                     :to="item.to"
                     :class="[
                       isActiveMenuItem(item.to)
-                        ? 'bg-slate-200 text-slate-900'
-                        : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900',
+                        ? 'bg-highlight'
+                        : 'opacity-80 hover:bg-highlight hover:opacity-100',
                       'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                     ]"
                   >
@@ -231,8 +231,8 @@
               <NuxtLinkLocale
                 :class="[
                   isActiveMenuItem('/dashboard/profile')
-                    ? 'bg-slate-200 '
-                    : ' hover:bg-slate-200',
+                    ? 'bg-highlight'
+                    : 'hover:bg-highlight',
                   'group flex items-center gap-x-4 rounded-md px-3 py-2 text-sm font-semibold leading-6',
                 ]"
                 to="/dashboard/profile"

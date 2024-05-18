@@ -3,7 +3,7 @@
   const { user } = useUser();
 
   definePageMeta({
-    layout: "saas-app",
+    layout: "saas-dashboard",
   });
 </script>
 

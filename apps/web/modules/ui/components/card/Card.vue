@@ -11,7 +11,7 @@
   <div
     :class="
       cn(
-        'bg-card/90 text-card-foreground rounded-lg shadow-sm backdrop-blur-md',
+        'bg-card/90 text-card-foreground rounded-lg backdrop-blur-md',
         props.class,
       )
     "

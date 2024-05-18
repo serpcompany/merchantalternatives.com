@@ -26,7 +26,7 @@
 <template>
   <Menu as="div" class="relative inline-block text-left" v-if="currentTeam">
     <MenuButton
-      class="group flex w-full items-center gap-3 rounded-lg border-2 border-slate-200 px-3 py-2.5 hover:border-slate-300"
+      class="group flex w-full items-center gap-3 rounded-lg border-2 px-3 py-2.5 hover:border-opacity-20 border-foreground border-opacity-10"
     >
       <TeamAvatar
         class="size-8"
@@ -34,12 +34,12 @@
         :avatar-url="currentTeam.avatarUrl"
       />
       <div
-        class="text-sm font-semibold leading-6 text-slate-900 truncate block flex-1 text-left"
+        class="text-sm font-semibold leading-6 truncate block flex-1 text-left"
       >
         {{ currentTeam.name }}
       </div>
       <ChevronDownIcon
-        class="h-8 w-8 flex-none text-slate-300 group-hover:text-slate-400"
+        class="h-8 w-8 flex-none opacity-15 group-hover:opacity-25"
         aria-hidden="true"
       />
     </MenuButton>
