@@ -112,8 +112,8 @@
       "title": "Create an account"
     },
     "teamInvitation": {
-      "description": "You have been invited to join a team. By logging in or signing up you will automatically accept the invitation and join the team.",
-      "title": "Accept team invitation"
+      "description": "You have been invited to join a brand. By logging in or signing up you will automatically accept the invitation and join the brand.",
+      "title": "Accept brand invitation"
     },
     "verifyOtp": {
       "errors": {
@@ -157,13 +157,13 @@
     }
   },
   "createTeam": {
-    "name": "Team name",
+    "name": "Brand name",
     "notifications": {
-      "error": "We are sorry, but we were unable to create your team. Please try again later.",
-      "success": "Your team has been created. You can now invite members."
+      "error": "We are sorry, but we were unable to create your brand. Please try again later.",
+      "success": "Your brand has been created. You can now invite members."
     },
-    "submit": "Create team",
-    "title": "Create a team"
+    "submit": "Create brand",
+    "title": "Create a brand"
   },
   "dashboard": {
     "menu": {
@@ -234,8 +234,8 @@
       "avatarDescription": "Click the circle or drop an image to it to upload your avatar."
     },
     "team": {
-      "title": "Create a team",
-      "name": "Team name"
+      "title": "Create a brand",
+      "name": "Brand name"
     },
     "notifications": {
       "accountSetupFailed": "We are sorry, but we were unable to set up your account. Please try again later."
@@ -376,10 +376,10 @@
       "nameUpdated": "Your name has been updated.",
       "passwordNotUpdated": "We were unable to update your password. Please try again.",
       "passwordUpdated": "Your password has been updated.",
-      "teamDeleted": "Your team has been deleted.",
-      "teamNameNotUpdated": "We were unable to update your team name. Please try again later.",
-      "teamNameUpdated": "Your team name has been updated.",
-      "teamNotDeleted": "We were unable to delete your team. Please try again later."
+      "teamDeleted": "Your brand has been deleted.",
+      "teamNameNotUpdated": "We were unable to update your brand name. Please try again later.",
+      "teamNameUpdated": "Your brand name has been updated.",
+      "teamNotDeleted": "We were unable to delete your brand. Please try again later."
     },
     "save": "Save",
     "sections": {
@@ -389,14 +389,14 @@
     "team": {
       "changeName": {
         "description": "Enter a new name and click save to update it.",
-        "teamUrl": "Your team url will be {url}.",
-        "title": "Team name"
+        "teamUrl": "Your brand url will be {url}.",
+        "title": "Brand name"
       },
       "deleteTeam": {
-        "confirmation": "Are you sure you want to delete your team?",
-        "description": "Permanently delete your team. Once you delete your team, there is no going back. Please be certain.",
-        "submit": "Delete team",
-        "title": "Delete team"
+        "confirmation": "Are you sure you want to delete your brand?",
+        "description": "Permanently delete your brand. Once you delete your brand, there is no going back. Please be certain.",
+        "submit": "Delete brand",
+        "title": "Delete brand"
       },
       "members": {
         "activeMembers": "Active members",
@@ -425,13 +425,13 @@
         "notifications": {
           "removeMember": {
             "error": {
-              "description": "Could not remove the member from your team. Please try again."
+              "description": "Could not remove the member from your brand. Please try again."
             },
             "loading": {
-              "description": "Removing member from team..."
+              "description": "Removing member from brand..."
             },
             "success": {
-              "description": "The member has been successfully removed from your team."
+              "description": "The member has been successfully removed from your brand."
             }
           },
           "revokeInvitation": {
@@ -447,7 +447,7 @@
           },
           "updateMembership": {
             "error": {
-              "description": "Could not update team membership. Please try again."
+              "description": "Could not update brand membership. Please try again."
             },
             "loading": {
               "description": "Updating membership..."
@@ -465,8 +465,8 @@
         },
         "title": "Members"
       },
-      "subtitle": "Manage your team settings and members",
-      "title": "Team"
+      "subtitle": "Manage your brand settings and members",
+      "title": "Brand"
     },
     "title": "Settings"
   }
