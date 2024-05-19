@@ -1,8 +1,4 @@
-<script setup lang="ts">
-  definePageMeta({
-    layout: "marketing",
-  });
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <MarketingHero />

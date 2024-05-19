@@ -3,10 +3,6 @@
 
   const { t } = useTranslations();
 
-  definePageMeta({
-    layout: "marketing",
-  });
-
   useSeoMeta({
     title: t("blog.title"),
   });

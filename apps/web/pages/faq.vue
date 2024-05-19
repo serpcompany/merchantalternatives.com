@@ -2,10 +2,6 @@
   import type { FAQ } from "@/modules/marketing/faq/types";
   const { t } = useTranslations();
 
-  definePageMeta({
-    layout: "marketing",
-  });
-
   const faqItems: FAQ[] = [
     {
       question: t("faq.questions.refundPolicy"),

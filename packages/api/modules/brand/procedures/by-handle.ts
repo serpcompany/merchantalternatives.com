@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { BrandSchema, db } from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
+import { getSignedUrl } from "storage";
 
 export const byHandle = publicProcedure
   .input(
@@ -9,11 +10,24 @@ export const byHandle = publicProcedure
       handle: z.string(),
     }),
   )
-  .output(BrandSchema)
-  .query(async ({ input: { handle }, ctx: { abilities } }) => {
+  .output(
+    BrandSchema.extend({
+      name: z.string(),
+      logo: z.string().nullable(),
+    }),
+  )
+  .query(async ({ input: { handle } }) => {
     const brand = await db.brand.findFirst({
       where: {
         handle,
+      },
+      include: {
+        team: {
+          select: {
+            name: true,
+            avatarUrl: true,
+          },
+        },
       },
     });
 
@@ -24,5 +38,16 @@ export const byHandle = publicProcedure
       });
     }
 
-    return brand;
+    if (brand.team.avatarUrl) {
+      brand.team.avatarUrl = await getSignedUrl(brand.team.avatarUrl, {
+        bucket: "avatars",
+        expiresIn: 360,
+      });
+    }
+
+    return {
+      name: brand.team.name,
+      logo: brand.team.avatarUrl,
+      ...brand,
+    };
   });

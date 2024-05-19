@@ -1,8 +1,4 @@
 <script setup lang="ts">
-  definePageMeta({
-    layout: "marketing",
-  });
-
   const { apiCaller } = useApiCaller();
 
   const { data: plans } = await apiCaller.billing.plans.useQuery();

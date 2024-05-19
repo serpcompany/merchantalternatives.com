@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgres://postgres.ydjobjxbamneqdqeimgq:Cqzm05KIl6MWC2dN@aws-0-us-west-1.pooler.supabase.com:5432/postgres"
 }
 
 generator client {
@@ -86,13 +86,13 @@ model UserOneTimePassword {
 }
 
 model Team {
-  id             String           @id @default(cuid())
-  name           String
-  avatarUrl      String?
-  memberships    TeamMembership[]
-  subscription   Subscription?
-  invitations    TeamInvitation[]
-  companyProfile CompanyProfile?
+  id           String           @id @default(cuid())
+  name         String
+  avatarUrl    String?
+  memberships  TeamMembership[]
+  subscription Subscription?
+  invitations  TeamInvitation[]
+  brand        Brand?
 }
 
 enum TeamMemberRole {
@@ -146,15 +146,14 @@ model Subscription {
   nextPaymentDate DateTime?
 }
 
-model CompanyProfile {
-  id        String  @id @default(cuid())
-  team      Team    @relation(fields: [teamId], references: [id])
-  teamId    String  @unique
-  name      String
-  avatarUrl String?
-  website   String?
-  bio       String?
-  bestFor   String?
+model Brand {
+  id      String  @id @default(cuid())
+  team    Team    @relation(fields: [teamId], references: [id])
+  teamId  String  @unique
+  handle  String  @unique
+  website String?
+  bio     String?
+  bestFor String?
 }
 
 model glossary {

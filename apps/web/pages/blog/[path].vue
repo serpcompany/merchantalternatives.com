@@ -2,10 +2,6 @@
   import type { MarketingBlogPageFields } from "@/modules/marketing/blog/types";
   import { joinURL } from "ufo";
 
-  definePageMeta({
-    layout: "marketing",
-  });
-
   const route = useRoute("blog-path");
   const runtimeConfig = useRuntimeConfig();
   const { formatDate } = useLocaleDate();

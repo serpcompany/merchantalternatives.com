@@ -7,13 +7,17 @@
       }>,
       required: true,
     },
+    thin: {
+      type: Boolean,
+      default: false,
+    },
   });
 
   const route = useRoute();
 </script>
 
 <template>
-  <div>
+  <div class="overflow-hidden">
     <div class="sm:hidden">
       <!-- 
       <label for="tabs" class="sr-only">Select a tab</label>
@@ -30,18 +34,24 @@
       </select>
       -->
     </div>
-    <div class="hidden sm:block w-full">
+    <div class="hidden sm:block w-full" :class="{ '-mb-px': thin }">
       <div class="border-b border-gray-200 w-full">
-        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <nav
+          :class="[thin ? 'space-x-3' : ' space-x-8', '-mb-px flex']"
+          aria-label="Tabs"
+        >
           <NuxtLinkLocale
             v-for="tab in tabs"
             :key="tab.title"
             :href="tab.to"
             :class="[
               tab.to === route.path
-                ? 'border-slate-900'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-              'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium',
+                ? 'border-primary text-primary'
+                : 'border-transparent text-foreground/50 hover:border-highlight hover:text-foreground/80',
+              thin
+                ? 'py-3 font-semibold text-base border-b-4 px-3'
+                : 'py-4 text-sm font-medium border-b-2 px-1',
+              'whitespace-nowrap',
             ]"
             :aria-current="tab.to === route.path ? 'page' : undefined"
             >{{ tab.title }}</NuxtLinkLocale

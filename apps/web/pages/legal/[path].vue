@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-  definePageMeta({
-    layout: "marketing",
-  });
-
   const route = useRoute("legal-path");
   const { path } = route.params;
   const { locale, defaultLocale } = useTranslations();

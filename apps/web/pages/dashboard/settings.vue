@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import PageTabs from "~/modules/ui/components/tabs/PageTabs.vue";
-
   const { t } = useTranslations();
   const { currentTeam } = useUser();
 

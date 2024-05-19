@@ -47,12 +47,8 @@
       to: "/faq",
     },
     {
-      label: t("common.menu.changelog"),
-      to: "/changelog",
-    },
-    {
-      label: t("common.menu.docs"),
-      to: "/docs",
+      label: t("common.menu.reviews"),
+      to: "/reviews",
     },
   ]);
 </script>
@@ -60,15 +56,12 @@
 <template>
   <nav
     class="fixed left-0 top-0 z-20 w-full bg-background/80 backdrop-blur-lg transition-[height] duration-200"
-    :class="[isTop ? 'shadow-none' : 'shadow-sm']"
+    :class="[isTop ? 'shadow-sm' : 'shadow-sm']"
   >
-    <MarketingBanner />
+    <PromoBanner />
 
     <div class="container">
-      <div
-        class="flex items-center justify-stretch gap-6 transition-all duration-200"
-        :class="[isTop ? 'py-8' : 'py-4']"
-      >
+      <div class="flex items-center justify-between gap-6 py-3">
         <div class="flex flex-1 justify-start">
           <NuxtLinkLocale
             to="/"
@@ -78,7 +71,7 @@
           </NuxtLinkLocale>
         </div>
 
-        <div class="hidden flex-1 items-center justify-center lg:flex">
+        <div class="hidden flex-1 items-center justify-end lg:flex">
           <NuxtLinkLocale
             v-for="menuItem of menuItems"
             :key="menuItem.to"
@@ -88,9 +81,7 @@
           >
             {{ menuItem.label }}
           </NuxtLinkLocale>
-        </div>
 
-        <div class="flex flex-1 items-center justify-end gap-3">
           <ColorModeToggle />
 
           <Sheet v-model:open="mobileMenuOpen">
@@ -105,7 +96,7 @@
                 <DialogDescription> Navigation Menu </DialogDescription>
               </VisuallyHidden>
 
-              <div class="flex flex-col items-start justify-center">
+              <div class="flex flex-col items-start justify-end">
                 <NuxtLinkLocale
                   v-for="menuItem of menuItems"
                   :key="menuItem.to"
@@ -133,7 +124,7 @@
             </SheetContent>
           </Sheet>
 
-          <Button class="hidden lg:block" asChild variant="ghost">
+          <Button class="hidden lg:block px-2" asChild variant="ghost">
             <NuxtLinkLocale
               :to="hasUser ? runtimeConfig.auth.redirectPath : '/auth/login'"
               :prefetch="!hasUser"

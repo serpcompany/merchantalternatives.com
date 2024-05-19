@@ -29,6 +29,8 @@
         fill="currentColor"
       />
     </svg>
-    <span v-if="props.withLabel" class="ml-3 text-lg">acme</span>
+    <span v-if="props.withLabel" class="ml-3 text-lg text-foreground"
+      ><span class="text-primary">Serp</span>.Money</span
+    >
   </span>
 </template>

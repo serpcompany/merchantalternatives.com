@@ -10,11 +10,11 @@ const lightVariables = {
   colors: {
     border: "#e2e8f0",
     input: "#e2e8f0",
-    ring: "#42a46f",
+    ring: "#4169e1",
     highlight: "#e2e8f0", // slate-300
     background: "#ffffff",
     foreground: "#0f172a",
-    primary: "#42a46f",
+    primary: "#0000ff",
     "primary-foreground": "#ffffff",
     secondary: "#f1f5f9",
     "secondary-foreground": "#0f172a",
@@ -41,7 +41,7 @@ const darkVariables = {
     highlight: "#475569", // slate-600
     background: "#121924",
     foreground: "#f8fafc",
-    primary: "#42a46f",
+    primary: "#0000ff",
     "primary-foreground": "#ffffff",
     secondary: "#1e293b",
     "secondary-foreground": "#f8fafc",

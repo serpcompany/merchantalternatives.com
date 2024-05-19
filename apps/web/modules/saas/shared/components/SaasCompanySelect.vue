@@ -26,7 +26,7 @@
 <template>
   <Menu as="div" class="relative inline-block text-left" v-if="currentTeam">
     <MenuButton
-      class="group flex w-full items-center gap-3 rounded-lg border-2 px-3 py-2.5 hover:border-opacity-20 border-foreground border-opacity-10"
+      class="group flex w-full items-center gap-3 border-2 px-3 py-2.5 hover:border-opacity-20 border-foreground border-opacity-10"
     >
       <TeamAvatar
         class="size-8"
@@ -53,7 +53,7 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
+        class="absolute right-0 z-10 mt-2 w-full origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
       >
         <MenuItem
           v-for="teamMembership of teamMemberships"
@@ -72,10 +72,11 @@
               :name="teamMembership.team.name"
               :avatar-url="teamMembership.team.avatarUrl"
             />
-            <div class="text-sm font-semibold leading-6 text-slate-900">
+            <div
+              class="text-sm font-semibold leading-6 text-slate-900 truncate flex-1 text-left"
+            >
               {{ teamMembership.team.name }}
             </div>
-            <div class="w-full" />
             <CheckIcon
               v-if="activeTeamIdModel === teamMembership.team.id"
               class="h-5 w-5 flex-none text-slate-500"
