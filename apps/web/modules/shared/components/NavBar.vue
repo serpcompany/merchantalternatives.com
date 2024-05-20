@@ -35,6 +35,10 @@
   };
   const menuItems = computed<MenuItem[]>(() => [
     {
+      label: t("common.menu.reviews"),
+      to: "/reviews",
+    },
+    {
       label: t("common.menu.pricing"),
       to: "/pricing",
     },
@@ -45,10 +49,6 @@
     {
       label: t("common.menu.faq"),
       to: "/faq",
-    },
-    {
-      label: t("common.menu.reviews"),
-      to: "/reviews",
     },
   ]);
 </script>
