@@ -75,7 +75,7 @@
   <nav v-if="user" class="">
     <!-- Mobile Top Navbar -->
     <div
-      class="sticky top-0 z-40 flex items-center gap-x-6 bg-background px-4 py-4 shadow-sm sm:px-6 lg:hidden"
+      class="bg-background sticky top-0 z-40 flex items-center gap-x-6 px-4 py-4 shadow-sm sm:px-6 lg:hidden"
     >
       <button
         type="button"
@@ -193,7 +193,7 @@
 
     <!-- Desktop Static Sidebar -->
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col bg-background"
+      class="bg-background hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"
     >
       <div class="flex grow flex-col gap-y-5 overflow-y-auto px-4">
         <div class="flex h-16 shrink-0 items-center justify-center">
@@ -212,7 +212,7 @@
                     :class="[
                       isActiveMenuItem(item.to)
                         ? 'bg-highlight'
-                        : 'opacity-80 hover:bg-highlight hover:opacity-100',
+                        : 'hover:bg-highlight opacity-80 hover:opacity-100',
                       'group flex gap-x-3 p-2 text-sm font-semibold leading-6',
                     ]"
                   >

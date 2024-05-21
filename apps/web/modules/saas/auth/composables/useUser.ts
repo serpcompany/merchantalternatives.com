@@ -41,6 +41,10 @@ export const useUser = ({ initialUser }: { initialUser?: User } = {}) => {
     () => currentTeamMemberships.value?.role ?? "MEMBER",
   );
 
+  const currentBrand = computed(
+    () => currentTeamMemberships.value?.team?.brand ?? null,
+  );
+
   const loadUser = async () => {
     const userRes = await apiCaller.auth.user.query();
     user.value = userRes;
@@ -115,5 +119,6 @@ export const useUser = ({ initialUser }: { initialUser?: User } = {}) => {
     reloadUser,
     currentTeam,
     teamRole,
+    currentBrand,
   };
 };

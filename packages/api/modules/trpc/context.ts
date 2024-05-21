@@ -23,21 +23,35 @@ export async function createContext(event?: H3Event | { isAdmin?: boolean }) {
               userId: user.id,
             },
             include: {
-              team: true,
+              team: {
+                include: {
+                  brand: true,
+                },
+              },
             },
           })
-        ).map(async (membership) => ({
-          ...membership,
-          team: {
-            ...membership.team,
-            avatarUrl: membership.team.avatarUrl
-              ? await getSignedUrl(membership.team.avatarUrl, {
-                  bucket: "avatars",
-                  expiresIn: 360,
-                })
-              : null,
-          },
-        })),
+        ).map(async (membership) => {
+          const logoUrl = membership.team.avatarUrl
+            ? await getSignedUrl(membership.team.avatarUrl, {
+                bucket: "avatars",
+                expiresIn: 360,
+              })
+            : null;
+          const brand = membership.team.brand
+            ? {
+                ...membership.team.brand,
+                logoUrl,
+              }
+            : null;
+          return {
+            ...membership,
+            team: {
+              ...membership.team,
+              avatarUrl: logoUrl,
+              brand,
+            },
+          };
+        }),
       )
     : null;
 

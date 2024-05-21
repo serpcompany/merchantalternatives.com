@@ -55,8 +55,8 @@
 
 <template>
   <nav
-    class="fixed left-0 top-0 z-20 w-full bg-background/80 backdrop-blur-lg transition-[height] duration-200"
-    :class="[isTop ? 'shadow-sm' : 'shadow-sm']"
+    class="bg-background/80 fixed left-0 top-0 z-20 w-full backdrop-blur-lg transition-[height] duration-200"
+    :class="[isTop ? 'shadow-none' : 'shadow-sm']"
   >
     <PromoBanner />
 
@@ -76,7 +76,7 @@
             v-for="menuItem of menuItems"
             :key="menuItem.to"
             :to="menuItem.to"
-            class="block px-3 py-2 text-base shrink-0 text-foreground/80"
+            class="text-foreground/80 block shrink-0 px-3 py-2 text-base"
             :class="[isMenuItemActive(menuItem.to) ? 'font-bold' : '']"
           >
             {{ menuItem.label }}
@@ -124,7 +124,7 @@
             </SheetContent>
           </Sheet>
 
-          <Button class="hidden lg:block px-2" asChild variant="ghost">
+          <Button class="hidden px-2 lg:block" asChild variant="ghost">
             <NuxtLinkLocale
               :to="hasUser ? runtimeConfig.auth.redirectPath : '/auth/login'"
               :prefetch="!hasUser"

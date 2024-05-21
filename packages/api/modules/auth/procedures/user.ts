@@ -1,4 +1,10 @@
-import { TeamMembershipSchema, TeamSchema, UserSchema, db } from "database";
+import {
+  TeamMembershipSchema,
+  TeamSchema,
+  UserSchema,
+  db,
+  BrandSchema,
+} from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 import { getUserAvatarUrl } from "../lib/avatar-url";
@@ -17,7 +23,9 @@ export const user = publicProcedure
         teamMemberships: z
           .array(
             TeamMembershipSchema.extend({
-              team: TeamSchema,
+              team: TeamSchema.extend({
+                brand: BrandSchema.nullable(),
+              }),
             }),
           )
           .nullable(),

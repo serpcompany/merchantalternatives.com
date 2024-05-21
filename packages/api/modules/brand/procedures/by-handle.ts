@@ -10,24 +10,11 @@ export const byHandle = publicProcedure
       handle: z.string(),
     }),
   )
-  .output(
-    BrandSchema.extend({
-      name: z.string(),
-      logo: z.string().nullable(),
-    }),
-  )
+  .output(BrandSchema)
   .query(async ({ input: { handle } }) => {
     const brand = await db.brand.findFirst({
       where: {
         handle,
-      },
-      include: {
-        team: {
-          select: {
-            name: true,
-            avatarUrl: true,
-          },
-        },
       },
     });
 
@@ -38,16 +25,12 @@ export const byHandle = publicProcedure
       });
     }
 
-    if (brand.team.avatarUrl) {
-      brand.team.avatarUrl = await getSignedUrl(brand.team.avatarUrl, {
+    if (brand.logoUrl) {
+      brand.logoUrl = await getSignedUrl(brand.logoUrl, {
         bucket: "avatars",
         expiresIn: 360,
       });
     }
 
-    return {
-      name: brand.team.name,
-      logo: brand.team.avatarUrl,
-      ...brand,
-    };
+    return brand;
   });

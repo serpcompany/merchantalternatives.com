@@ -19,7 +19,7 @@
           <NuxtLink to="/auth/login">Get started &rarr;</NuxtLink>
         </Button>
         <Button variant="outline" size="lg">
-          <NuxtLink to="/docs">Documentation</NuxtLink>
+          <NuxtLink to="/reviews">Reviews</NuxtLink>
         </Button>
       </div>
 

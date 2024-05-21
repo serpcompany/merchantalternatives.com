@@ -7,9 +7,14 @@ export const useDashboardState = () => {
     "dashboardState.createTeamDialogOpen",
     () => false,
   );
+  const editBrandHeaderOpen = useState(
+    "dashboardState.editBrandHeaderOpen",
+    () => false,
+  );
 
   return {
     sidebarExpanded,
     createTeamDialogOpen,
+    editBrandHeaderOpen,
   };
 };

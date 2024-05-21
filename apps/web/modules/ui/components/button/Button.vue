@@ -22,10 +22,7 @@
   <Primitive
     :as="as"
     :as-child="asChild"
-    :class="[
-      cn(buttonVariants({ variant, size }), props.class),
-      'rounded-none',
-    ]"
+    :class="cn(buttonVariants({ variant, size }), props.class)"
     :disabled="props.disabled || props.loading"
   >
     <LoaderIcon v-if="props.loading" class="size-4 animate-spin" />

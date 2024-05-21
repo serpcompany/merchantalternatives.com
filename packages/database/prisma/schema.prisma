@@ -151,9 +151,13 @@ model Brand {
   team    Team    @relation(fields: [teamId], references: [id])
   teamId  String  @unique
   handle  String  @unique
+  name    String
+  logoUrl String?
   website String?
   bio     String?
   bestFor String?
+
+  @@index([handle])
 }
 
 model glossary {
