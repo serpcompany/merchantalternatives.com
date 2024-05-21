@@ -24,7 +24,7 @@
     "mail": "workspace:*",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "shadcn-nuxt": "^0.10.2",
+    "shadcn-nuxt": "^0.10.4",
     "tailwind-config": "workspace:*",
     "tsconfig": "workspace:*",
     "utils": "workspace:*",
