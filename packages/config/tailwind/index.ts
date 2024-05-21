@@ -39,7 +39,7 @@ const darkVariables = {
     input: "#1e293b",
     ring: "#42a46f",
     highlight: "#475569", // slate-600
-    background: "#121924",
+    background: "#17202e",
     foreground: "#f8fafc",
     primary: "#0000ff",
     "primary-foreground": "#ffffff",
@@ -55,7 +55,7 @@ const darkVariables = {
     "accent-foreground": "#f8fafc",
     popover: "#121924",
     "popover-foreground": "#f8fafc",
-    card: "#121924",
+    card: "#17202e",
     "card-foreground": "#f8fafc",
   },
 };

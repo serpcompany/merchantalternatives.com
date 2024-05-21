@@ -26,7 +26,7 @@
 <template>
   <Menu as="div" class="relative inline-block text-left" v-if="currentTeam">
     <MenuButton
-      class="group flex w-full items-center gap-3 border-2 px-3 py-2.5 hover:border-opacity-20 border-foreground border-opacity-10"
+      class="border-foreground group flex w-full items-center gap-3 border-2 border-opacity-10 px-3 py-2.5 hover:border-opacity-20"
     >
       <TeamAvatar
         class="size-8"
@@ -34,7 +34,7 @@
         :avatar-url="currentTeam.avatarUrl"
       />
       <div
-        class="text-sm font-semibold leading-6 truncate block flex-1 text-left"
+        class="block flex-1 truncate text-left text-sm font-semibold leading-6"
       >
         {{ currentTeam.name }}
       </div>
@@ -53,7 +53,7 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute right-0 z-10 mt-2 w-full origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
+        class="bg-background ring-foreground shadow-foreground/10 absolute right-0 z-10 mt-2 w-full origin-top-right overflow-hidden shadow-lg ring-1 ring-opacity-5 focus:outline-none"
       >
         <MenuItem
           v-for="teamMembership of teamMemberships"
@@ -63,8 +63,8 @@
           <button
             @click="() => switchTeam(teamMembership.team.id)"
             :class="[
-              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-              'group flex items-center gap-3 px-4 py-3 text-sm w-full',
+              active ? 'bg-highlight text-foreground' : 'text-foreground/70',
+              'group flex w-full items-center gap-3 px-4 py-3 text-sm',
             ]"
           >
             <TeamAvatar
@@ -73,7 +73,7 @@
               :avatar-url="teamMembership.team.avatarUrl"
             />
             <div
-              class="text-sm font-semibold leading-6 text-slate-900 truncate flex-1 text-left"
+              class="text-foreground flex-1 truncate text-left text-sm font-semibold leading-6"
             >
               {{ teamMembership.team.name }}
             </div>
@@ -88,14 +88,11 @@
           <button
             @click="() => (createTeamDialogOpen = true)"
             :class="[
-              active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-              'group flex items-center gap-3 px-4 py-3 text-sm w-full border-t',
+              active ? 'bg-highlight' : '',
+              'flex w-full items-center gap-3 border-t px-4 py-3 text-sm',
             ]"
           >
-            <PlusIcon
-              class="h-7 w-8 text-gray-500 group-hover:text-gray-500"
-              aria-hidden="true"
-            />
+            <PlusIcon class="h-7 w-8" aria-hidden="true" />
             {{ $t("dashboard.sidebar.createCompany") }}
           </button>
         </MenuItem>

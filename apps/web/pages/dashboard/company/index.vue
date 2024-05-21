@@ -35,8 +35,8 @@
         >Edit</Button
       >
     </div>
-    <ProfileHeader :brand="currentBrand" :inDashboard="true" class="mt-3" />
-    <div class="mt-10 flex w-full items-center">
+    <ProfileHeader :brand="currentBrand" :inDashboard="true" class="mt-1" />
+    <div class="mt-8 flex w-full items-center">
       <h2 class="text-lg font-medium">About •</h2>
       <Button
         variant="link"
@@ -45,8 +45,8 @@
         >Edit</Button
       >
     </div>
-    <div class="bg-background mt-3 h-64 w-full" />
-    <div class="mt-10 flex w-full items-center">
+    <div class="bg-background mt-1 h-64 w-full" />
+    <div class="mt-8 flex w-full items-center">
       <h2 class="text-lg font-medium">Reviews •</h2>
       <Button
         variant="link"
@@ -55,7 +55,7 @@
         >Edit</Button
       >
     </div>
-    <div class="bg-background mt-3 h-64 w-full" />
+    <div class="bg-background mt-1 h-64 w-full" />
   </div>
 
   <SaasEditBrandHeaderDialog />

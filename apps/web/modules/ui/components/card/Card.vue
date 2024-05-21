@@ -9,7 +9,7 @@
 
 <template>
   <div
-    :class="cn('bg-card/90 text-card-foreground backdrop-blur-md', props.class)"
+    :class="cn('text-card-foreground bg-card/90 backdrop-blur-md', props.class)"
   >
     <slot />
   </div>

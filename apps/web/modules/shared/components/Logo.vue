@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <span class="flex items-center font-semibold leading-none text-primary">
+  <span class="text-primary flex items-center font-semibold leading-none">
     <svg class="size-10" viewBox="0 0 734 635">
       <path
         opacity="0.2"
@@ -29,7 +29,7 @@
         fill="currentColor"
       />
     </svg>
-    <span v-if="props.withLabel" class="ml-3 text-lg text-foreground"
+    <span v-if="props.withLabel" class="text-foreground ml-3 text-lg"
       ><span class="text-primary">Serp</span>.Money</span
     >
   </span>
