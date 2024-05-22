@@ -2,7 +2,7 @@
   const { t } = useTranslations();
 
   definePageMeta({
-    layout: "saas-auth",
+    layout: "auth",
   });
 
   useSeoMeta({

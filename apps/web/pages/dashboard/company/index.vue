@@ -2,7 +2,7 @@
   import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/24/outline";
 
   definePageMeta({
-    layout: "saas-dashboard",
+    layout: "dashboard",
   });
 
   const { currentBrand } = useUser();

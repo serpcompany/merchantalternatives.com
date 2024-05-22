@@ -1,6 +1,6 @@
 <script setup lang="ts">
   definePageMeta({
-    layout: "saas-auth",
+    layout: "auth",
   });
 
   const { apiCaller } = useApiCaller();

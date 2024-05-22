@@ -3,7 +3,7 @@
   const { user } = useUser();
 
   definePageMeta({
-    layout: "saas-dashboard",
+    layout: "dashboard",
   });
 </script>
 
@@ -39,7 +39,7 @@
 
     <Card class="mt-8">
       <div
-        class="flex h-64 items-center justify-center p-8 text-muted-foreground"
+        class="text-muted-foreground flex h-64 items-center justify-center p-8"
       >
         Place your content here...
       </div>

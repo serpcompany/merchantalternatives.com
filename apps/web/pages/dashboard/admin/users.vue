@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   definePageMeta({
-    layout: "saas-dashboard",
+    layout: "dashboard",
   });
 </script>
 
