@@ -85,14 +85,28 @@ model UserOneTimePassword {
   @@index([userId])
 }
 
+model Brand {
+  id      String  @id @default(cuid())
+  handle  String  @unique
+  name    String
+  logoUrl String?
+  website String?
+  bio     String?
+  bestFor String?
+  team    Team?
+
+  @@index([handle])
+}
+
 model Team {
   id           String           @id @default(cuid())
+  brand        Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brandId      String           @unique
   name         String
   avatarUrl    String?
   memberships  TeamMembership[]
   subscription Subscription?
   invitations  TeamInvitation[]
-  brand        Brand?
 }
 
 enum TeamMemberRole {
@@ -146,20 +160,6 @@ model Subscription {
   nextPaymentDate DateTime?
 }
 
-model Brand {
-  id      String  @id @default(cuid())
-  team    Team    @relation(fields: [teamId], references: [id])
-  teamId  String  @unique
-  handle  String  @unique
-  name    String
-  logoUrl String?
-  website String?
-  bio     String?
-  bestFor String?
-
-  @@index([handle])
-}
-
 model glossary {
   id                BigInt   @id @default(autoincrement())
   created_at        DateTime @default(now())
@@ -175,4 +175,15 @@ model glossary {
   slug              String   @unique
 
   @@index([slug])
+}
+
+model post {
+  id             BigInt   @id @default(autoincrement())
+  created_at     DateTime @default(now())
+  title          String
+  slug           String
+  except         String?
+  author_fk      String?
+  content        String?
+  featured_image String?
 }

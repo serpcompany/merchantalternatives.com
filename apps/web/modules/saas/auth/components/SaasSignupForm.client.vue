@@ -9,14 +9,6 @@
   const { apiCaller } = useApiCaller();
   const { t } = useTranslations();
   const localePath = useLocalePath();
-
-  const formSchema = toTypedSchema(
-    z.object({
-      email: z.string().email(),
-      password: z.string().min(8),
-    }),
-  );
-
   const { searchQuery: invitationCode } = useRouteSearchQuery({
     name: "invitationCode",
     replace: true,
@@ -35,13 +27,17 @@
       ? `/team/invitation?code=${invitationCode.value}`
       : redirectToParam.value || runtimeConfig.public.auth.redirectPath;
   });
-
+  const formSchema = toTypedSchema(
+    z.object({
+      email: z.string().email(),
+      password: z.string().min(8),
+    }),
+  );
   type ServerErrorType = {
     title: string;
     message: string;
   };
   const serverError = ref<null | ServerErrorType>(null);
-
   const {
     handleSubmit,
     setFieldValue,
@@ -96,7 +92,7 @@
 <template>
   <div>
     <h1 class="text-3xl font-bold">{{ $t("auth.signup.title") }}</h1>
-    <p class="mb-6 mt-2 text-muted-foreground">
+    <p class="text-muted-foreground mb-6 mt-2">
       {{ $t("auth.signup.message") }}
     </p>
 

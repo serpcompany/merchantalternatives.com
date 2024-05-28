@@ -3,6 +3,7 @@
   import { ArrowLeftIcon, ArrowRightIcon } from "lucide-vue-next";
   import { useForm } from "vee-validate";
   import { z } from "zod";
+  import Button from "~/modules/ui/components/button/Button.vue";
 
   const emit = defineEmits<{
     complete: [];
@@ -11,49 +12,75 @@
 
   const { apiCaller } = useApiCaller();
   const { t } = useTranslations();
+  const createBrandMutation = apiCaller.brand.create.useMutation();
 
-  const createTeamMutation = apiCaller.team.create.useMutation();
-
+  const brandType = ref<"new" | "existing">("new");
   const formSchema = toTypedSchema(
     z.object({
-      teamName: z.string().min(1, "Name is required"),
+      brandName: z.string().min(1, "Name is required"),
     }),
   );
-
   const serverError = ref<null | string>(null);
 
   const { isSubmitting, handleSubmit } = useForm({
     validationSchema: formSchema,
     initialValues: {
-      teamName: "",
+      brandName: "",
     },
   });
 
-  const onSubmit = handleSubmit(async ({ teamName }) => {
+  const onSubmit = handleSubmit(async ({ brandName }) => {
     serverError.value = null;
 
-    try {
-      await createTeamMutation.mutate({
-        name: teamName,
-      });
+    if (brandType.value === "existing") {
+      try {
+        await createBrandMutation.mutate({
+          name: brandName,
+        });
 
-      emit("complete");
-    } catch (e) {
-      serverError.value = t("onboarding.notifications.teamSetupFailed");
+        navigateTo("/onboarding/well-be-in-touch");
+      } catch (e) {
+        serverError.value = "Failed to send brand claim request";
+      }
+    } else {
+      try {
+        await createBrandMutation.mutate({
+          name: brandName,
+        });
+
+        emit("complete");
+      } catch (e) {
+        serverError.value = t("onboarding.notifications.teamSetupFailed");
+      }
     }
   });
 </script>
 
 <template>
-  <form @submit="onSubmit" class="space-y-8">
-    <div class="space-y-4">
-      <h3 className="mb-4 text-xl font-bold">
-        {{ $t("onboarding.team.title") }}
-      </h3>
+  <form @submit="onSubmit" class="py-3">
+    <div class="mt-3">
+      <h3 className="mb-4 text-xl font-bold">Setup Your Brand</h3>
+      <Tabs v-model="brandType" class="mt-3">
+        <TabsList class="w-full">
+          <TabsTrigger value="new" class="flex-1"
+            >Create a new brand</TabsTrigger
+          >
+          <TabsTrigger value="existing" class="flex-1"
+            >Claim an existing brand</TabsTrigger
+          >
+        </TabsList>
+      </Tabs>
+      <p class="text-muted-foreground mb-6 mt-3 text-sm">
+        {{
+          brandType === "new"
+            ? "Create a new brand to list on Serp.Money"
+            : "Claim an existing brand you've spotted in our listings"
+        }}
+      </p>
 
-      <FormField v-slot="{ componentField }" name="teamName">
+      <FormField v-slot="{ componentField }" name="brandName">
         <FormItem>
-          <FormLabel for="teamName" required>
+          <FormLabel for="brandName" required>
             {{ $t("onboarding.team.name") }}
           </FormLabel>
           <FormControl>
@@ -64,7 +91,7 @@
       </FormField>
     </div>
 
-    <div class="flex gap-2">
+    <div class="mt-20 flex gap-2">
       <Button
         type="button"
         variant="outline"
