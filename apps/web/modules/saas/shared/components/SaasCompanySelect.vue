@@ -28,7 +28,7 @@
     <MenuButton
       class="border-foreground group flex w-full items-center gap-3 border-2 border-opacity-10 px-3 py-2.5 hover:border-opacity-20"
     >
-      <TeamAvatar
+      <BrandLogo
         class="size-8"
         :name="currentTeam.name"
         :avatar-url="currentTeam.avatarUrl"
@@ -67,7 +67,7 @@
               'group flex w-full items-center gap-3 px-4 py-3 text-sm',
             ]"
           >
-            <TeamAvatar
+            <BrandLogo
               class="size-8"
               :name="teamMembership.team.name"
               :avatar-url="teamMembership.team.avatarUrl"

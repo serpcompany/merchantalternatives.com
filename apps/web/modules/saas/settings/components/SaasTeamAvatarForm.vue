@@ -92,7 +92,7 @@
         class="relative cursor-pointer rounded-full"
         @click="openFileDialog()"
       >
-        <TeamAvatar
+        <BrandLogo
           class="size-24 cursor-pointer text-xl"
           :avatarUrl="currentTeam?.avatarUrl"
           :name="currentTeam?.name ?? ''"
@@ -100,9 +100,9 @@
 
         <div
           v-if="uploading"
-          class="absolute inset-0 z-20 flex items-center justify-center bg-card/90"
+          class="bg-card/90 absolute inset-0 z-20 flex items-center justify-center"
         >
-          <LoaderIcon class="size-6 animate-spin text-primary" />
+          <LoaderIcon class="text-primary size-6 animate-spin" />
         </div>
       </div>
     </div>

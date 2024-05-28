@@ -18,7 +18,7 @@
       </div>
       <div>
         <Button
-          variant="outline"
+          variant="soft"
           @click="navigateTo('/reviews/square', { open: { target: '_blank' } })"
         >
           Go to live profile<ArrowTopRightOnSquareIcon
@@ -35,7 +35,17 @@
         >Edit</Button
       >
     </div>
-    <ProfileHeader :brand="currentBrand" :inDashboard="true" class="mt-1" />
+    <Card class="mt-1 w-full overflow-hidden pt-5">
+      <div class="mb-5 px-5">
+        <BrandLogo
+          class="size-24 text-xl"
+          :avatarUrl="currentBrand.logoUrl"
+          :name="currentBrand.name"
+        />
+        <h1 class="mt-4 text-3xl font-semibold">{{ currentBrand.name }}</h1>
+        <p class="mt-1 text-gray-500">{{ currentBrand.bio }}</p>
+      </div>
+    </Card>
     <div class="mt-8 flex w-full items-center">
       <h2 class="text-lg font-medium">About •</h2>
       <Button
