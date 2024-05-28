@@ -39,16 +39,12 @@
       to: "/reviews",
     },
     {
-      label: t("common.menu.pricing"),
-      to: "/pricing",
-    },
-    {
       label: t("common.menu.blog"),
       to: "/blog",
     },
     {
-      label: t("common.menu.faq"),
-      to: "/faq",
+      label: t("common.menu.pricing"),
+      to: "/pricing",
     },
   ]);
 </script>

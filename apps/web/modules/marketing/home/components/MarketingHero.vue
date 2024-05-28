@@ -1,10 +1,10 @@
 <template>
   <nav
-    class="border-b bg-gradient-to-b from-transparent to-primary/10 py-8 pb-20"
+    class="to-primary/10 border-b bg-gradient-to-b from-transparent py-8 pb-20"
   >
     <div class="container text-center">
-      <h1 class="mx-auto max-w-3xl text-5xl font-bold lg:text-7xl">
-        Your revolutionary <span class="text-primary">Nuxt 3</span> SaaS
+      <h1 class="mx-auto max-w-3xl text-3xl font-bold lg:text-6xl">
+        Where Business Owners Go for Expert Advice On Financial Services.
       </h1>
 
       <p class="mt-5 text-lg opacity-75">
@@ -16,22 +16,22 @@
         class="mt-6 flex flex-col items-center justify-center gap-3 md:flex-row"
       >
         <Button size="lg" as-child>
-          <NuxtLink to="/auth/login">Get started &rarr;</NuxtLink>
+          <NuxtLink to="/auth/login">Get listed &rarr;</NuxtLink>
         </Button>
         <Button variant="outline" size="lg">
-          <NuxtLink to="/reviews">Reviews</NuxtLink>
+          <NuxtLink to="/reviews">Go to reviews</NuxtLink>
         </Button>
       </div>
 
       <div class="mt-12 px-8 text-center">
         <h5
-          class="text-xs font-semibold uppercase tracking-wider text-foreground/50"
+          class="text-foreground/50 text-xs font-semibold uppercase tracking-wider"
         >
           Built & shipped with these awesome tools
         </h5>
 
         <div
-          class="mt-4 flex flex-col-reverse items-center justify-center gap-4 text-primary/50 md:flex-row md:gap-8"
+          class="text-primary/50 mt-4 flex flex-col-reverse items-center justify-center gap-4 md:flex-row md:gap-8"
         >
           <!-- Supastarter Logo -->
           <div class="aspect-[631/236] h-10 w-auto">
