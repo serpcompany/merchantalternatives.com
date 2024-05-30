@@ -3,10 +3,22 @@ import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 import { getSignedUrl } from "storage";
 
-export const getMany = publicProcedure
+export const byBusinessType = publicProcedure
+  .input(
+    z.object({
+      businessTypeSlug: z.string(),
+    }),
+  )
   .output(z.array(BrandSchema))
-  .query(async () => {
+  .query(async ({ input: { businessTypeSlug } }) => {
     const brands = await db.brand.findMany({
+      where: {
+        businessTypesServed: {
+          some: {
+            slug: businessTypeSlug,
+          },
+        },
+      },
       orderBy: {
         rating: "desc",
       },

@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <Card class="flex gap-3 p-4 hover:shadow">
+  <Card class="flex gap-3 px-4 py-5 hover:shadow">
     <BrandLogo
       :src="brand.logoUrl"
       :name="brand.name"
