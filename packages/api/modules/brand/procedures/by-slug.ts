@@ -4,17 +4,17 @@ import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 import { getSignedUrl } from "storage";
 
-export const byHandle = publicProcedure
+export const bySlug = publicProcedure
   .input(
     z.object({
-      handle: z.string(),
+      slug: z.string(),
     }),
   )
   .output(BrandSchema)
-  .query(async ({ input: { handle } }) => {
+  .query(async ({ input: { slug } }) => {
     const brand = await db.brand.findFirst({
       where: {
-        handle,
+        slug,
       },
     });
 

@@ -24,17 +24,17 @@ export const create = protectedProcedure
   .mutation(async ({ input: { name }, ctx: { user } }) => {
     const existingBrand = await db.brand.findFirst({
       where: {
-        handle: name.toLowerCase().replace(/\s/g, "-"),
+        slug: name.toLowerCase().replace(/\s/g, "-"),
       },
     });
-    const handle = existingBrand
+    const slug = existingBrand
       ? `${name.toLowerCase().replace(/\s/g, "-")}-${Date.now()}`
       : name.toLowerCase().replace(/\s/g, "-");
 
     const brand = await db.brand.create({
       data: {
         name,
-        handle,
+        slug,
         team: {
           create: {
             name,

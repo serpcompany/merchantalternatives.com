@@ -11,25 +11,25 @@
         <template #title>All Brands</template>
         <template #subtitle>Click on a profile to see it's reviews</template>
       </SaasPageHeader>
-      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.handle}`">
+      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.slug}`">
         <Card class="w-full overflow-hidden p-5 hover:shadow">
-          <NuxtImg :src="brand.logoUrl || ''" class="h-24 w-24 rounded-lg" />
+          <BrandLogo :src="brand.logoUrl" :name="brand.name" />
           <h1 class="mt-4 text-3xl font-semibold">{{ brand.name }}</h1>
-          <p class="mt-1 text-gray-500">{{ brand.bio }}</p>
+          <p class="mt-1 text-gray-500">{{ brand.reviewOneliner }}</p>
         </Card>
       </NuxtLink>
-      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.handle}`">
+      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.slug}`">
         <Card class="w-full overflow-hidden p-5 hover:shadow">
-          <NuxtImg :src="brand.logoUrl || ''" class="h-24 w-24 rounded-lg" />
+          <BrandLogo :src="brand.logoUrl" :name="brand.name" />
           <h1 class="mt-4 text-3xl font-semibold">{{ brand.name }}</h1>
-          <p class="mt-1 text-gray-500">{{ brand.bio }}</p>
+          <p class="mt-1 text-gray-500">{{ brand.reviewOneliner }}</p>
         </Card>
       </NuxtLink>
-      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.handle}`">
+      <NuxtLink v-for="brand in brands" :to="`/reviews/${brand.slug}`">
         <Card class="w-full overflow-hidden p-5 hover:shadow">
-          <NuxtImg :src="brand.logoUrl || ''" class="h-24 w-24 rounded-lg" />
+          <BrandLogo :src="brand.logoUrl" :name="brand.name" />
           <h1 class="mt-4 text-3xl font-semibold">{{ brand.name }}</h1>
-          <p class="mt-1 text-gray-500">{{ brand.bio }}</p>
+          <p class="mt-1 text-gray-500">{{ brand.reviewOneliner }}</p>
         </Card>
       </NuxtLink>
     </div>

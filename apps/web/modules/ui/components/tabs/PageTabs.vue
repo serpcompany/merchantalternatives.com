@@ -34,8 +34,8 @@
       </select>
       -->
     </div>
-    <div class="hidden sm:block w-full" :class="{ '-mb-px': thin }">
-      <div class="border-b border-gray-200 w-full">
+    <div class="hidden w-full sm:block" :class="{ '-mb-px': thin }">
+      <div class="w-full border-b border-gray-200">
         <nav
           :class="[thin ? 'space-x-3' : ' space-x-8', '-mb-px flex']"
           aria-label="Tabs"
@@ -47,10 +47,10 @@
             :class="[
               tab.to === route.path
                 ? 'border-primary text-primary'
-                : 'border-transparent text-foreground/50 hover:border-highlight hover:text-foreground/80',
+                : 'text-muted-foreground hover:border-highlight hover:text-foreground border-transparent',
               thin
-                ? 'py-3 font-semibold text-base border-b-4 px-3'
-                : 'py-4 text-sm font-medium border-b-2 px-1',
+                ? 'border-b-4 px-3 py-3 text-base font-semibold'
+                : 'border-b-2 px-1 py-4 text-sm font-medium',
               'whitespace-nowrap',
             ]"
             :aria-current="tab.to === route.path ? 'page' : undefined"

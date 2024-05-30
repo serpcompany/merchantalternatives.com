@@ -19,7 +19,11 @@
       <div>
         <Button
           variant="soft"
-          @click="navigateTo('/reviews/square', { open: { target: '_blank' } })"
+          @click="
+            navigateTo(`/reviews/${currentBrand.slug}`, {
+              open: { target: '_blank' },
+            })
+          "
         >
           Go to live profile<ArrowTopRightOnSquareIcon
             class="mb-1 ml-2 h-5 w-5"
@@ -43,7 +47,7 @@
           :name="currentBrand.name"
         />
         <h1 class="mt-4 text-3xl font-semibold">{{ currentBrand.name }}</h1>
-        <p class="mt-1 text-gray-500">{{ currentBrand.bio }}</p>
+        <p class="mt-1 text-gray-500">{{ currentBrand.reviewOneliner }}</p>
       </div>
     </Card>
     <div class="mt-8 flex w-full items-center">
