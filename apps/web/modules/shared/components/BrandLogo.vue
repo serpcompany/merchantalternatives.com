@@ -1,15 +1,21 @@
 <script setup lang="ts">
-  const props = defineProps<{
-    name: string;
-    avatarUrl?: string | null;
-  }>();
+  defineProps({
+    src: {
+      type: null as unknown as PropType<string | null>,
+      default: null,
+    },
+    name: {
+      type: String,
+      default: "?",
+    },
+  });
 </script>
 
 <template>
-  <Avatar>
-    <AvatarImage v-if="avatarUrl" :src="avatarUrl" />
-    <AvatarFallback class="text-primary">
-      <BoringAvatar :size="84" :name="name" variant="marble" />
-    </AvatarFallback>
+  <Avatar shape="square" class="bg-primary/10">
+    <AvatarImage v-if="src" :src="src" />
+    <span v-else="name" class="text-2xl font-bold">{{
+      name.substring(0, 1)
+    }}</span>
   </Avatar>
 </template>

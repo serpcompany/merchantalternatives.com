@@ -43,7 +43,7 @@
       <div class="mb-5 px-5">
         <BrandLogo
           class="size-24 text-xl"
-          :avatarUrl="currentBrand.logoUrl"
+          :src="currentBrand.logoUrl"
           :name="currentBrand.name"
         />
         <h1 class="mt-4 text-3xl font-semibold">{{ currentBrand.name }}</h1>

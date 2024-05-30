@@ -93,9 +93,9 @@
         @click="openFileDialog()"
       >
         <BrandLogo
-          class="size-24 cursor-pointer text-xl"
-          :avatarUrl="currentTeam?.avatarUrl"
+          :src="currentTeam?.avatarUrl"
           :name="currentTeam?.name ?? ''"
+          class="size-24 cursor-pointer text-xl"
         />
 
         <div

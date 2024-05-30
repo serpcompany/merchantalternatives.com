@@ -14,6 +14,14 @@ export const bySlug = publicProcedure
     BrandSchema.extend({
       industriesServed: IndustrySchema.array(),
       businessTypesServed: BusinessTypeSchema.array(),
+      alternatives: BrandSchema.pick({
+        id: true,
+        name: true,
+        slug: true,
+        logoUrl: true,
+        reviewOneliner: true,
+        rating: true,
+      }).array(),
     }),
   )
   .query(async ({ input: { slug } }) => {
@@ -24,6 +32,16 @@ export const bySlug = publicProcedure
       include: {
         industriesServed: true,
         businessTypesServed: true,
+        alternatives: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            logoUrl: true,
+            reviewOneliner: true,
+            rating: true,
+          },
+        },
       },
     });
 
@@ -39,6 +57,14 @@ export const bySlug = publicProcedure
         bucket: "avatars",
         expiresIn: 360,
       });
+    }
+    for (const alternative of brand.alternatives) {
+      if (alternative.logoUrl) {
+        alternative.logoUrl = await getSignedUrl(alternative.logoUrl, {
+          bucket: "avatars",
+          expiresIn: 360,
+        });
+      }
     }
 
     return brand;

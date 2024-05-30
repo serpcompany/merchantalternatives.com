@@ -29,7 +29,7 @@
           <div>
             <BrandLogo
               class="size-24 rounded-none text-xl"
-              :avatarUrl="brand.logoUrl"
+              :src="brand.logoUrl"
               :name="brand.name"
             />
             <h1 class="mt-3.5 text-3xl font-semibold">{{ brand.name }}</h1>
@@ -83,13 +83,34 @@
           >See our best picks</Button
         >
       </Card>
-      <Card>
+      <Card v-if="brand.alternatives.length">
         <CardHeader>
           <CardTitle>{{ brand.name }} Alternatives</CardTitle>
         </CardHeader>
-        <CardContent> </CardContent>
+        <CardContent class="px-0 py-0">
+          <div class="flex flex-col divide-y">
+            <NuxtLink
+              v-for="alternative in brand.alternatives"
+              :to="`/reviews/${alternative.slug}`"
+              :key="alternative.id"
+              class="hover:bg-highlight/20 flex items-center gap-2 px-3 py-3.5"
+            >
+              <BrandLogo :src="alternative.logoUrl" :name="alternative.name" />
+              <div class="flex flex-col items-start">
+                <h3 class="text-lg font-semibold">{{ alternative.name }}</h3>
+                <StarRating
+                  v-if="alternative.rating"
+                  :rating="alternative.rating"
+                  size="sm"
+                />
+                <p class="text-muted-foreground mt-1 truncate text-sm">
+                  {{ alternative.reviewOneliner }}
+                </p>
+              </div>
+            </NuxtLink>
+          </div>
+        </CardContent>
       </Card>
-      <Card class="h-96 w-full" />
     </div>
   </div>
 </template>

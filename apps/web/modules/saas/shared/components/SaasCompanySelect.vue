@@ -31,7 +31,7 @@
       <BrandLogo
         class="size-8"
         :name="currentTeam.name"
-        :avatar-url="currentTeam.avatarUrl"
+        :src="currentTeam.avatarUrl"
       />
       <div
         class="block flex-1 truncate text-left text-sm font-semibold leading-6"
@@ -70,7 +70,7 @@
             <BrandLogo
               class="size-8"
               :name="teamMembership.team.name"
-              :avatar-url="teamMembership.team.avatarUrl"
+              :src="teamMembership.team.avatarUrl"
             />
             <div
               class="text-foreground flex-1 truncate text-left text-sm font-semibold leading-6"

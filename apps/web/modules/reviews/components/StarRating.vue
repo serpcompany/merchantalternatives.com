@@ -6,6 +6,10 @@
       type: Number,
       required: true,
     },
+    size: {
+      type: String as PropType<"sm" | "md" | "lg">,
+      default: "md",
+    },
     withText: {
       type: Boolean,
       default: false,
@@ -15,11 +19,25 @@
 
 <template>
   <div class="flex flex-col items-center">
-    <span v-if="withText" class="text-6xl font-medium">{{ rating }}</span>
-    <div class="mt-1.5 flex">
+    <span
+      v-if="withText"
+      class="font-medium"
+      :class="{ 'text-6xl': size === 'md', 'text-lg': size === 'sm' }"
+      >{{ rating }}</span
+    >
+    <div
+      class="flex"
+      :class="{
+        'mt-1.5': withText && size === 'md',
+        'mt-0.5': withText && size === 'sm',
+      }"
+    >
       <div v-for="s in 5" class="relative">
         <div class="relative left-0 top-0 -z-10">
-          <StarIcon class="size-6 stroke-yellow-500" />
+          <StarIcon
+            class="stroke-yellow-500"
+            :class="{ 'size-6': size === 'md', 'size-3.5': size === 'sm' }"
+          />
         </div>
         <div
           class="absolute left-0 top-0 overflow-hidden"
@@ -30,8 +48,12 @@
           }"
         >
           <StarIcon
-            class="size-6 text-transparent"
-            :class="{ 'fill-yellow-500': rating >= s - 1 }"
+            class="text-transparent"
+            :class="{
+              'fill-yellow-500': rating >= s - 1,
+              'size-6': size === 'md',
+              'size-3.5': size === 'sm',
+            }"
           />
         </div>
       </div>
