@@ -28,7 +28,7 @@
         <div class="flex justify-between px-6 pb-4 pt-10">
           <div>
             <BrandLogo
-              class="size-24 rounded-none text-xl"
+              class="size-24 text-xl"
               :src="brand.logoUrl"
               :name="brand.name"
             />
@@ -60,7 +60,12 @@
             >
           </div>
           <div>
-            <StarRating v-if="brand.rating" :rating="brand.rating" with-text />
+            <StarRating
+              v-if="brand.rating"
+              :rating="brand.rating"
+              size="lg"
+              with-text
+            />
           </div>
         </div>
         <PageTabs

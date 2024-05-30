@@ -22,13 +22,18 @@
     <span
       v-if="withText"
       class="font-medium"
-      :class="{ 'text-6xl': size === 'md', 'text-lg': size === 'sm' }"
+      :class="{
+        'text-6xl': size === 'lg',
+        'text-3xl': size === 'md',
+        'text-lg': size === 'sm',
+      }"
       >{{ rating }}</span
     >
     <div
       class="flex"
       :class="{
-        'mt-1.5': withText && size === 'md',
+        'mt-1.5': withText && size === 'lg',
+        'mt-1': withText && size === 'md',
         'mt-0.5': withText && size === 'sm',
       }"
     >
@@ -36,7 +41,11 @@
         <div class="relative left-0 top-0 -z-10">
           <StarIcon
             class="stroke-yellow-500"
-            :class="{ 'size-6': size === 'md', 'size-3.5': size === 'sm' }"
+            :class="{
+              'size-6': size === 'lg',
+              'size-4': size === 'md',
+              'size-3.5': size === 'sm',
+            }"
           />
         </div>
         <div
@@ -51,7 +60,8 @@
             class="text-transparent"
             :class="{
               'fill-yellow-500': rating >= s - 1,
-              'size-6': size === 'md',
+              'size-6': size === 'lg',
+              'size-4': size === 'md',
               'size-3.5': size === 'sm',
             }"
           />

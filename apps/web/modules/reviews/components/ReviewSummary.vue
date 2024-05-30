@@ -44,7 +44,7 @@
           <p class="text-muted-foreground mt-1">{{ brand.specializesIn }}</p>
         </div>
         <div>
-          <StarRating :rating="brand.rating" with-text />
+          <StarRating :rating="brand.rating" size="lg" with-text />
         </div>
       </div>
       <div>
