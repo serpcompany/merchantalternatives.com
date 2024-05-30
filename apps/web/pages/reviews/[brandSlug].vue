@@ -83,7 +83,12 @@
           >See our best picks</Button
         >
       </Card>
-      <Card class="h-64 w-full" />
+      <Card>
+        <CardHeader>
+          <CardTitle>{{ brand.name }} Alternatives</CardTitle>
+        </CardHeader>
+        <CardContent> </CardContent>
+      </Card>
       <Card class="h-96 w-full" />
     </div>
   </div>

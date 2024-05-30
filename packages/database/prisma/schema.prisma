@@ -15,11 +15,6 @@ generator zod {
   addSelectType    = false
 }
 
-enum UserRole {
-  USER
-  ADMIN
-}
-
 model User {
   id                 String                  @id @default(cuid())
   email              String                  @unique
@@ -67,12 +62,6 @@ model UserVerificationToken {
   @@index([userId])
 }
 
-enum UserOneTimePasswordType {
-  SIGNUP
-  LOGIN
-  PASSWORD_RESET
-}
-
 model UserOneTimePassword {
   id         String                  @id @default(cuid())
   userId     String
@@ -86,16 +75,44 @@ model UserOneTimePassword {
 }
 
 model Brand {
-  id      String  @id @default(cuid())
-  handle  String  @unique
-  name    String
-  logoUrl String?
-  website String?
-  bio     String?
-  bestFor String?
-  team    Team?
+  id                       String         @id @default(cuid())
+  slug                     String         @unique
+  name                     String
+  logoUrl                  String?
+  website                  String?
+  hqLocation               String?
+  numOfEmployees           Int?
+  yearFounded              Int?
+  ceo                      String?
+  summary                  String?
+  overview                 String?
+  rating                   Float?
+  ratesAndFeesRating       Int?
+  truthInAdvertisingRating Int?
+  consumerReviewsRating    Int?
+  customerSupportRating    Int?
+  reviewOneliner           String?
+  reviewSummaryPoint1      String?
+  reviewSummaryPoint2      String?
+  reviewSummaryPoint3      String?
+  reviewText               String?
+  reviewPros               String[]
+  reviewCons               String[]
+  bestFor                  String?
+  specializesIn            String?
+  setupFee                 String?
+  swipeRate                String?
+  earlyTerminationFee      String?
+  monthlyFee               String?
+  keyedInRate              String?
+  contractTerms            String?
+  industriesServed         Industry[]
+  businessTypesServed      BusinessType[]
+  alternatives             Brand[]        @relation("Alternatives")
+  alternativeMentions      Brand[]        @relation("Alternatives")
+  team                     Team?
 
-  @@index([handle])
+  @@index([slug])
 }
 
 model Team {
@@ -107,11 +124,6 @@ model Team {
   memberships  TeamMembership[]
   subscription Subscription?
   invitations  TeamInvitation[]
-}
-
-enum TeamMemberRole {
-  MEMBER
-  OWNER
 }
 
 model TeamMembership {
@@ -138,17 +150,6 @@ model TeamInvitation {
   @@unique([teamId, email])
 }
 
-enum SubscriptionStatus {
-  TRIALING
-  ACTIVE
-  PAUSED
-  CANCELED
-  PAST_DUE
-  UNPAID
-  INCOMPLETE
-  EXPIRED
-}
-
 model Subscription {
   id              String             @id
   team            Team               @relation(fields: [teamId], references: [id])
@@ -158,6 +159,24 @@ model Subscription {
   planId          String
   variantId       String
   nextPaymentDate DateTime?
+}
+
+model Industry {
+  id    String  @id @default(cuid())
+  slug  String  @unique
+  name  String  @unique
+  brand Brand[]
+
+  @@index([slug])
+}
+
+model BusinessType {
+  id    String  @id @default(cuid())
+  slug  String  @unique
+  name  String  @unique
+  brand Brand[]
+
+  @@index([slug])
 }
 
 model glossary {
@@ -186,4 +205,31 @@ model post {
   author_fk      String?
   content        String?
   featured_image String?
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum UserOneTimePasswordType {
+  SIGNUP
+  LOGIN
+  PASSWORD_RESET
+}
+
+enum TeamMemberRole {
+  MEMBER
+  OWNER
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAUSED
+  CANCELED
+  PAST_DUE
+  UNPAID
+  INCOMPLETE
+  EXPIRED
 }

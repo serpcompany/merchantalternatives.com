@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { BrandSchema, db } from "database";
+import { BrandSchema, BusinessTypeSchema, db, IndustrySchema } from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 import { getSignedUrl } from "storage";
@@ -10,11 +10,20 @@ export const bySlug = publicProcedure
       slug: z.string(),
     }),
   )
-  .output(BrandSchema)
+  .output(
+    BrandSchema.extend({
+      industriesServed: IndustrySchema.array(),
+      businessTypesServed: BusinessTypeSchema.array(),
+    }),
+  )
   .query(async ({ input: { slug } }) => {
     const brand = await db.brand.findFirst({
       where: {
         slug,
+      },
+      include: {
+        industriesServed: true,
+        businessTypesServed: true,
       },
     });
 

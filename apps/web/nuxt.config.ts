@@ -53,6 +53,7 @@ export default defineNuxtConfig({
     { path: "@/modules/saas/settings/components", pathPrefix: false },
     { path: "@/modules/saas/shared/components", pathPrefix: false },
     { path: "@/modules/profiles/components", pathPrefix: false },
+    { path: "@/modules/reviews/components", pathPrefix: false },
   ],
 
   app: {
