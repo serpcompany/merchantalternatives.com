@@ -80,6 +80,7 @@ model Brand {
   name                     String
   logoUrl                  String?
   website                  String?
+  engaged                  Boolean        @default(false)
   hqLocation               String?
   numOfEmployees           Int?
   yearFounded              Int?

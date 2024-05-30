@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { LinkIcon } from "@heroicons/vue/24/outline";
+  import { LinkIcon, CheckBadgeIcon } from "@heroicons/vue/24/solid";
 
   const { apiCaller } = useApiCaller();
   const brandSlug = useRoute("reviews-brandSlug").params.brandSlug;
@@ -19,6 +19,12 @@
     { title: "Advertising", to: `/reviews/${brand.slug}/advertising` },
     { title: "Contracts", to: `/reviews/${brand.slug}/contracts` },
   ]);
+
+  const inform = () => {
+    alert(
+      "This company has claimed their account and has verified their information.",
+    );
+  };
 </script>
 
 <template>
@@ -44,20 +50,29 @@
               {{ brand.hqLocation && numOfEmployees ? " • " : "" }}
               {{ numOfEmployees || "" }}
             </p>
-            <Button
-              v-if="brand.website"
-              size="sm"
-              @click="
-                navigateTo('https://' + brand.website, {
-                  external: true,
-                  open: {
-                    target: '_blank',
-                  },
-                })
-              "
-              class="mt-3"
-              ><LinkIcon class="mr-2 size-4" />{{ brand.website }}</Button
-            >
+            <div class="mt-3 flex gap-2">
+              <Button
+                v-if="brand.website"
+                size="sm"
+                @click="
+                  navigateTo('https://' + brand.website, {
+                    external: true,
+                    open: {
+                      target: '_blank',
+                    },
+                  })
+                "
+                ><LinkIcon class="mr-2 size-4" />{{ brand.website }}</Button
+              >
+              <Button
+                v-if="brand.engaged"
+                variant="outline"
+                size="sm"
+                @click="inform"
+                class="text-success border-success hover:bg-success/10"
+                ><CheckBadgeIcon class="mr-2 size-5" />Engaged Company</Button
+              >
+            </div>
           </div>
           <div>
             <StarRating

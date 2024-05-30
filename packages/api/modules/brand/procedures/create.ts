@@ -35,6 +35,7 @@ export const create = protectedProcedure
       data: {
         name,
         slug,
+        engaged: true,
         team: {
           create: {
             name,
