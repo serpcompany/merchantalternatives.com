@@ -2,9 +2,12 @@
   import type { ApiOutput } from "api/modules/trpc/router";
   import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/outline";
 
-  defineProps<{
-    brand: ApiOutput["brand"]["bySlug"];
-  }>();
+  defineProps({
+    brand: {
+      type: Object as PropType<ApiOutput["brand"]["bySlug"]>,
+      required: true,
+    },
+  });
 </script>
 
 <template>

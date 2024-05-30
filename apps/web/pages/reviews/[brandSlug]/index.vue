@@ -1,9 +1,12 @@
 <script setup lang="ts">
   import type { ApiOutput } from "api/modules/trpc/router";
 
-  defineProps<{
-    brand: ApiOutput["brand"]["bySlug"];
-  }>();
+  defineProps({
+    brand: {
+      type: Object as PropType<ApiOutput["brand"]["bySlug"]>,
+      required: true,
+    },
+  });
 
   const getFirstParagraph = (html: string): string =>
     html.split("<p>")[1].split("</p>")[0];
