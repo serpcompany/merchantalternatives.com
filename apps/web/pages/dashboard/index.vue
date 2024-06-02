@@ -8,15 +8,11 @@
 </script>
 
 <template>
-  <div>
-    <SaasPageHeader>
-      <template #title>{{
-        t("dashboard.welcome", { name: user?.name })
-      }}</template>
-      <template #subtitle>{{ $t("dashboard.subtitle") }}</template>
-    </SaasPageHeader>
-
-    <div class="mt-8 grid gap-4 lg:grid-cols-3">
+  <SaasPage
+    :heading="'Welcome ' + user?.name || ''"
+    subheading="Checkout your latest stats"
+  >
+    <div class="grid gap-4 lg:grid-cols-3">
       <SaasStatsTile
         title="New clients"
         :value="344"
@@ -44,5 +40,5 @@
         Place your content here...
       </div>
     </Card>
-  </div>
+  </SaasPage>
 </template>

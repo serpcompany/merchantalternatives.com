@@ -10,26 +10,19 @@
 </script>
 
 <template>
-  <div v-if="currentBrand">
-    <div class="mb-8 flex items-end justify-between border-b pb-4">
-      <div>
-        <h2 class="text-2xl font-bold lg:text-3xl">Company Profile</h2>
-        <p class="mt-1 opacity-50">How your company appears on our platform</p>
-      </div>
-      <div>
-        <Button
-          variant="soft"
-          @click="
-            navigateTo(`/reviews/${currentBrand.slug}`, {
-              open: { target: '_blank' },
-            })
-          "
-        >
-          Go to live profile<ArrowTopRightOnSquareIcon
-            class="mb-1 ml-2 h-5 w-5"
-        /></Button>
-      </div>
-    </div>
+  <SaasPage
+    v-if="currentBrand"
+    heading="Company Profile"
+    subheading="How your company looks on our platform"
+    :heading-button="{
+      label: 'Go to live profile',
+      action: () =>
+        navigateTo(`/reviews/${currentBrand!.slug}`, {
+          open: { target: '_blank' },
+        }),
+      icon: ArrowTopRightOnSquareIcon,
+    }"
+  >
     <div class="flex w-full items-center">
       <h2 class="text-lg font-medium">Header •</h2>
       <Button
@@ -70,7 +63,7 @@
       >
     </div>
     <div class="bg-background mt-1 h-64 w-full" />
-  </div>
+  </SaasPage>
 
   <SaasEditBrandHeaderDialog />
 </template>

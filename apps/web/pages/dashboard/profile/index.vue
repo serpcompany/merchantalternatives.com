@@ -19,16 +19,16 @@
 </script>
 
 <template>
-  <div>
-    <SaasPageHeader>
-      <template #title>Profile Settings</template>
-      <template #subtitle>Your profile settings</template>
-    </SaasPageHeader>
+  <SaasPage
+    heading="Profile Settings"
+    subheading="Your profile settings"
+    variant="sm"
+  >
     <div v-if="user" class="grid gap-6">
       <SaasUserAvatarForm />
       <SaasChangeNameForm :initialValue="user.name || ''" />
       <SaasChangePasswordForm />
       <SaasDeleteAccountForm />
     </div>
-  </div>
+  </SaasPage>
 </template>

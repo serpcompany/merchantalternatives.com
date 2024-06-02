@@ -30,10 +30,10 @@
 </script>
 
 <template>
-  <div class="min-h-screen bg-muted">
+  <div class="bg-muted min-h-screen">
     <SaasNavBar />
-    <div class="lg:pl-72">
-      <main class="py-8 container max-w-4xl px-4">
+    <div class="lg:pl-[272px]">
+      <main>
         <slot />
       </main>
     </div>

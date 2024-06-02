@@ -19,16 +19,14 @@
 </script>
 
 <template>
-  <div v-if="currentTeam">
-    <div class="pb-4">
-      <h2 class="text-2xl font-bold lg:text-3xl">
-        {{ currentTeam.name }} Settings
-      </h2>
-      <p class="mt-1 opacity-50">All your company settings</p>
-    </div>
+  <SaasPage
+    v-if="currentTeam"
+    :heading="`${currentTeam.name} Settings`"
+    subheading="All your company settings"
+  >
     <div class="flex flex-col gap-7">
       <PageTabs :tabs="tabs" />
       <NuxtPage />
     </div>
-  </div>
+  </SaasPage>
 </template>
