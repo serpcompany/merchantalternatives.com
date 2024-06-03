@@ -4,26 +4,18 @@
   });
 
   const { t } = useTranslations();
-  const localePath = useLocalePath();
-  const { currentTeam } = useUser();
+  const { currentBrand } = useUser();
 
   useSeoMeta({
     title: t("settings.team.title"),
   });
-
-  const currentTeamId = useCurrentTeamIdCookie();
-
-  if (!currentTeamId.value) {
-    navigateTo(localePath("/auth/login"));
-    throw new Error("Team not found");
-  }
 </script>
 
 <template>
-  <div v-if="currentTeam" class="grid gap-6">
-    <SaasChangeTeamNameForm
-      :initialValue="currentTeam.name"
-      :teamId="currentTeam.id"
+  <div v-if="currentBrand" class="grid gap-6">
+    <SaasChangeBrandNameForm
+      :brandId="currentBrand.id"
+      :initialValue="currentBrand.name"
     />
     <SaasDeleteTeamForm />
   </div>

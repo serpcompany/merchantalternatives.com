@@ -5,8 +5,8 @@
   import { useToast } from "@/modules/ui/components/toast";
 
   const props = defineProps<{
+    brandId: string;
     initialValue: string;
-    teamId: string;
   }>();
 
   const { t } = useTranslations();
@@ -28,7 +28,6 @@
   });
 
   const [name, nameAttrs] = defineField("name");
-  console.log(name);
 
   const isSubmitDisabled = computed(() => {
     return (
@@ -38,9 +37,9 @@
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      await apiCaller.team.update.mutate({
+      await apiCaller.brand.update.mutate({
+        id: props.brandId,
         name: values.name,
-        id: props.teamId,
       });
 
       toast({

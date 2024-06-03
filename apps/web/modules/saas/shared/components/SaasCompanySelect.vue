@@ -7,13 +7,13 @@
   } from "@heroicons/vue/20/solid";
 
   const localePath = useLocalePath();
-  const { teamMemberships, currentTeam } = useUser();
+  const { teamMemberships, currentBrand, currentTeam } = useUser();
   const { switchTeam } = useSwitchTeam();
   const { createBrandDialogOpen } = useDashboardState();
   const runtimeConfig = useRuntimeConfig();
 
   const activeTeamIdModel = computed({
-    get: () => currentTeam.value?.id,
+    get: () => currentBrand.value?.id,
     set: async (newValue) => {
       if (newValue) {
         switchTeam(newValue);
@@ -24,19 +24,23 @@
 </script>
 
 <template>
-  <Menu as="div" class="relative inline-block text-left" v-if="currentTeam">
+  <Menu
+    as="div"
+    class="relative inline-block text-left"
+    v-if="currentBrand && currentTeam"
+  >
     <MenuButton
       class="border-foreground group flex w-full items-center gap-3 border-2 border-opacity-10 px-3 py-2.5 hover:border-opacity-20"
     >
       <BrandLogo
         class="size-8"
-        :name="currentTeam.name"
-        :src="currentTeam.avatarUrl"
+        :name="currentBrand.name"
+        :src="currentBrand.logoUrl"
       />
       <div
         class="block flex-1 truncate text-left text-sm font-semibold leading-6"
       >
-        {{ currentTeam.name }}
+        {{ currentBrand.name }}
       </div>
       <ChevronDownIcon
         class="h-8 w-8 flex-none opacity-15 group-hover:opacity-25"
@@ -69,13 +73,13 @@
           >
             <BrandLogo
               class="size-8"
-              :name="teamMembership.team.name"
-              :src="teamMembership.team.avatarUrl"
+              :name="teamMembership.team.brand?.name"
+              :src="teamMembership.team.brand?.logoUrl"
             />
             <div
               class="text-foreground flex-1 truncate text-left text-sm font-semibold leading-6"
             >
-              {{ teamMembership.team.name }}
+              {{ teamMembership.team.brand?.name }}
             </div>
             <CheckIcon
               v-if="activeTeamIdModel === teamMembership.team.id"
@@ -101,6 +105,10 @@
   </Menu>
 
   <SaasCreateBrandDialog
-    @success="(newTeamId: string) => switchTeam(newTeamId)"
+    @success="
+      (newTeamId: string | undefined) => {
+        if (newTeamId) switchTeam(newTeamId);
+      }
+    "
   />
 </template>

@@ -1,12 +1,16 @@
 <script setup lang="ts">
+  import type { ApiOutput } from "api";
+
   const { createBrandDialogOpen } = useDashboardState();
 
   const emit = defineEmits<{
-    success: [id: string];
+    success: [newTeamId: string | undefined];
   }>();
 
-  const handleCreateBrandSuccess = async (newBrandId: string) => {
-    emit("success", newBrandId);
+  const handleCreateBrandSuccess = async (
+    newBrand: ApiOutput["brand"]["create"],
+  ) => {
+    emit("success", newBrand.team?.id);
     createBrandDialogOpen.value = false;
   };
 </script>
@@ -27,7 +31,10 @@
       </DialogHeader>
 
       <SaasCreateBrandForm
-        @success="(newTeam) => handleCreateBrandSuccess(newTeam.id)"
+        @success="
+          (newBrand: ApiOutput['brand']['create']) =>
+            handleCreateBrandSuccess(newBrand)
+        "
       />
     </DialogContent>
   </Dialog>
