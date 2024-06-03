@@ -23,6 +23,7 @@
     v-if="currentTeam"
     :heading="`${currentTeam.name} Settings`"
     subheading="All your company settings"
+    variant="sm"
   >
     <div class="flex flex-col gap-7">
       <PageTabs :tabs="tabs" />

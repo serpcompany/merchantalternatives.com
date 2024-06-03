@@ -6,7 +6,19 @@
   });
 
   const { currentBrand } = useUser();
-  const { editBrandHeaderOpen } = useDashboardState();
+  const { settingsDialogOpen } = useDashboardState();
+
+  type FormType = "brand header" | "quick facts" | "about" | null;
+  const openFormType = ref<FormType>(null);
+
+  const openSettingsDialog = (formType: FormType) => {
+    settingsDialogOpen.value = true;
+    openFormType.value = formType;
+  };
+  const closeSettingsDialog = () => {
+    settingsDialogOpen.value = false;
+    openFormType.value = null;
+  };
 </script>
 
 <template>
@@ -27,43 +39,52 @@
       <h2 class="text-lg font-medium">Header •</h2>
       <Button
         variant="link"
-        @click="() => (editBrandHeaderOpen = true)"
+        @click="openSettingsDialog('brand header')"
         class="px-2 text-lg font-medium"
         >Edit</Button
       >
     </div>
-    <Card class="mt-1 w-full overflow-hidden pt-5">
-      <div class="mb-5 px-5">
-        <BrandLogo
-          class="size-24 text-xl"
-          :src="currentBrand.logoUrl"
-          :name="currentBrand.name"
-        />
-        <h1 class="mt-4 text-3xl font-semibold">{{ currentBrand.name }}</h1>
-        <p class="mt-1 text-gray-500">{{ currentBrand.reviewOneliner }}</p>
-      </div>
-    </Card>
+    <SaasBrandHeaderPreview />
+    <div class="mt-8 flex w-full items-center">
+      <h2 class="text-lg font-medium">Quick Facts •</h2>
+      <Button
+        variant="link"
+        @click="openSettingsDialog('quick facts')"
+        class="px-2 text-lg font-medium"
+        >Edit</Button
+      >
+    </div>
+    <SaasQuickFactsPreview />
     <div class="mt-8 flex w-full items-center">
       <h2 class="text-lg font-medium">About •</h2>
       <Button
         variant="link"
-        @click="() => (editBrandHeaderOpen = true)"
+        @click="openSettingsDialog('about')"
         class="px-2 text-lg font-medium"
         >Edit</Button
       >
     </div>
-    <div class="bg-background mt-1 h-64 w-full" />
+    <SaasAboutPreview />
+
     <div class="mt-8 flex w-full items-center">
-      <h2 class="text-lg font-medium">Reviews •</h2>
-      <Button
-        variant="link"
-        @click="() => (editBrandHeaderOpen = true)"
-        class="px-2 text-lg font-medium"
-        >Edit</Button
-      >
+      <h2 class="text-lg font-medium">Pricing •</h2>
+      <Button variant="link" class="px-2 text-lg font-medium">Edit</Button>
     </div>
     <div class="bg-background mt-1 h-64 w-full" />
   </SaasPage>
 
-  <SaasEditBrandHeaderDialog />
+  <SaasSettingsDialog :title="'Edit ' + openFormType">
+    <SaasBrandHeaderForm
+      v-if="openFormType === 'brand header'"
+      @close="closeSettingsDialog()"
+    />
+    <SaasQuickFactsForm
+      v-if="openFormType === 'quick facts'"
+      @close="closeSettingsDialog()"
+    />
+    <SaasAboutForm
+      v-if="openFormType === 'about'"
+      @close="closeSettingsDialog()"
+    />
+  </SaasSettingsDialog>
 </template>

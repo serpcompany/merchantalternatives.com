@@ -26,6 +26,6 @@
     :disabled="props.disabled || props.loading"
   >
     <LoaderIcon v-if="props.loading" class="size-4 animate-spin" />
-    <slot />
+    <slot v-else />
   </Primitive>
 </template>

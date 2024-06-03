@@ -21,7 +21,6 @@
 
 <template>
   <div v-if="currentTeam" class="grid gap-6">
-    <SaasTeamAvatarForm />
     <SaasChangeTeamNameForm
       :initialValue="currentTeam.name"
       :teamId="currentTeam.id"

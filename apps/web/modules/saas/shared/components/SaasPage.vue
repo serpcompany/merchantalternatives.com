@@ -27,7 +27,7 @@
 
 <template>
   <div
-    class="mx-auto py-14"
+    class="mx-auto px-8 py-14"
     :class="{
       'max-w-[1000px]': variant === 'default',
       'max-w-3xl': variant === 'sm',

@@ -3,6 +3,7 @@
   import { LoaderIcon } from "lucide-vue-next";
   import { v4 as uuid } from "uuid";
   import { useToast } from "@/modules/ui/components/toast";
+  import { PencilIcon } from "@heroicons/vue/24/outline";
 
   const uploading = ref(false);
   const image = ref<File | null>(null);
@@ -11,7 +12,6 @@
   const { reloadUser, currentTeam } = useUser();
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
-  const { t } = useTranslations();
 
   const getSignedUploadUrlMutation =
     apiCaller.uploads.signedUploadUrl.useMutation();
@@ -61,14 +61,14 @@
 
       toast({
         variant: "success",
-        title: t("settings.notifications.avatarUpdated"),
+        title: "Your logo has been updated",
       });
 
       await reloadUser();
     } catch (e) {
       toast({
         variant: "error",
-        title: t("settings.notifications.avatarNotUpdated"),
+        title: "We were unable to update your logo. Please try again later.",
       });
     } finally {
       uploading.value = false;
@@ -77,16 +77,10 @@
 </script>
 
 <template>
-  <SaasActionBlock>
-    <template #title>
-      {{ $t("settings.account.avatar.title") }}
-    </template>
+  <div>
+    <label class="text-sm font-medium">Logo</label>
 
-    <div class="flex items-center gap-4">
-      <div class="flex-1">
-        <p>{{ $t("settings.account.avatar.description") }}</p>
-      </div>
-
+    <div class="mt-2 flex items-center gap-4">
       <div
         ref="dropZoneRef"
         class="relative cursor-pointer rounded-full"
@@ -97,7 +91,14 @@
           :name="currentTeam?.name ?? ''"
           class="size-24 cursor-pointer text-xl"
         />
-
+        <Button
+          type="button"
+          variant="soft"
+          size="sm"
+          class="bg-primary/50 hover:bg-primary/90 absolute right-1 top-1 p-2 text-white transition-colors duration-200"
+        >
+          <PencilIcon class="size-4 stroke-2 text-white" />
+        </Button>
         <div
           v-if="uploading"
           class="bg-card/90 absolute inset-0 z-20 flex items-center justify-center"
@@ -117,5 +118,5 @@
         )
       "
     />
-  </SaasActionBlock>
+  </div>
 </template>
