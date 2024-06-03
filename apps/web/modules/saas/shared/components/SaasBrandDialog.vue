@@ -1,20 +1,20 @@
 <script setup lang="ts">
-  const { createTeamDialogOpen } = useDashboardState();
+  const { createBrandDialogOpen } = useDashboardState();
 
   const emit = defineEmits<{
     success: [id: string];
   }>();
 
-  const handleCreateTeamSuccess = async (newTeamId: string) => {
-    emit("success", newTeamId);
-    createTeamDialogOpen.value = false;
+  const handleCreateBrandSuccess = async (newBrandId: string) => {
+    emit("success", newBrandId);
+    createBrandDialogOpen.value = false;
   };
 </script>
 
 <template>
   <Dialog
-    :open="createTeamDialogOpen"
-    @update:open="(newVal) => (createTeamDialogOpen = newVal)"
+    :open="createBrandDialogOpen"
+    @update:open="(newVal) => (createBrandDialogOpen = newVal)"
   >
     <DialogContent>
       <DialogDescription class="sr-only">
@@ -26,8 +26,8 @@
         </DialogTitle>
       </DialogHeader>
 
-      <SaasCreateTeamForm
-        @success="(newTeam) => handleCreateTeamSuccess(newTeam.id)"
+      <SaasCreateBrandForm
+        @success="(newTeam) => handleCreateBrandSuccess(newTeam.id)"
       />
     </DialogContent>
   </Dialog>

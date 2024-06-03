@@ -8,10 +8,14 @@
 
   defineProps({
     brand: {
-      type: Object as () => ApiOutput["brand"]["bySlug"],
+      type: Object as () => Partial<ApiOutput["brand"]["bySlug"]>,
       required: true,
     },
     withButton: {
+      type: Boolean,
+      default: false,
+    },
+    dashboard: {
       type: Boolean,
       default: false,
     },
@@ -19,17 +23,18 @@
 </script>
 
 <template>
-  <Card
-    v-if="
-      brand.rating &&
-      brand.ratesAndFeesRating &&
-      brand.consumerReviewsRating &&
-      brand.customerSupportRating &&
-      brand.truthInAdvertisingRating
-    "
-  >
+  <Card>
     <CardHeader><CardTitle>Review</CardTitle></CardHeader>
-    <CardContent class="flex flex-col gap-6">
+    <CardContent
+      v-if="
+        brand.rating &&
+        brand.ratesAndFeesRating &&
+        brand.consumerReviewsRating &&
+        brand.customerSupportRating &&
+        brand.truthInAdvertisingRating
+      "
+      class="flex flex-col gap-6"
+    >
       <div class="flex gap-6">
         <div class="flex-1">
           <div class="flex items-center gap-2">
@@ -83,6 +88,13 @@
           <PercentBar :percent="brand.customerSupportRating" />
         </div>
       </div>
+    </CardContent>
+    <CardContent v-else>
+      <p v-if="!dashboard">Our review of this company is coming soon.</p>
+      <p v-else>
+        We have not yet reviewed your company's profile and offerings but you
+        are now in the queue and we will contact you shortly.
+      </p>
     </CardContent>
     <CardButton
       v-if="withButton"

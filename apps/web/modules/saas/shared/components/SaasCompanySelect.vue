@@ -9,7 +9,7 @@
   const localePath = useLocalePath();
   const { teamMemberships, currentTeam } = useUser();
   const { switchTeam } = useSwitchTeam();
-  const { createTeamDialogOpen } = useDashboardState();
+  const { createBrandDialogOpen } = useDashboardState();
   const runtimeConfig = useRuntimeConfig();
 
   const activeTeamIdModel = computed({
@@ -86,7 +86,7 @@
         </MenuItem>
         <MenuItem v-slot="{ active }">
           <button
-            @click="() => (createTeamDialogOpen = true)"
+            @click="() => (createBrandDialogOpen = true)"
             :class="[
               active ? 'bg-highlight' : '',
               'flex w-full items-center gap-3 border-t px-4 py-3 text-sm',
@@ -100,5 +100,7 @@
     </transition>
   </Menu>
 
-  <SaasCreateTeamDialog @success="(newTeamId) => switchTeam(newTeamId)" />
+  <SaasCreateBrandDialog
+    @success="(newTeamId: string) => switchTeam(newTeamId)"
+  />
 </template>

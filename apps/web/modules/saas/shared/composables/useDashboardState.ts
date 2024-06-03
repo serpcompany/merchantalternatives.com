@@ -3,8 +3,8 @@ export const useDashboardState = () => {
     "dashboardState.sidebarExpanded",
     () => false,
   );
-  const createTeamDialogOpen = useState(
-    "dashboardState.createTeamDialogOpen",
+  const createBrandDialogOpen = useState(
+    "dashboardState.createBrandDialogOpen",
     () => false,
   );
   const settingsDialogOpen = useState(
@@ -14,7 +14,7 @@ export const useDashboardState = () => {
 
   return {
     sidebarExpanded,
-    createTeamDialogOpen,
+    createBrandDialogOpen,
     settingsDialogOpen,
   };
 };

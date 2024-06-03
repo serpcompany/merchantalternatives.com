@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  definePageMeta({
-    layout: "dashboard",
-  });
+  import { ArrowRightStartOnRectangleIcon } from "@heroicons/vue/24/outline";
+
+  definePageMeta({ layout: "dashboard" });
 
   const { t } = useTranslations();
   const localePath = useLocalePath();
@@ -10,6 +10,7 @@
   useSeoMeta({
     title: t("settings.account.title"),
   });
+  const { logout } = useUser();
 
   watchEffect(() => {
     if (!user.value) {
@@ -23,6 +24,11 @@
     heading="Profile Settings"
     subheading="Your profile settings"
     variant="sm"
+    :heading-button="{
+      label: 'Logout',
+      action: logout,
+      icon: ArrowRightStartOnRectangleIcon,
+    }"
   >
     <div v-if="user" class="grid gap-6">
       <SaasUserAvatarForm />

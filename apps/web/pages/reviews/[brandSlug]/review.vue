@@ -13,7 +13,10 @@
 <template>
   <div class="flex flex-col gap-6">
     <ReviewSummary :brand="brand" />
-    <div class="flex gap-6">
+    <div
+      v-if="brand.reviewPros.length && brand.reviewCons.length"
+      class="flex gap-6"
+    >
       <Card class="flex-1">
         <CardHeader><CardTitle>What We Like</CardTitle></CardHeader>
         <CardContent>

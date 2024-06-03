@@ -18,13 +18,18 @@
     <Card>
       <CardHeader><CardTitle>About</CardTitle></CardHeader>
       <CardContent>
-        <div v-html="brand.overview" class="externalHtml" />
+        <div
+          v-if="brand.overview"
+          v-html="brand.overview"
+          class="externalHtml"
+        />
+        <p v-else>Nothing here yet.</p>
       </CardContent>
       <CardButton @click="navigateTo(`/reviews/${brand.slug}/about`)"
         >See all details</CardButton
       >
     </Card>
-    <Card>
+    <Card v-if="brand.overview">
       <CardHeader><CardTitle>Pricing</CardTitle></CardHeader>
       <CardContent>
         <p v-if="brand.overview">{{ getFirstParagraph(brand.overview) }}</p>

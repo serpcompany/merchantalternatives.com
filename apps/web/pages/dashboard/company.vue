@@ -25,7 +25,7 @@
   <SaasPage
     v-if="currentBrand"
     heading="Company Profile"
-    subheading="How your company looks on our platform"
+    subheading="How your company looks in our listings"
     :heading-button="{
       label: 'Go to live profile',
       action: () =>

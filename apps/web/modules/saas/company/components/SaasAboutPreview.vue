@@ -5,7 +5,12 @@
 <template>
   <Card v-if="currentBrand">
     <CardContent class="pt-6">
-      <div v-html="currentBrand.overview" class="externalHtml" />
+      <div
+        v-if="currentBrand.overview"
+        v-html="currentBrand.overview"
+        class="externalHtml"
+      />
+      <p v-else>Nothing here yet.</p>
     </CardContent>
   </Card>
 </template>

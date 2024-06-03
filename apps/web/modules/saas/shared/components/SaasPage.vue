@@ -40,9 +40,14 @@
           {{ subheading }}
         </p>
       </div>
-      <Button v-if="headingButton" @click="headingButton.action" variant="soft">
-        {{ headingButton.label
-        }}<component :is="headingButton.icon" class="mb-1 ml-2 h-5 w-5" />
+      <Button
+        v-if="headingButton"
+        @click="headingButton.action"
+        variant="soft"
+        class="flex items-center gap-0.5"
+      >
+        <span>{{ headingButton.label }}</span>
+        <component :is="headingButton.icon" class="mb-1 ml-2 h-5 w-5" />
       </Button>
     </div>
     <slot />

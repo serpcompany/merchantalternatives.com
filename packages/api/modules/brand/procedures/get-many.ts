@@ -7,6 +7,11 @@ export const getMany = publicProcedure
   .output(z.array(BrandSchema))
   .query(async () => {
     const brands = await db.brand.findMany({
+      where: {
+        rating: {
+          not: null,
+        },
+      },
       orderBy: {
         rating: "desc",
       },

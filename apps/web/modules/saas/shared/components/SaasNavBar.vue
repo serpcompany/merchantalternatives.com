@@ -9,6 +9,7 @@
   import {
     Bars3Icon,
     HomeIcon,
+    BriefcaseIcon,
     StarIcon,
     XMarkIcon,
     CogIcon,
@@ -40,8 +41,14 @@
       },
       {
         label: t("dashboard.menu.company"),
-        icon: StarIcon,
+        icon: BriefcaseIcon,
         to: "/dashboard/company",
+        current: false,
+      },
+      {
+        label: "Review",
+        icon: StarIcon,
+        to: "/dashboard/review",
         current: false,
       },
       {

@@ -2,9 +2,7 @@
   const { t } = useTranslations();
   const { user } = useUser();
 
-  definePageMeta({
-    layout: "dashboard",
-  });
+  definePageMeta({ layout: "dashboard" });
 </script>
 
 <template>

@@ -12,7 +12,15 @@
 <template>
   <Card v-if="currentBrand">
     <CardContent class="pt-6">
-      <div class="flex flex-col divide-y">
+      <div
+        v-if="
+          currentBrand.ceo ||
+          currentBrand.numOfEmployees ||
+          currentBrand.hqLocation ||
+          currentBrand.yearFounded
+        "
+        class="flex flex-col divide-y"
+      >
         <div class="flex justify-between py-4">
           <div class="flex items-center gap-2">
             <UserIcon class="h-6 w-6" />
@@ -42,6 +50,7 @@
           <span>{{ currentBrand.yearFounded }}</span>
         </div>
       </div>
+      <p v-else>Nothing here yet.</p>
     </CardContent>
   </Card>
 </template>

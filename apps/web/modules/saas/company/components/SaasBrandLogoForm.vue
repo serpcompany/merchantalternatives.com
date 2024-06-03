@@ -9,13 +9,13 @@
   const image = ref<File | null>(null);
   const cropDialogOpen = ref(false);
   const dropZoneRef = ref<HTMLDivElement>();
-  const { reloadUser, currentTeam } = useUser();
+  const { reloadUser, currentBrand } = useUser();
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
 
   const getSignedUploadUrlMutation =
     apiCaller.uploads.signedUploadUrl.useMutation();
-  const updateTeamMutation = apiCaller.team.update.useMutation();
+  const updateBrandMutation = apiCaller.brand.update.useMutation();
 
   const { open: openFileDialog, onChange: onFilesSelected } = useFileDialog({
     accept: "image/*",
@@ -30,13 +30,13 @@
   });
 
   const onCrop = async (croppedImageData: Blob | null) => {
-    if (!croppedImageData || !currentTeam.value) {
+    if (!croppedImageData || !currentBrand.value) {
       return;
     }
 
     uploading.value = true;
     try {
-      const path = `/${currentTeam.value?.id}-${uuid()}.png`;
+      const path = `/${currentBrand.value?.id}-${uuid()}.png`;
       const uploadUrl = await getSignedUploadUrlMutation.mutate({
         path,
         bucket: "avatars",
@@ -54,9 +54,9 @@
         },
       });
 
-      await updateTeamMutation.mutate({
-        id: currentTeam.value.id,
-        avatarUrl: path,
+      await updateBrandMutation.mutate({
+        id: currentBrand.value.id,
+        logoUrl: path,
       });
 
       toast({
@@ -87,8 +87,8 @@
         @click="openFileDialog()"
       >
         <BrandLogo
-          :src="currentTeam?.avatarUrl"
-          :name="currentTeam?.name ?? ''"
+          :src="currentBrand?.logoUrl"
+          :name="currentBrand?.name ?? ''"
           class="size-24 cursor-pointer text-xl"
         />
         <Button

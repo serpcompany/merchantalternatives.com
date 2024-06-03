@@ -20,7 +20,15 @@
     <Card>
       <CardHeader><CardTitle>Quick Facts</CardTitle></CardHeader>
       <CardContent>
-        <div class="flex flex-col divide-y">
+        <div
+          v-if="
+            brand.ceo ||
+            brand.numOfEmployees ||
+            brand.hqLocation ||
+            brand.yearFounded
+          "
+          class="flex flex-col divide-y"
+        >
           <div class="flex justify-between py-4">
             <div class="flex items-center gap-2">
               <UserIcon class="h-6 w-6" />
@@ -50,15 +58,21 @@
             <span>{{ brand.yearFounded }}</span>
           </div>
         </div>
+        <p v-else>Nothing here yet.</p>
       </CardContent>
     </Card>
     <Card>
       <CardHeader><CardTitle>About</CardTitle></CardHeader>
       <CardContent>
-        <div v-html="brand.overview" class="externalHtml" />
+        <div
+          v-if="brand.overview"
+          v-html="brand.overview"
+          class="externalHtml"
+        />
+        <p v-else>Nothing here yet.</p>
       </CardContent>
     </Card>
-    <Card>
+    <Card v-if="brand.industriesServed.length">
       <CardHeader><CardTitle>Industries Served</CardTitle></CardHeader>
       <CardContent
         ><div class="flex divide-x">
@@ -84,7 +98,7 @@
         </div>
       </CardContent>
     </Card>
-    <Card>
+    <Card v-if="brand.businessTypesServed.length">
       <CardHeader><CardTitle>Business Type Served</CardTitle></CardHeader>
       <CardContent>
         <div class="flex divide-x">
