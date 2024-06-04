@@ -1,4 +1,10 @@
 <script setup lang="ts">
+  import {
+    XCircleIcon,
+    CheckCircleIcon,
+    ArrowPathIcon,
+  } from "@heroicons/vue/24/outline";
+
   definePageMeta({ layout: "dashboard" });
 
   const { currentBrand } = useUser();
@@ -8,6 +14,11 @@
   <SaasPage
     heading="Our Review"
     subheading="Our review of your financial services"
+    :heading-button="{
+      label: 'Request Rereview',
+      action: () => navigateTo('/'),
+      icon: ArrowPathIcon,
+    }"
   >
     <div v-if="currentBrand" class="flex flex-col gap-6">
       <ReviewSummary :brand="currentBrand" :dashboard="true" />

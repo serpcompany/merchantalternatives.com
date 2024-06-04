@@ -15,20 +15,15 @@
 
   const isSubmitSuccessful = ref(false);
 
-  const {
-    defineInputBinds,
-    handleSubmit,
-    isSubmitting,
-    errors,
-    setFieldError,
-  } = useForm({
-    validationSchema: formSchema,
-    initialValues: {
-      email: "",
-    },
-  });
+  const { defineField, handleSubmit, isSubmitting, errors, setFieldError } =
+    useForm({
+      validationSchema: formSchema,
+      initialValues: {
+        email: "",
+      },
+    });
 
-  const email = defineInputBinds("email");
+  const email = defineField("email");
 
   const onSubmit = handleSubmit(
     async (values) => {
@@ -56,7 +51,7 @@
   <section class="border-t py-24">
     <div class="container">
       <div class="mb-12 text-center">
-        <KeyIcon class="mx-auto mb-3 size-12 text-primary" />
+        <KeyIcon class="text-primary mx-auto mb-3 size-12" />
         <h1 class="text-3xl font-bold lg:text-4xl">
           {{ $t("newsletter.title") }}
         </h1>
@@ -73,18 +68,28 @@
         </Alert>
 
         <template v-else>
-          <form @submit.prevent="onSubmit">
-            <div class="flex items-start">
-              <Input
-                v-bind="email"
-                type="email"
-                required
-                :placeholder="t('newsletter.email')"
-              />
-              <Button type="submit" class="ml-4" :loading="isSubmitting">
-                {{ $t("newsletter.submit") }}
-              </Button>
-            </div>
+          <form @submit.prevent="onSubmit" class="flex items-start">
+            <FormField v-slot="{ componentField }" name="email">
+              <FormItem class="w-full">
+                <FormLabel for="email" class="sr-only">CEO</FormLabel>
+                <FormControl>
+                  <Input
+                    v-bind="componentField"
+                    type="email"
+                    required
+                    placeholder="Email"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <Button
+              type="submit"
+              class="ml-4 mt-2 flex-none"
+              :loading="isSubmitting"
+            >
+              {{ $t("newsletter.submit") }}
+            </Button>
           </form>
 
           <Alert v-if="errors.email" variant="error" class="mt-6 text-sm">

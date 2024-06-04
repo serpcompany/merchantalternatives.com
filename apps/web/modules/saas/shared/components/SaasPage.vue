@@ -44,10 +44,13 @@
         v-if="headingButton"
         @click="headingButton.action"
         variant="soft"
-        class="flex items-center gap-0.5"
+        class="mb-1.5 flex items-center gap-0.5"
       >
         <span>{{ headingButton.label }}</span>
-        <component :is="headingButton.icon" class="mb-1 ml-2 h-5 w-5" />
+        <component
+          :is="headingButton.icon"
+          class="mb-1 ml-2 h-5 w-5 stroke-2"
+        />
       </Button>
     </div>
     <slot />

@@ -31,8 +31,8 @@ export async function createContext(event?: H3Event | { isAdmin?: boolean }) {
             },
           })
         ).map(async (membership) => {
-          const logoUrl = membership.team.avatarUrl
-            ? await getSignedUrl(membership.team.avatarUrl, {
+          const logoUrl = membership.team.brand?.logoUrl
+            ? await getSignedUrl(membership.team.brand?.logoUrl, {
                 bucket: "avatars",
                 expiresIn: 360,
               })
