@@ -4,6 +4,5 @@
   <div class="bg-white pt-20">
     <MarketingHero />
     <MarketingFeatures />
-    <MarketingNewsletter />
   </div>
 </template>

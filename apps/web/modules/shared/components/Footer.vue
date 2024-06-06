@@ -1,6 +1,9 @@
 <template>
-  <footer class="bg-muted py-12 text-muted-foreground">
-    <div class="container grid grid-cols-1 gap-6 lg:grid-cols-3">
+  <footer class="bg-muted border-t">
+    <MarketingNewsletter />
+    <div
+      class="text-muted-foreground container grid grid-cols-1 gap-6 pb-12 pt-12 lg:grid-cols-3"
+    >
       <div>
         <Logo class="opacity-50 grayscale" />
         <p class="mt-3 text-sm opacity-70">

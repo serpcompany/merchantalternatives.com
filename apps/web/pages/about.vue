@@ -55,7 +55,7 @@
 </script>
 
 <template>
-  <div class="isolate bg-white pb-32">
+  <div class="isolate bg-white">
     <!-- Hero section -->
     <div class="relative isolate -z-10">
       <svg
@@ -230,7 +230,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-border mt-[270px] h-48 w-0.5" />
+      <div class="bg-border mt-[220px] h-56 w-0.5" />
       <div class="mx-auto max-w-xl px-14 lg:mx-0 lg:max-w-none">
         <div
           class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/20 shadow-lg"
@@ -256,7 +256,7 @@
     </div>
 
     <!-- Blog section -->
-    <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+    <div class="mx-auto mt-32 max-w-7xl px-6 pb-32 sm:mt-40 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           From the blog
