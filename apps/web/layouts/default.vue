@@ -3,7 +3,7 @@
   const password = ref("");
 
   const checkPassword = () => {
-    if (password.value === "password") {
+    if (password.value === "4321") {
       authorised.value = true;
     }
   };
