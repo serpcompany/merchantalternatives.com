@@ -105,7 +105,7 @@
       <NuxtImg
         src="/images/blog/cover.jpg"
         alt="World"
-        class="h-96 w-full rotate-180 object-cover"
+        class="h-96 w-full object-cover"
       />
     </div>
     <div class="absolute inset-0 h-96 bg-slate-800/5" />

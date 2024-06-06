@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const authorised = ref(false);
+  const authorised = ref(true);
   const password = ref("");
 
   const checkPassword = () => {

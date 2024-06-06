@@ -210,11 +210,13 @@
     <div class="mx-auto -mt-12 flex max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
       <div class="mx-auto max-w-xl px-14 lg:mx-0 lg:max-w-none">
         <div
-          class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/20 shadow-lg"
+          class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/40 shadow-lg"
         >
           <RocketLaunchIcon class="size-24" />
         </div>
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2
+          class="mt-14 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+        >
           Our Mission
         </h2>
         <div class="mt-3 lg:w-full lg:max-w-xl lg:flex-auto">
@@ -230,14 +232,16 @@
           </div>
         </div>
       </div>
-      <div class="bg-border mt-[220px] h-56 w-0.5" />
+      <div class="bg-border mt-[240px] h-56 w-0.5" />
       <div class="mx-auto max-w-xl px-14 lg:mx-0 lg:max-w-none">
         <div
-          class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/20 shadow-lg"
+          class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/40 shadow-lg"
         >
           <FlagIcon class="size-24" />
         </div>
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2
+          class="mt-14 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+        >
           Our Purpose
         </h2>
         <div class="mt-3 lg:w-full lg:max-w-xl lg:flex-auto">

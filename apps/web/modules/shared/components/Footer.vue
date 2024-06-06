@@ -12,12 +12,14 @@
       </div>
 
       <div class="flex flex-col gap-2">
-        <NuxtLinkLocale to="/blog" class="block"> Blog </NuxtLinkLocale>
-        <a href="#" class="block"> Features </a>
-        <a href="#" class="block"> Pricing </a>
+        <NuxtLink to="/reviews" class="block"> Reviews </NuxtLink>
+        <NuxtLink href="/blog" class="block"> Blog </NuxtLink>
+        <NuxtLink href="/pricing" class="block"> Pricing </NuxtLink>
+        <NuxtLink href="/about" class="block"> About </NuxtLink>
       </div>
 
       <div class="flex flex-col gap-2">
+        <NuxtLink to="/glossary" class="block"> Glossary </NuxtLink>
         <NuxtLink to="/legal/privacy" class="block"> Privacy policy </NuxtLink>
         <NuxtLink href="/legal/terms" class="block">
           Terms and conditions

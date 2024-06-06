@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
+  routeRules: {
+    "/": { prerender: true },
+    "/blog": { prerender: true },
+    "/blog/:path": { prerender: true },
+    "/glossary": { prerender: true },
+    "/glossary/:slug": { prerender: true },
+  },
+
   runtimeConfig: {
     public: {
       siteUrl: baseUrl,
@@ -42,6 +50,7 @@ export default defineNuxtConfig({
     { path: "@/modules/marketing/shared/components", pathPrefix: false },
     { path: "@/modules/marketing/home/components", pathPrefix: false },
     { path: "@/modules/marketing/blog/components", pathPrefix: false },
+    { path: "@/modules/marketing/glossary/components", pathPrefix: false },
     { path: "@/modules/marketing/faq/components", pathPrefix: false },
     { path: "@/modules/marketing/changelog/components", pathPrefix: false },
     { path: "@/modules/marketing/content/components", pathPrefix: false },
