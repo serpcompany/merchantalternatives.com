@@ -46,6 +46,10 @@
       label: t("common.menu.pricing"),
       to: "/pricing",
     },
+    {
+      label: "About",
+      to: "/about",
+    },
   ]);
 </script>
 
@@ -54,8 +58,6 @@
     class="bg-background/80 fixed left-0 top-0 z-20 w-full backdrop-blur-lg transition-[height] duration-200"
     :class="[isTop ? 'shadow-none' : 'shadow-sm']"
   >
-    <PromoBanner />
-
     <div class="container">
       <div class="flex items-center justify-between gap-6 py-3">
         <div class="flex flex-1 justify-start">

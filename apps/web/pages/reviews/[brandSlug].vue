@@ -28,7 +28,7 @@
 </script>
 
 <template>
-  <div class="mx-auto flex gap-6 pt-2.5 lg:max-w-[1100px]">
+  <div class="mx-auto flex gap-6 pt-[88px] lg:max-w-[1100px]">
     <div class="flex w-full flex-initial flex-col gap-6">
       <Card class="w-full overflow-hidden">
         <div class="flex justify-between px-6 pb-4 pt-10">

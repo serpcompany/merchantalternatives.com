@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="flex justify-center gap-6 px-4 pt-4">
+  <div class="flex justify-center gap-6 px-4 pt-24">
     <div class="flex w-full max-w-3xl flex-initial flex-col gap-4">
       <SaasPageHeader class="mb-px">
         <template #title>All Brands</template>

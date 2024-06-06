@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const authorised = ref(false);
+  const authorised = ref(true);
   const password = ref("");
 
   const checkPassword = () => {
@@ -24,7 +24,7 @@
     </div>
     <div v-else>
       <NavBar />
-      <main class="min-h-screen pt-20">
+      <main class="min-h-screen">
         <slot />
       </main>
       <Footer />

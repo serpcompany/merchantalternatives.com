@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <MarketingHero />
-  <MarketingFeatures />
-  <MarketingNewsletter />
+  <div class="bg-white pt-20">
+    <MarketingHero />
+    <MarketingFeatures />
+    <MarketingNewsletter />
+  </div>
 </template>

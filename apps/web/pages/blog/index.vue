@@ -39,7 +39,7 @@
 </script>
 
 <template>
-  <div class="container max-w-6xl pb-24">
+  <div class="container max-w-6xl py-24">
     <div class="mb-12 pt-8 text-center">
       <h1 class="mb-2 text-5xl font-bold">{{ $t("blog.title") }}</h1>
       <p class="text-lg opacity-50">{{ $t("blog.description") }}</p>
