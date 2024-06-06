@@ -2,7 +2,7 @@
   import type { MarketingBlogPageFields } from "@/modules/marketing/blog/types";
   import { joinURL } from "ufo";
 
-  const route = useRoute("blog-path");
+  const slug = useRoute("blog-slug").params.slug;
   const runtimeConfig = useRuntimeConfig();
   const { formatDate } = useLocaleDate();
   const { locale, defaultLocale } = useI18n();
@@ -67,13 +67,11 @@
   ];
 
   const { data: post } = await useAsyncData(
-    route.path,
+    slug,
     async () => {
       const localeExtensionPattern = /(\.[a-zA-Z\\-]{2,5})+\.md$/;
       try {
-        return await queryContent<MarketingBlogPageFields>(
-          `blog/${route.params.path}`,
-        )
+        return await queryContent<MarketingBlogPageFields>(`blog/${slug}`)
           .where({
             $and: [
               { draft: { $not: true } },
@@ -112,73 +110,46 @@
 
 <template>
   <ContentRenderer v-if="post" :value="post">
-    <div class="bg-white py-20">
-      <div class="container max-w-6xl">
-        <div>
-          <div class="mb-12">
-            <NuxtLinkLocale to="/blog">
-              &larr; {{ $t("blog.backLabel") }}
-            </NuxtLinkLocale>
+    <div class="bg-white">
+      <div class="bg-primary flex h-[450px] items-center pt-20">
+        <NuxtLinkLocale to="/blog" class="absolute left-20 top-20 text-white">
+          &larr; {{ $t("blog.backLabel") }}
+        </NuxtLinkLocale>
+        <div class="relative px-20">
+          <div class="flex gap-2">
+            <NuxtLink v-for="tag in post.tags" to="/">
+              <Badge class="bg-white/20 text-white">{{ tag }}</Badge>
+            </NuxtLink>
           </div>
-
-          <h1 class="text-5xl font-bold">{{ post.title }}</h1>
-
-          <div class="mt-4 flex items-center justify-start gap-6">
-            <div v-if="post.authorName" class="flex items-center">
-              <div
-                v-if="post.authorImage"
-                class="relative mr-2 size-8 overflow-hidden rounded-full"
-              >
-                <NuxtImg
-                  :src="post.authorImage"
-                  :alt="post.authorName"
-                  sizes="96px"
-                  class="object-cover object-center"
-                />
-              </div>
-              <div>
-                <p class="text-sm font-semibold opacity-50">
-                  {{ post.authorName }}
-                </p>
-              </div>
-            </div>
-
-            <div v-if="post.date" class="ml-auto mr-0">
-              <p class="text-sm opacity-30">
-                {{ formatDate({ date: new Date(post.date) }) }}
-              </p>
-            </div>
-
-            <div v-if="post.tags?.length" class="flex flex-1 flex-wrap gap-2">
-              <span
-                v-for="tag of post.tags"
-                :key="tag"
-                class="text-primary text-xs font-semibold uppercase tracking-wider"
-              >
-                #{{ tag }}
-              </span>
-            </div>
+          <h2
+            class="stext-4xl mt-8 text-6xl font-black tracking-tight text-white"
+          >
+            {{ post.title }}
+          </h2>
+          <p class="mt-4 text-xl leading-8 text-gray-300">
+            Helpful resources for running and growing your business.
+          </p>
+        </div>
+      </div>
+      <div class="mx-auto max-w-5xl">
+        <div
+          class="flex items-end justify-between border-b pb-4 pt-8 text-lg font-medium text-gray-400"
+        >
+          <div>
+            <div>Author</div>
+            <NuxtLink to="/" class="text-primary">{{
+              post.authorName
+            }}</NuxtLink>
+          </div>
+          <div v-if="post.date">
+            {{ formatDate({ date: new Date(post.date) }) }}
           </div>
         </div>
-
-        <div class="mt-6 flex justify-center gap-10">
+        <div class="mt-6 flex gap-10 pb-20 pt-8">
           <div class="flex-1">
-            <div
-              v-if="post.image?.src"
-              class="relative aspect-[16/9] overflow-hidden"
-            >
-              <NuxtImg
-                :src="post.image.src"
-                :alt="post.title"
-                sizes="100vw md:50vw lg:1200px"
-                width="1920"
-                height="1080"
-                class="size-full object-cover object-center"
-              />
-            </div>
             <ContentRendererMarkdown
               :value="post"
-              class="prose dark:prose-invert mx-auto mt-6 max-w-2xl"
+              class="prose dark:prose-invert"
             />
           </div>
           <div class="w-72 flex-none">
