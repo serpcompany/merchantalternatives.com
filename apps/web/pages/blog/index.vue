@@ -113,7 +113,7 @@
       <div class="flex h-96 items-center justify-center pt-20 text-center">
         <div>
           <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            The Serp Money Blog
+            The Serp.Money Blog
           </h2>
           <p class="mt-2 text-lg leading-8 text-gray-300">
             Helpful resources for running and growing your business.
