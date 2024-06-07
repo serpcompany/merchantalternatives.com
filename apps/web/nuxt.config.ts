@@ -7,14 +7,6 @@ export default defineNuxtConfig({
     typedPages: true,
   },
 
-  routeRules: {
-    "/": { prerender: true },
-    "/blog": { prerender: true },
-    "/blog/:slug": { prerender: true },
-    "/glossary": { prerender: true },
-    "/glossary/:slug": { prerender: true },
-  },
-
   runtimeConfig: {
     public: {
       siteUrl: baseUrl,
