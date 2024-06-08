@@ -93,7 +93,7 @@
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
       </button>
       <NuxtLinkLocale to="/" class="flex items-center gap-2">
-        <Logo :withLabel="false" />
+        <Logo />
         <span class="text-lg font-semibold"> Merchant Alternatives </span>
       </NuxtLinkLocale>
       <div class="ml-auto mr-0 flex items-center justify-end gap-4">
