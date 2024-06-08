@@ -94,7 +94,7 @@
       </button>
       <NuxtLinkLocale to="/" class="flex items-center gap-2">
         <Logo :withLabel="false" />
-        <span class="text-lg font-semibold"> Serp.Money </span>
+        <span class="text-lg font-semibold"> Merchant Alternatives </span>
       </NuxtLinkLocale>
       <div class="ml-auto mr-0 flex items-center justify-end gap-4">
         <UserMenu />

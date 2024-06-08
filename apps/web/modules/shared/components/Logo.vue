@@ -30,7 +30,7 @@
       />
     </svg>
     <span v-if="props.withLabel" class="text-foreground ml-3 text-lg"
-      ><span class="text-primary">Serp</span>.Money</span
+      ><span class="text-primary">Merchant</span> Alternatives</span
     >
   </span>
 </template>

@@ -73,7 +73,7 @@
       <p class="text-muted-foreground mb-6 mt-3 text-sm">
         {{
           brandType === "new"
-            ? "Create a new brand to list on Serp.Money"
+            ? "Create a new brand to list on Merchant Alternatives"
             : "Claim an existing brand you've spotted in our listings"
         }}
       </p>

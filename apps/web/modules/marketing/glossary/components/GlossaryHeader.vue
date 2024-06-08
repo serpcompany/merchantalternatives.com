@@ -16,7 +16,7 @@
   <div class="relative flex h-96 items-center justify-center pt-20 text-center">
     <div>
       <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        The Serp.Money Glossary
+        The Merchant Alternatives Glossary
       </h2>
       <p class="mt-2 text-lg leading-8 text-gray-300">
         Everything you need to know about the world of digital finance.

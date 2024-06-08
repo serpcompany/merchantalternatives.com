@@ -1,1 +1,1 @@
-# Serp.Money
+# Merchant Alternatives

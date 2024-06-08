@@ -110,7 +110,7 @@
     <div class="bg-primary flex h-[450px] items-center pt-20">
       <div class="px-20">
         <h2 class="stext-4xl text-7xl font-medium tracking-tight text-white">
-          The Serp.Money Blog
+          The Merchant Alternatives Blog
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-300">
           Helpful resources for running and growing your business.
