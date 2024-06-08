@@ -72,18 +72,30 @@
         <p v-else>Nothing here yet.</p>
       </CardContent>
     </Card>
-    <Card v-if="brand.industriesServed.length">
+    <Card>
       <CardHeader><CardTitle>Industries Served</CardTitle></CardHeader>
       <CardContent
         ><div class="flex divide-x">
           <ul class="flex-1 list-inside list-disc px-4">
             <li
-              v-for="industry in brand.industriesServed.slice(0, 10)"
-              :key="industry.id"
+              v-for="industry in [
+                'tech',
+                'finance',
+                'healthcare',
+                'retail',
+                'education',
+                'manufacturing',
+                'real estate',
+                'hospitality',
+                'media',
+                'transportation',
+              ]"
+              :key="industry"
             >
-              {{ industry.name }}
+              {{ industry }}
             </li>
           </ul>
+          <!--
           <ul
             v-if="brand.industriesServed.slice(10).length"
             class="flex-1 list-inside list-disc px-4"
@@ -94,22 +106,34 @@
             >
               {{ industry.name }}
             </li>
-          </ul>
+          </ul>-->
         </div>
       </CardContent>
     </Card>
-    <Card v-if="brand.businessTypesServed.length">
+    <Card>
       <CardHeader><CardTitle>Business Type Served</CardTitle></CardHeader>
       <CardContent>
         <div class="flex divide-x">
           <ul class="flex-1 list-inside list-disc px-4">
             <li
-              v-for="businessType in brand.businessTypesServed.slice(0, 10)"
-              :key="businessType.id"
+              v-for="businessType in [
+                'Small Company',
+                'Enterprise',
+                'Public Sector',
+                'Nonprofit',
+                'Startup',
+                'SME',
+                'Mid-Market',
+                'Fortune 500',
+                'Global Corporation',
+                'Local Business',
+              ]"
+              :key="businessType"
             >
-              {{ businessType.name }}
+              {{ businessType }}
             </li>
           </ul>
+          <!--
           <ul
             v-if="brand.businessTypesServed.slice(10).length"
             class="flex-1 list-inside list-disc px-4"
@@ -120,7 +144,7 @@
             >
               {{ businessType.name }}
             </li>
-          </ul>
+          </ul>-->
         </div>
       </CardContent>
     </Card>

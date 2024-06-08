@@ -10,61 +10,70 @@ generator client {
 generator zod {
   provider         = "zod-prisma-types"
   output           = "../src/zod"
-  createInputTypes = false
-  addIncludeType   = false
-  addSelectType    = false
+  createInputTypes = "false"
+  addSelectType    = "false"
+  addIncludeType   = "false"
 }
+
+///////////////////////////////////////////////
+//    SaaS                                   //
+///////////////////////////////////////////////
 
 model User {
   id                 String                  @id @default(cuid())
   email              String                  @unique
-  emailVerified      Boolean                 @default(false)
+  emailVerified      Boolean                 @default(false) @map("email_verified")
   role               UserRole                @default(USER)
   name               String?
-  avatarUrl          String?
-  createdAt          DateTime                @default(now())
-  hashedPassword     String?
-  onboardingComplete Boolean                 @default(false)
+  avatarUrl          String?                 @map("avatar_url")
+  createdAt          DateTime                @default(now()) @map("created_at")
+  hashedPassword     String?                 @map("hashed_password")
+  onboardingComplete Boolean                 @default(false) @map("onboarding_complete")
   oauthAccounts      UserOauthAccount[]
   sessions           UserSession[]
   memberships        TeamMembership[]
-  verificationtokens UserVerificationToken[]
+  verificationTokens UserVerificationToken[]
   oneTimePasswords   UserOneTimePassword[]
+
+  @@map("user")
 }
 
 model UserSession {
   id             String   @id
-  userId         String
-  expiresAt      DateTime
-  impersonatorId String?
+  userId         String   @map("user_id")
+  expiresAt      DateTime @map("expires_at")
+  impersonatorId String?  @map("impersonator_id")
   user           User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
   @@index([userId])
+  @@map("user_session")
 }
 
 model UserOauthAccount {
   id             String @id @default(cuid())
-  providerId     String
-  providerUserId String
-  userId         String
+  providerId     String @map("provider_id")
+  providerUserId String @map("provider_user_id")
+  userId         String @map("user_id")
   user           User   @relation(references: [id], fields: [userId], onDelete: Cascade)
 
   @@unique([providerId, providerUserId])
+  @@map("user_oauth_account")
 }
 
 model UserVerificationToken {
   id      String   @id @default(cuid())
-  userId  String
+  userId  String   @map("user_id")
   user    User     @relation(references: [id], fields: [userId], onDelete: Cascade)
   token   String
   expires DateTime
 
   @@index([userId])
+  @@map("user_verification_token")
 }
 
 model UserOneTimePassword {
   id         String                  @id @default(cuid())
-  userId     String
+  userId     String                  @map("user_id")
   user       User                    @relation(references: [id], fields: [userId], onDelete: Cascade)
   code       String
   type       UserOneTimePasswordType
@@ -72,156 +81,122 @@ model UserOneTimePassword {
   expires    DateTime
 
   @@index([userId])
+  @@map("user_one_time_password")
 }
 
 model Brand {
-  id                       String         @id @default(cuid())
-  slug                     String         @unique
+  id                       String   @id @default(cuid())
+  slug                     String   @unique
   name                     String
-  logoUrl                  String?
+  logoUrl                  String?  @map("logo_url")
   website                  String?
-  engaged                  Boolean        @default(false)
-  hqLocation               String?
-  numOfEmployees           Int?
-  yearFounded              Int?
+  engaged                  Boolean  @default(false)
+  hqLocation               String?  @map("hq_location")
+  numOfEmployees           Int?     @map("num_of_employees")
+  yearFounded              Int?     @map("year_founded")
   ceo                      String?
   summary                  String?
   overview                 String?
   rating                   Float?
-  ratesAndFeesRating       Int?
-  truthInAdvertisingRating Int?
-  consumerReviewsRating    Int?
-  customerSupportRating    Int?
-  reviewOneliner           String?
-  reviewSummaryPoint1      String?
-  reviewSummaryPoint2      String?
-  reviewSummaryPoint3      String?
-  reviewText               String?
-  reviewPros               String[]
-  reviewCons               String[]
-  bestFor                  String?
-  specializesIn            String?
-  setupFee                 String?
-  swipeRate                String?
-  earlyTerminationFee      String?
-  monthlyFee               String?
-  keyedInRate              String?
-  contractTerms            String?
-  industriesServed         Industry[]
-  businessTypesServed      BusinessType[]
-  alternatives             Brand[]        @relation("Alternatives")
-  alternativeMentions      Brand[]        @relation("Alternatives")
+  ratesAndFeesRating       Int?     @map("rates_and_fees_rating")
+  truthInAdvertisingRating Int?     @map("truth_in_advertising_rating")
+  consumerReviewsRating    Int?     @map("consumer_reviews_rating")
+  customerSupportRating    Int?     @map("customer_support_rating")
+  reviewOneliner           String?  @map("review_oneliner")
+  reviewSummaryPoint1      String?  @map("review_summary_point1")
+  reviewSummaryPoint2      String?  @map("review_summary_point2")
+  reviewSummaryPoint3      String?  @map("review_summary_point3")
+  reviewText               String?  @map("review_text")
+  reviewPros               String[] @map("review_pros")
+  reviewCons               String[] @map("review_cons")
+  bestFor                  String?  @map("best_for")
+  specializesIn            String?  @map("specializes_in")
+  setupFee                 String?  @map("setup_fee")
+  swipeRate                String?  @map("swipe_rate")
+  earlyTerminationFee      String?  @map("early_termination_fee")
+  monthlyFee               String?  @map("monthly_fee")
+  keyedInRate              String?  @map("keyed_in_rate")
+  contractTerms            String?  @map("contract_terms")
+  alternatives             Brand[]  @relation("Alternatives")
+  alternativeMentions      Brand[]  @relation("Alternatives")
   team                     Team?
 
   @@index([slug])
+  @@map("brand")
 }
 
 model Team {
   id           String           @id @default(cuid())
   brand        Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  brandId      String           @unique
+  brandId      String           @unique @map("brand_id")
   name         String
-  avatarUrl    String?
+  avatarUrl    String?          @map("avatar_url")
   memberships  TeamMembership[]
   subscription Subscription?
   invitations  TeamInvitation[]
+
+  @@map("team")
 }
 
 model TeamMembership {
   id        String         @id @default(cuid())
   team      Team           @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId    String
+  teamId    String         @map("team_id")
   user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  userId    String         @map("user_id")
   role      TeamMemberRole @default(MEMBER)
-  isCreator Boolean        @default(false)
+  isCreator Boolean        @default(false) @map("is_creator")
 
   @@unique([teamId, userId])
+  @@map("team_membership")
 }
 
 model TeamInvitation {
   id        String         @id @default(cuid())
   team      Team           @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId    String
+  teamId    String         @map("team_id")
   email     String
   role      TeamMemberRole @default(MEMBER)
-  createdAt DateTime       @default(now())
-  expiresAt DateTime       @updatedAt
+  createdAt DateTime       @default(now()) @map("created_at")
+  expiresAt DateTime       @updatedAt @map("expires_at")
 
   @@unique([teamId, email])
+  @@map("team_invitation")
 }
 
 model Subscription {
   id              String             @id
   team            Team               @relation(fields: [teamId], references: [id])
-  teamId          String             @unique
-  customerId      String
+  teamId          String             @unique @map("team_id")
+  customerId      String             @map("customer_id")
   status          SubscriptionStatus
-  planId          String
-  variantId       String
-  nextPaymentDate DateTime?
-}
+  planId          String             @map("plan_id")
+  variantId       String             @map("variant_id")
+  nextPaymentDate DateTime?          @map("next_payment_date")
 
-model Industry {
-  id    String  @id @default(cuid())
-  slug  String  @unique
-  name  String  @unique
-  brand Brand[]
-
-  @@index([slug])
-}
-
-model BusinessType {
-  id    String  @id @default(cuid())
-  slug  String  @unique
-  name  String  @unique
-  brand Brand[]
-
-  @@index([slug])
-}
-
-model glossary {
-  id                BigInt   @id @default(autoincrement())
-  created_at        DateTime @default(now())
-  term              String
-  definition        String?
-  video             String?
-  short_description String?
-  content           String?
-  example           String?
-  ELIM              String?
-  updated_at        DateTime @updatedAt
-  faqs              Json?
-  slug              String   @unique
-
-  @@index([slug])
-}
-
-model post {
-  id             BigInt   @id @default(autoincrement())
-  created_at     DateTime @default(now())
-  title          String
-  slug           String
-  except         String?
-  author_fk      String?
-  content        String?
-  featured_image String?
+  @@map("subscription")
 }
 
 enum UserRole {
   USER
   ADMIN
+
+  @@map("user_role")
 }
 
 enum UserOneTimePasswordType {
   SIGNUP
   LOGIN
   PASSWORD_RESET
+
+  @@map("user_one_time_password_type")
 }
 
 enum TeamMemberRole {
   MEMBER
   OWNER
+
+  @@map("team_member_role")
 }
 
 enum SubscriptionStatus {
@@ -233,4 +208,548 @@ enum SubscriptionStatus {
   UNPAID
   INCOMPLETE
   EXPIRED
+
+  @@map("subscription_status")
+}
+
+///////////////////////////////////////////////
+//    Company Data                           //
+///////////////////////////////////////////////
+
+model affiliate_platform {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(255)
+  company company[]
+}
+
+model author {
+  id              BigInt  @id
+  name            String  @db.VarChar
+  slug            String  @db.VarChar
+  bio             String?
+  profile_picture String? @db.VarChar
+}
+
+model award {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  slug              String              @unique @db.VarChar(255)
+  description       String?
+  company_award_map company_award_map[]
+  company           company[]           @relation("AwardToCompany")
+}
+
+model billing_option {
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  slug                       String                       @unique @db.VarChar(255)
+  description                String?
+  company_billing_option_map company_billing_option_map[]
+  company                    company[]                    @relation("BillingOptionToCompany")
+}
+
+model blog {
+  id             BigInt    @id
+  title          String    @db.VarChar
+  slug           String    @db.VarChar
+  content        String
+  featured_image String?   @db.VarChar
+  excerpt        String?   @db.VarChar
+  updated_at     DateTime? @db.Date
+  author_fk      BigInt?
+  created_at     DateTime  @db.Timestamptz(6)
+}
+
+model business_type {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  slug                      String                      @unique @db.VarChar(255)
+  description               String?
+  company_business_type_map company_business_type_map[]
+  company                   company[]                   @relation("BusinessTypeToCompany")
+}
+
+model company {
+  id                                                                      Int                              @id @default(autoincrement())
+  created_at                                                              DateTime                         @default(now()) @db.Timestamp(6)
+  name                                                                    String                           @db.VarChar(255)
+  slug                                                                    String                           @unique @db.VarChar(255)
+  url                                                                     String?                          @unique @db.VarChar(1024)
+  shortlink                                                               String?                          @db.VarChar(512)
+  date_founded                                                            DateTime?                        @db.Date
+  year_founded                                                            String?                          @db.VarChar(255)
+  ownership                                                               String?                          @db.VarChar(255)
+  phone_number                                                            String?                          @db.VarChar(255)
+  revenue_usd                                                             Decimal?                         @db.Decimal(20, 2)
+  num_employees                                                           String?                          @db.VarChar(255)
+  hq_location                                                             String?                          @db.VarChar(255)
+  support_setup_details                                                   String?
+  twitter_url                                                             String?                          @db.VarChar(1024)
+  linkedin_url                                                            String?                          @db.VarChar(1024)
+  support_email                                                           String?                          @db.VarChar(255)
+  support_phone                                                           String?                          @db.VarChar(255)
+  support_url                                                             String?                          @db.VarChar(1024)
+  support_chat_url                                                        String?                          @db.VarChar(1024)
+  support_hours                                                           String?                          @db.VarChar(255)
+  signup_url                                                              String?                          @db.VarChar(1024)
+  faq_url                                                                 String?                          @db.VarChar(1024)
+  forum_url                                                               String?                          @db.VarChar(1024)
+  knowledge_base_url                                                      String?                          @db.VarChar(1024)
+  privacy_policy_url                                                      String?                          @db.VarChar(1024)
+  terms_of_service_url                                                    String?                          @db.VarChar(1024)
+  about_url                                                               String?                          @db.VarChar(1024)
+  blog_url                                                                String?                          @db.VarChar(1024)
+  documentation_url                                                       String?                          @db.VarChar(1024)
+  has_training_documentation                                              Boolean                          @default(false)
+  has_live_online_training                                                Boolean                          @default(false)
+  has_in_person_training                                                  Boolean                          @default(false)
+  has_webinars                                                            Boolean                          @default(false)
+  has_videos                                                              Boolean                          @default(false)
+  has_tutorials                                                           Boolean                          @default(false)
+  advertising_sales_details                                               String?
+  advertises_deceptive_rates                                              String?                          @db.VarChar(255)
+  discloses_all_important_terms                                           String?                          @db.VarChar(255)
+  public_pricing_available                                                String?                          @db.VarChar(255)
+  contract_terms_details                                                  String?
+  pricing_details                                                         String?
+  swiped_rate                                                             String?                          @db.VarChar(255)
+  keyed_in_rate                                                           String?                          @db.VarChar(255)
+  mobile_payment_rate                                                     String?                          @db.VarChar(255)
+  virtual_terminal_rate                                                   String?                          @db.VarChar(255)
+  monthly_fee                                                             String?                          @db.VarChar(255)
+  payment_gateway_fee                                                     String?                          @db.VarChar(255)
+  batch_fee                                                               String?                          @db.VarChar(255)
+  early_termination_fee                                                   String?                          @db.VarChar(255)
+  pci_compliance_fee                                                      String?                          @db.VarChar(255)
+  pci_non_validation_fee                                                  String?                          @db.VarChar(255)
+  equipment_lease_terms                                                   String?                          @db.VarChar(255)
+  address_verification_service                                            String?                          @db.VarChar(255)
+  application_fee                                                         String?                          @db.VarChar(255)
+  account_setup_fee                                                       String?                          @db.VarChar(255)
+  gateway_setup_fee                                                       String?                          @db.VarChar(255)
+  annual_fee                                                              String?                          @db.VarChar(255)
+  monthly_minimum                                                         String?                          @db.VarChar(255)
+  statement_fee                                                           String?                          @db.VarChar(255)
+  ratings_reviews_complaints_details                                      String?
+  consumer_reviews                                                        String?                          @db.VarChar(255)
+  bbb_rating                                                              String?                          @db.VarChar(255)
+  google_rating                                                           String?                          @db.VarChar(255)
+  yelp_rating                                                             String?                          @db.VarChar(255)
+  trustpilot_rating                                                       String?                          @db.VarChar(255)
+  facebook_rating                                                         String?                          @db.VarChar(255)
+  lawsuits                                                                String?                          @db.VarChar(255)
+  products_services_details                                               String?
+  affiliate_link                                                          String?                          @db.VarChar(1024)
+  affiliate_signup_link                                                   String?                          @db.VarChar(1024)
+  affiliate_login_link                                                    String?                          @db.VarChar(1024)
+  affiliate_platform_fk                                                   Int?
+  affiliate_shortlink                                                     String?                          @db.VarChar(512)
+  ceo                                                                     String?                          @db.VarChar(255)
+  chargeback_fee                                                          String?                          @db.VarChar(255)
+  editor_rating                                                           String?                          @db.VarChar(255)
+  merchant_summary                                                        String?
+  online_card_not_present_payments                                        String?                          @db.VarChar(255)
+  pos_card_present_payments                                               String?                          @db.VarChar(255)
+  retrieval_fee                                                           String?                          @db.VarChar(255)
+  specialize_in                                                           String?
+  tin_tfn_invalid_fee                                                     String?                          @db.VarChar(255)
+  total_online_complaints                                                 String?                          @db.VarChar(255)
+  total_online_reviews                                                    String?                          @db.VarChar(255)
+  transaction_fees                                                        String?                          @db.VarChar(255)
+  truth_in_marketing                                                      String?                          @db.VarChar(1024)
+  additional_considerations_details                                       String?
+  free_trial                                                              String?                          @db.VarChar(255)
+  independent_sales_agents                                                String?                          @db.VarChar(255)
+  inactive                                                                Boolean                          @default(false)
+  additional_content                                                      String?
+  buyers_guide                                                            String?
+  intro                                                                   String?
+  description                                                             String?
+  affiliate_platform                                                      affiliate_platform?              @relation(fields: [affiliate_platform_fk], references: [id], onUpdate: NoAction, map: "fk_company_affiliate_platform")
+  company_alternative_map_company_alternative_map_alternative_fkTocompany company_alternative_map[]        @relation("company_alternative_map_alternative_fkTocompany")
+  company_alternative_map_company_alternative_map_company_fkTocompany     company_alternative_map[]        @relation("company_alternative_map_company_fkTocompany")
+  company_award_map                                                       company_award_map[]
+  company_billing_option_map                                              company_billing_option_map[]
+  company_business_type_map                                               company_business_type_map[]
+  company_cloudflare_image                                                company_cloudflare_image[]
+  company_contract_length_map                                             company_contract_length_map[]
+  company_contract_term_map                                               company_contract_term_map[]
+  company_faq                                                             company_faq[]
+  company_feature                                                         company_feature[]
+  company_image                                                           company_image[]
+  company_industry_map                                                    company_industry_map[]
+  company_integration_map_company_integration_map_company_fkTocompany     company_integration_map[]        @relation("company_integration_map_company_fkTocompany")
+  company_integration_map_company_integration_map_integration_fkTocompany company_integration_map[]        @relation("company_integration_map_integration_fkTocompany")
+  company_language_map                                                    company_language_map[]
+  company_payment_option_map                                              company_payment_option_map[]
+  company_payment_processing_map                                          company_payment_processing_map[]
+  company_price_map                                                       company_price_map[]
+  company_pricing_model_map                                               company_pricing_model_map[]
+  company_setup_highlight_map                                             company_setup_highlight_map[]
+  company_support_highlight_map                                           company_support_highlight_map[]
+  company_tag_map                                                         company_tag_map[]
+  company_video                                                           company_video[]
+  award                                                                   award[]                          @relation("AwardToCompany")
+  billing_option                                                          billing_option[]                 @relation("BillingOptionToCompany")
+  business_type                                                           business_type[]                  @relation("BusinessTypeToCompany")
+  company_A                                                               company[]                        @relation("CompanyToCompany")
+  company_B                                                               company[]                        @relation("CompanyToCompany")
+  contract_length                                                         contract_length[]                @relation("CompanyToContractLength")
+  contract_term                                                           contract_term[]                  @relation("CompanyToContractTerm")
+  industry                                                                industry[]                       @relation("CompanyToIndustry")
+  language                                                                language[]                       @relation("CompanyToLanguage")
+  payment_option                                                          payment_option[]                 @relation("CompanyToPaymentOption")
+  payment_processing                                                      payment_processing[]             @relation("CompanyToPaymentProcessing")
+  price                                                                   price[]                          @relation("CompanyToPrice")
+  pricing_model                                                           pricing_model[]                  @relation("CompanyToPricingModel")
+  risk_tolerance                                                          risk_tolerance[]                 @relation("CompanyToRiskTolerance")
+  setup_highlight                                                         setup_highlight[]                @relation("CompanyToSetupHighlight")
+  support_highlight                                                       support_highlight[]              @relation("CompanyToSupportHighlight")
+  tag                                                                     tag[]                            @relation("CompanyToTag")
+
+  @@index([name])
+  @@index([slug])
+  @@index([url])
+}
+
+model company_alternative_map {
+  company_fk                                              Int
+  alternative_fk                                          Int
+  company_company_alternative_map_alternative_fkTocompany company @relation("company_alternative_map_alternative_fkTocompany", fields: [alternative_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_alternative_map_alternative")
+  company_company_alternative_map_company_fkTocompany     company @relation("company_alternative_map_company_fkTocompany", fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_alternative_map_company")
+
+  @@id([company_fk, alternative_fk])
+}
+
+model company_award_map {
+  company_fk   Int
+  award_fk     Int
+  date_awarded DateTime? @db.Date
+  award        award     @relation(fields: [award_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_award_map_award")
+  company      company   @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_award_map_company")
+
+  @@id([company_fk, award_fk])
+}
+
+model company_billing_option_map {
+  company_fk        Int
+  billing_option_fk Int
+  billing_option    billing_option @relation(fields: [billing_option_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_billing_option_map_billing_option")
+  company           company        @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_billing_option_map_company")
+
+  @@id([company_fk, billing_option_fk])
+}
+
+model company_business_type_map {
+  company_fk       Int
+  business_type_fk Int
+  business_type    business_type @relation(fields: [business_type_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_business_type_map_business_type")
+  company          company       @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_business_type_map_company")
+
+  @@id([company_fk, business_type_fk])
+}
+
+model company_cloudflare_image {
+  id         Int     @id @default(autoincrement())
+  company_fk Int
+  url        String  @db.VarChar(1024)
+  file_id    String? @db.VarChar(255)
+  order      Int     @default(0)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_cloudflare_image_company")
+
+  @@unique([company_fk, url], map: "unique_company_cloudflare_image_url")
+}
+
+model company_con {
+  id         Int    @id @default(autoincrement())
+  company_fk Int
+  text       String @db.VarChar(255)
+
+  @@unique([company_fk, text], map: "unique_company_con_text")
+}
+
+model company_contract_length_map {
+  company_fk         Int
+  contract_length_fk Int
+  company            company         @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_contract_length_map_company")
+  contract_length    contract_length @relation(fields: [contract_length_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_contract_length_map_contract_length")
+
+  @@id([company_fk, contract_length_fk])
+}
+
+model company_contract_term_map {
+  company_fk       Int
+  contract_term_fk Int
+  company          company       @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_contract_term_map_company")
+  contract_term    contract_term @relation(fields: [contract_term_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_contract_term_map_contract_term")
+
+  @@id([company_fk, contract_term_fk])
+}
+
+model company_faq {
+  id         Int     @id @default(autoincrement())
+  company_fk Int
+  question   String  @db.VarChar(255)
+  answer     String?
+  order      Int     @default(0)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_faq_company")
+
+  @@unique([company_fk, question], map: "unique_company_faq_question")
+}
+
+model company_feature {
+  id         Int     @id @default(autoincrement())
+  company_fk Int
+  text       String  @db.VarChar(255)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_feature_company")
+
+  @@unique([company_fk, text], map: "unique_company_feature_text")
+}
+
+model company_image {
+  id         Int     @id @default(autoincrement())
+  company_fk Int
+  url        String  @db.VarChar(1024)
+  file_id    String? @db.VarChar(255)
+  order      Int     @default(0)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_image_company")
+
+  @@unique([company_fk, url], map: "unique_company_image_url")
+}
+
+model company_industry_map {
+  company_fk  Int
+  industry_fk Int
+  company     company  @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_industry_map_company")
+  industry    industry @relation(fields: [industry_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_industry_map_industry")
+
+  @@id([company_fk, industry_fk])
+}
+
+model company_integration_map {
+  company_fk                                              Int
+  integration_fk                                          Int
+  company_company_integration_map_company_fkTocompany     company @relation("company_integration_map_company_fkTocompany", fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_integration_map_company")
+  company_company_integration_map_integration_fkTocompany company @relation("company_integration_map_integration_fkTocompany", fields: [integration_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_integration_map_integration")
+
+  @@id([company_fk, integration_fk])
+}
+
+model company_language_map {
+  company_fk  Int
+  language_fk Int
+  company     company  @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_language_map_company")
+  language    language @relation(fields: [language_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_language_map_language")
+
+  @@id([company_fk, language_fk])
+}
+
+model company_payment_option_map {
+  company_fk        Int
+  payment_option_fk Int
+  company           company        @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_payment_option_map_company")
+  payment_option    payment_option @relation(fields: [payment_option_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_payment_option_map_payment_option")
+
+  @@id([company_fk, payment_option_fk])
+}
+
+model company_payment_processing_map {
+  company_fk            Int
+  payment_processing_fk Int
+  company               company            @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_payment_processing_map_company")
+  payment_processing    payment_processing @relation(fields: [payment_processing_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_payment_processing_map_payment_processing")
+
+  @@id([company_fk, payment_processing_fk])
+}
+
+model company_price_map {
+  company_fk Int
+  price_fk   Int
+  order      Int     @default(0)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_price_map_company")
+  price      price   @relation(fields: [price_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_price_map_price")
+
+  @@id([company_fk, price_fk])
+}
+
+model company_pricing_model_map {
+  company_fk       Int
+  pricing_model_fk Int
+  company          company       @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_pricing_model_map_company")
+  pricing_model    pricing_model @relation(fields: [pricing_model_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_pricing_model_map_pricing_model")
+
+  @@id([company_fk, pricing_model_fk])
+}
+
+model company_pro {
+  id         Int    @id @default(autoincrement())
+  company_fk Int
+  text       String @db.VarChar(255)
+
+  @@unique([company_fk, text], map: "unique_company_pro_text")
+}
+
+model company_risk_tolerance_map {
+  company_fk        Int
+  risk_tolerance_fk Int
+
+  @@id([company_fk, risk_tolerance_fk])
+}
+
+model company_setup_highlight_map {
+  company_fk         Int
+  setup_highlight_fk Int
+  company            company         @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_setup_highlight_map_company")
+  setup_highlight    setup_highlight @relation(fields: [setup_highlight_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_setup_highlight_map_setup_highlight")
+
+  @@id([company_fk, setup_highlight_fk])
+}
+
+model company_support_highlight_map {
+  company_fk           Int
+  support_highlight_fk Int
+  company              company           @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_support_highlight_map_company")
+  support_highlight    support_highlight @relation(fields: [support_highlight_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_support_highlight_map_support_highlight")
+
+  @@id([company_fk, support_highlight_fk])
+}
+
+model company_tag_map {
+  company_fk Int
+  tag_fk     Int
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_tag_map_company")
+  tag        tag     @relation(fields: [tag_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_tag_map_tag")
+
+  @@id([company_fk, tag_fk])
+}
+
+model company_video {
+  id         Int     @id @default(autoincrement())
+  company_fk Int
+  url        String  @db.VarChar(1024)
+  file_id    String? @db.VarChar(255)
+  order      Int     @default(0)
+  company    company @relation(fields: [company_fk], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_company_video_company")
+
+  @@unique([company_fk, url], map: "unique_company_video_url")
+}
+
+model contract_length {
+  id                          Int                           @id @default(autoincrement())
+  name                        String                        @db.VarChar(255)
+  slug                        String                        @unique @db.VarChar(255)
+  description                 String?
+  company_contract_length_map company_contract_length_map[]
+  company                     company[]                     @relation("CompanyToContractLength")
+}
+
+model contract_term {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  slug                      String                      @unique @db.VarChar(255)
+  description               String?
+  company_contract_term_map company_contract_term_map[]
+  company                   company[]                   @relation("CompanyToContractTerm")
+}
+
+model glossary {
+  id          BigInt   @id
+  created_at  DateTime @db.Timestamptz(6)
+  title       String   @db.VarChar
+  slug        String   @db.VarChar
+  one_liner   String?  @db.VarChar
+  content     String?
+  post_status String   @db.VarChar
+}
+
+model industry {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  slug                 String                 @unique @db.VarChar(255)
+  description          String?
+  company_industry_map company_industry_map[]
+  company              company[]              @relation("CompanyToIndustry")
+}
+
+model language {
+  id                   Int                    @id @default(autoincrement())
+  code                 String                 @unique @db.VarChar(2)
+  company_language_map company_language_map[]
+  company              company[]              @relation("CompanyToLanguage")
+}
+
+model payment_option {
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @db.VarChar(255)
+  slug                       String                       @unique @db.VarChar(255)
+  description                String?
+  company_payment_option_map company_payment_option_map[]
+  company                    company[]                    @relation("CompanyToPaymentOption")
+}
+
+model payment_processing {
+  id                             Int                              @id @default(autoincrement())
+  name                           String                           @db.VarChar(255)
+  slug                           String                           @unique @db.VarChar(255)
+  description                    String?
+  company_payment_processing_map company_payment_processing_map[]
+  company                        company[]                        @relation("CompanyToPaymentProcessing")
+}
+
+model price {
+  id                Int                 @id @default(autoincrement())
+  name              String              @db.VarChar(255)
+  price             Decimal?            @db.Decimal(10, 2)
+  currency          String?             @db.VarChar(3)
+  interval          String?             @db.VarChar(255)
+  description       String?
+  company_price_map company_price_map[]
+  company           company[]           @relation("CompanyToPrice")
+}
+
+model pricing_model {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @db.VarChar(255)
+  slug                      String                      @unique @db.VarChar(255)
+  description               String?
+  company_pricing_model_map company_pricing_model_map[]
+  company                   company[]                   @relation("CompanyToPricingModel")
+}
+
+model risk_tolerance {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  slug        String    @unique @db.VarChar(255)
+  description String?
+  company     company[] @relation("CompanyToRiskTolerance")
+}
+
+model setup_highlight {
+  id                          Int                           @id @default(autoincrement())
+  name                        String                        @db.VarChar(255)
+  slug                        String                        @unique @db.VarChar(255)
+  description                 String?
+  company_setup_highlight_map company_setup_highlight_map[]
+  company                     company[]                     @relation("CompanyToSetupHighlight")
+}
+
+model support_highlight {
+  id                            Int                             @id @default(autoincrement())
+  name                          String                          @db.VarChar(255)
+  slug                          String                          @unique @db.VarChar(255)
+  description                   String?
+  company_support_highlight_map company_support_highlight_map[]
+  company                       company[]                       @relation("CompanyToSupportHighlight")
+}
+
+model tag {
+  id              Int               @id @default(autoincrement())
+  created_at      DateTime          @default(now()) @db.Timestamp(6)
+  name            String            @unique @db.VarChar(255)
+  slug            String            @unique @db.VarChar(255)
+  company_tag_map company_tag_map[]
+  company         company[]         @relation("CompanyToTag")
+
+  @@index([name])
+  @@index([slug])
 }

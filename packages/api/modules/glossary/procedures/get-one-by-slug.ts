@@ -1,28 +1,28 @@
 import { TRPCError } from "@trpc/server";
-import { BusinessTypeSchema, db } from "database";
+import { glossarySchema, db } from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 
-export const bySlug = publicProcedure
+export const getOneBySlug = publicProcedure
   .input(
     z.object({
       slug: z.string(),
     }),
   )
-  .output(BusinessTypeSchema)
+  .output(glossarySchema)
   .query(async ({ input: { slug } }) => {
-    const businessType = await db.businessType.findUnique({
+    const term = await db.glossary.findFirst({
       where: {
         slug,
       },
     });
 
-    if (!businessType) {
+    if (!term) {
       throw new TRPCError({
         code: "NOT_FOUND",
         message: "Brand not found.",
       });
     }
 
-    return businessType;
+    return term;
   });

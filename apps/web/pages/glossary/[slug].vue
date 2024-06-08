@@ -1,12 +1,9 @@
 <script lang="ts" setup>
+  const { apiCaller } = useApiCaller();
   import type { MarketingBlogPageFields } from "@/modules/marketing/blog/types";
-  import { joinURL } from "ufo";
+  import markdownParser from "@nuxt/content/transformers/markdown";
 
   const slug = useRoute("glossary-slug").params.slug;
-  const slugTemp = "second-post";
-  const runtimeConfig = useRuntimeConfig();
-  const { formatDate } = useLocaleDate();
-  const { locale, defaultLocale } = useI18n();
   const recentPosts = [
     {
       id: 1,
@@ -67,50 +64,16 @@
     },
   ];
 
-  const { data: post } = await useAsyncData(
-    slugTemp,
-    async () => {
-      const localeExtensionPattern = /(\.[a-zA-Z\\-]{2,5})+\.md$/;
-      try {
-        return await queryContent<MarketingBlogPageFields>(`blog/${slugTemp}`)
-          .where({
-            $and: [
-              { draft: { $not: true } },
-              locale.value === defaultLocale
-                ? { _file: { $not: { $match: localeExtensionPattern } } }
-                : {
-                    _file: { $match: localeExtensionPattern },
-                  },
-            ],
-          })
-          .findOne();
-      } catch {
-        await navigateTo("/blog");
-        return null;
-      }
-    },
-    {
-      watch: [locale],
-    },
+  const term = await apiCaller.glossary.getOneBySlug.query({ slug });
+  const formattedContent = await markdownParser.parse!(
+    term.id.toString() || "",
+    term.content || "",
+    {},
   );
-  if (!post.value) {
-    await navigateTo("/blog");
-    throw new Error("Post not found");
-  }
-
-  // SEO
-  useContentHead(post.value);
-
-  // Override the `ogImage` field. It is already set by `useContentHead` above, but without the base url.
-  useSeoMeta({
-    ogImage: post.value.image?.src
-      ? joinURL(runtimeConfig.public.siteUrl, post.value.image.src)
-      : undefined,
-  });
 </script>
 
 <template>
-  <ContentRenderer v-if="post" :value="post">
+  <ContentRenderer v-if="term">
     <div class="isolate bg-white">
       <GlossaryHeader />
       <div class="container max-w-5xl py-12">
@@ -121,13 +84,14 @@
             </NuxtLinkLocale>
           </div>
 
-          <h1 class="text-5xl font-bold">{{ post.title }}</h1>
+          <h1 class="text-6xl font-bold">{{ term.title }}</h1>
+          <p class="mt-4 text-lg text-gray-600">{{ term.one_liner }}</p>
         </div>
 
         <div class="mt-6 flex justify-center gap-10">
           <div class="flex-1">
             <ContentRendererMarkdown
-              :value="post"
+              :value="formattedContent"
               class="prose dark:prose-invert mt-6"
             />
           </div>
