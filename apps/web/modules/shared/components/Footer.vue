@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-muted border-t">
+  <footer class="bg-muted">
     <MarketingNewsletter />
     <div
       class="text-muted-foreground container grid grid-cols-1 gap-6 pb-12 pt-12 lg:grid-cols-3"

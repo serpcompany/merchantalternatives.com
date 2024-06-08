@@ -85,7 +85,7 @@
           </div>
 
           <h1 class="text-6xl font-bold">{{ term.title }}</h1>
-          <p class="mt-4 text-lg text-gray-600">{{ term.one_liner }}</p>
+          <p class="mt-4 text-xl text-gray-500">{{ term.one_liner }}</p>
         </div>
 
         <div class="mt-6 flex justify-center gap-10">
