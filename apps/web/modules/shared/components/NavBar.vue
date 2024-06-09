@@ -39,6 +39,10 @@
       to: "/reviews",
     },
     {
+      label: "Industries",
+      to: "/reviews/industry",
+    },
+    {
       label: t("common.menu.blog"),
       to: "/blog",
     },

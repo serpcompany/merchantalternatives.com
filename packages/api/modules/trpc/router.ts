@@ -9,6 +9,7 @@ import * as uploadsProcedures from "../uploads/procedures";
 import * as glossaryProcedures from "../glossary/procedures";
 import * as blogProcedures from "../blog/procedures";
 import * as companyProcedures from "../company/procedures";
+import * as industryProcedures from "../industry/procedures";
 import { router } from "./trpc";
 
 export const apiRouter = router({
@@ -22,6 +23,7 @@ export const apiRouter = router({
   glossary: router(glossaryProcedures),
   blog: router(blogProcedures),
   company: router(companyProcedures),
+  industry: router(industryProcedures),
 });
 
 export type ApiRouter = typeof apiRouter;
