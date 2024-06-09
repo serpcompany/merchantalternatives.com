@@ -2,39 +2,38 @@
   import type { ApiOutput } from "api/modules/trpc/router";
 
   defineProps({
-    brand: {
-      type: Object as PropType<ApiOutput["brand"]["bySlug"]>,
+    company: {
+      type: Object as PropType<ApiOutput["company"]["getOneBySlug"]>,
       required: true,
     },
   });
-
-  const getFirstParagraph = (html: string): string =>
-    html.split("<p>")[1].split("</p>")[0];
 </script>
 
 <template>
   <div class="flex flex-col gap-6">
-    <ReviewSummary :brand="brand" with-button />
+    <ReviewSummary :company="company" with-button />
     <Card>
       <CardHeader><CardTitle>About</CardTitle></CardHeader>
       <CardContent>
         <div
-          v-if="brand.overview"
-          v-html="brand.overview"
+          v-if="company.merchant_summary"
+          v-html="company.merchant_summary"
           class="externalHtml"
         />
         <p v-else>Nothing here yet.</p>
       </CardContent>
-      <CardButton @click="navigateTo(`/reviews/${brand.slug}/about`)"
+      <CardButton @click="navigateTo(`/reviews/${company.slug}/about`)"
         >See all details</CardButton
       >
     </Card>
-    <Card v-if="brand.overview">
+    <Card v-if="company.merchant_summary">
       <CardHeader><CardTitle>Pricing</CardTitle></CardHeader>
       <CardContent>
-        <p v-if="brand.overview">{{ getFirstParagraph(brand.overview) }}</p>
+        <p v-if="company.pricing_details">
+          {{ company.pricing_details }}
+        </p>
       </CardContent>
-      <CardButton @click="navigateTo(`/reviews/${brand.slug}/pricing`)"
+      <CardButton @click="navigateTo(`/reviews/${company.slug}/pricing`)"
         >See all details</CardButton
       >
     </Card>

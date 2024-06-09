@@ -7,9 +7,6 @@
   const company = await apiCaller.company.getOneBySlug.query({
     slug: brandSlug,
   });
-  const numOfEmployees = company.num_employees
-    ? getNumOfEmployeesString(+company.num_employees)
-    : null;
   const tabs = ref([
     { title: "Overview", to: `/reviews/${company.slug}` },
     { title: "Review", to: `/reviews/${company.slug}/review` },
@@ -28,8 +25,8 @@
 </script>
 
 <template>
-  <div class="mx-auto flex gap-6 pt-[88px] lg:max-w-[1100px]">
-    <div class="flex w-full flex-initial flex-col gap-6">
+  <div class="mx-auto flex max-w-[1100px] gap-6 pt-[88px]">
+    <div class="flex max-w-3xl flex-1 flex-col gap-6">
       <Card class="w-full overflow-hidden">
         <div class="flex justify-between px-6 pb-4 pt-10">
           <div>
@@ -39,32 +36,30 @@
               :name="company.name"
             />
             <h1 class="mt-3.5 text-3xl font-semibold">{{ company.name }}</h1>
-            <p class="mt-1">
-              {{ company.intro }}
+            <p class="mt-1 max-w-xl truncate">
+              {{ company.specialize_in }}
             </p>
             <p
-              v-if="company.hq_location || numOfEmployees"
+              v-if="company.hq_location || company.num_employees"
               class="text-muted-foreground mt-1 text-sm"
             >
               {{ company.hq_location || "" }}
-              {{ company.hq_location && numOfEmployees ? " • " : "" }}
-              {{ numOfEmployees || "" }}
+              {{ company.hq_location && company.num_employees ? " • " : "" }}
+              {{ company.num_employees || "" }} employees
             </p>
             <div class="mt-3 flex gap-2">
               <Button
-                v-if="company.support_url"
+                v-if="company.url"
                 size="sm"
                 @click="
-                  navigateTo('https://' + company.support_url, {
+                  navigateTo('https://' + company.url, {
                     external: true,
                     open: {
                       target: '_blank',
                     },
                   })
                 "
-                ><LinkIcon class="mr-2 size-4" />{{
-                  company.support_url
-                }}</Button
+                ><LinkIcon class="mr-2 size-4" />{{ company.url }}</Button
               >
               <Button
                 v-if="true"
@@ -91,8 +86,7 @@
           class="border-foreground/10 border-t pl-2"
         />
       </Card>
-      <!--
-      <NuxtPage :company="company" />-->
+      <NuxtPage :company="company" />-
     </div>
     <div class="hidden w-72 flex-none flex-col gap-6 lg:flex">
       <Card class="w-full p-4">

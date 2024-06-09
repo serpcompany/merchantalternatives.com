@@ -409,6 +409,8 @@ model company {
   setup_highlight                                                         setup_highlight[]                @relation("CompanyToSetupHighlight")
   support_highlight                                                       support_highlight[]              @relation("CompanyToSupportHighlight")
   tag                                                                     tag[]                            @relation("CompanyToTag")
+  company_pro                                                             company_pro[]
+  company_con                                                             company_con[]
 
   @@index([name])
   @@index([slug])
@@ -464,9 +466,10 @@ model company_cloudflare_image {
 }
 
 model company_con {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
+  company    company @relation(fields: [company_fk], references: [id])
   company_fk Int
-  text       String @db.VarChar(255)
+  text       String  @db.VarChar(255)
 
   @@unique([company_fk, text], map: "unique_company_con_text")
 }
@@ -585,9 +588,10 @@ model company_pricing_model_map {
 }
 
 model company_pro {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
+  company    company @relation(fields: [company_fk], references: [id])
   company_fk Int
-  text       String @db.VarChar(255)
+  text       String  @db.VarChar(255)
 
   @@unique([company_fk, text], map: "unique_company_pro_text")
 }

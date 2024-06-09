@@ -3,8 +3,8 @@
   import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/outline";
 
   defineProps({
-    brand: {
-      type: Object as PropType<ApiOutput["brand"]["bySlug"]>,
+    company: {
+      type: Object as PropType<ApiOutput["company"]["getOneBySlug"]>,
       required: true,
     },
   });
@@ -12,17 +12,18 @@
 
 <template>
   <div class="flex flex-col gap-6">
-    <ReviewSummary :brand="brand" />
     <div
-      v-if="brand.reviewPros.length && brand.reviewCons.length"
+      v-if="company.company_pro.length && company.company_con.length"
       class="flex gap-6"
     >
       <Card class="flex-1">
         <CardHeader><CardTitle>What We Like</CardTitle></CardHeader>
         <CardContent>
           <div class="flex flex-col gap-3.5">
-            <div v-for="pro in brand.reviewPros" class="flex gap-2">
-              <CheckCircleIcon class="text-success size-6 flex-none" />{{ pro }}
+            <div v-for="pro in company.company_pro" class="flex gap-2">
+              <CheckCircleIcon class="text-success size-6 flex-none" />{{
+                pro.text
+              }}
             </div>
           </div>
         </CardContent>
@@ -31,12 +32,15 @@
         <CardHeader><CardTitle>What We Don't Like</CardTitle></CardHeader>
         <CardContent>
           <div class="flex flex-col gap-3.5">
-            <div v-for="con in brand.reviewCons" class="flex gap-2">
-              <XCircleIcon class="text-destructive size-6 flex-none" />{{ con }}
+            <div v-for="con in company.company_con" class="flex gap-2">
+              <XCircleIcon class="text-destructive size-6 flex-none" />{{
+                con.text
+              }}
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
+    <ReviewSummary :company="company" />
   </div>
 </template>

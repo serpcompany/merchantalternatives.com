@@ -7,8 +7,8 @@
   } from "@heroicons/vue/24/outline";
 
   defineProps({
-    brand: {
-      type: Object as () => Partial<ApiOutput["brand"]["bySlug"]>,
+    company: {
+      type: Object as () => Partial<ApiOutput["company"]["getOneBySlug"]>,
       required: true,
     },
     withButton: {
@@ -26,13 +26,7 @@
   <Card>
     <CardHeader><CardTitle>Review</CardTitle></CardHeader>
     <CardContent
-      v-if="
-        brand.rating &&
-        brand.ratesAndFeesRating &&
-        brand.consumerReviewsRating &&
-        brand.customerSupportRating &&
-        brand.truthInAdvertisingRating
-      "
+      v-if="company.editor_rating && company.consumer_reviews"
       class="flex flex-col gap-6"
     >
       <div class="flex gap-6">
@@ -41,15 +35,15 @@
             <TrophyIcon class="size-5" />
             <h3 class="font-bold">Best For</h3>
           </div>
-          <p class="text-muted-foreground mt-1">{{ brand.bestFor }}</p>
+          <p class="text-muted-foreground mt-1">{{ company.description }}</p>
           <div class="mt-5 flex items-center gap-2">
             <StarIcon class="size-5" />
             <h3 class="font-bold">Specializes In</h3>
           </div>
-          <p class="text-muted-foreground mt-1">{{ brand.specializesIn }}</p>
+          <p class="text-muted-foreground mt-1">{{ company.specialize_in }}</p>
         </div>
         <div>
-          <StarRating :rating="brand.rating" size="lg" with-text />
+          <StarRating :rating="+company.editor_rating" size="lg" with-text />
         </div>
       </div>
       <div>
@@ -59,33 +53,35 @@
         </div>
         <div class="text-muted-foreground mt-1 flex divide-x-2">
           <div class="flex flex-1 flex-col px-3">
-            <span>Setup Fee: {{ brand.setupFee }}</span>
-            <span>Monthly Fee: {{ brand.monthlyFee }}</span>
-            <span>Early Termination Fee: {{ brand.earlyTerminationFee }}</span>
+            <span>Setup Fee: {{ company.account_setup_fee }}</span>
+            <span>Monthly Fee: {{ company.monthly_fee }}</span>
+            <span
+              >Early Termination Fee: {{ company.early_termination_fee }}</span
+            >
           </div>
           <div class="flex flex-1 flex-col px-3">
-            <span>Swipe Rate: {{ brand.swipeRate }}</span>
-            <span>Keyed-In Rate: {{ brand.keyedInRate }}</span>
-            <span>Contract Terms: {{ brand.contractTerms }}</span>
+            <span>Swipe Rate: {{ company.swiped_rate }}</span>
+            <span>Keyed-In Rate: {{ company.keyed_in_rate }}</span>
+            <span>Contract Terms: {{ "12 months" }}</span>
           </div>
         </div>
       </div>
       <div class="flex flex-col gap-2.5 font-bold">
         <div>
-          <h3>Rates and Fees | {{ brand.ratesAndFeesRating }}%</h3>
-          <PercentBar :percent="brand.ratesAndFeesRating" />
+          <h3>Rates and Fees | {{ 80 }}%</h3>
+          <PercentBar :percent="80" />
         </div>
         <div>
-          <h3>Trust in Advertising | {{ brand.truthInAdvertisingRating }}%</h3>
-          <PercentBar :percent="brand.truthInAdvertisingRating" />
+          <h3>Trust in Advertising | {{ 70 }}%</h3>
+          <PercentBar :percent="70" />
         </div>
         <div>
-          <h3>Consumer Reviews | {{ brand.consumerReviewsRating }}%</h3>
-          <PercentBar :percent="brand.consumerReviewsRating" />
+          <h3>Consumer Reviews | {{ company.consumer_reviews }}%</h3>
+          <PercentBar :percent="+company.consumer_reviews" />
         </div>
         <div>
-          <h3>Customer Support | {{ brand.customerSupportRating }}%</h3>
-          <PercentBar :percent="brand.customerSupportRating" />
+          <h3>Customer Support | {{ 60 }}%</h3>
+          <PercentBar :percent="60" />
         </div>
       </div>
     </CardContent>
@@ -98,7 +94,7 @@
     </CardContent>
     <CardButton
       v-if="withButton"
-      @click="navigateTo(`/reviews/${brand.slug}/review`)"
+      @click="navigateTo(`/reviews/${company.slug}/review`)"
       >See full review</CardButton
     >
   </Card>

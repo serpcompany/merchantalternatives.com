@@ -8,8 +8,8 @@
   } from "@heroicons/vue/24/outline";
 
   defineProps({
-    brand: {
-      type: Object as PropType<ApiOutput["brand"]["bySlug"]>,
+    company: {
+      type: Object as PropType<ApiOutput["company"]["getOneBySlug"]>,
       required: true,
     },
   });
@@ -22,10 +22,10 @@
       <CardContent>
         <div
           v-if="
-            brand.ceo ||
-            brand.numOfEmployees ||
-            brand.hqLocation ||
-            brand.yearFounded
+            company.ceo ||
+            company.num_employees ||
+            company.hq_location ||
+            company.year_founded
           "
           class="flex flex-col divide-y"
         >
@@ -34,28 +34,28 @@
               <UserIcon class="h-6 w-6" />
               CEO
             </div>
-            <span>{{ brand.ceo }}</span>
+            <span>{{ company.ceo }}</span>
           </div>
           <div class="flex justify-between py-4">
             <div class="flex items-center gap-2">
               <UserGroupIcon class="h-6 w-6" />
               Employees
             </div>
-            <span>{{ brand.numOfEmployees }}</span>
+            <span>{{ company.num_employees }}</span>
           </div>
           <div class="flex justify-between py-4">
             <div class="flex items-center gap-2">
               <MapPinIcon class="h-6 w-6" />
               HQ
             </div>
-            <span>{{ brand.hqLocation }}</span>
+            <span>{{ company.hq_location }}</span>
           </div>
           <div class="flex justify-between py-4">
             <div class="flex items-center gap-2">
               <RocketLaunchIcon class="h-6 w-6" />
               Founded
             </div>
-            <span>{{ brand.yearFounded }}</span>
+            <span>{{ company.year_founded }}</span>
           </div>
         </div>
         <p v-else>Nothing here yet.</p>
@@ -65,8 +65,8 @@
       <CardHeader><CardTitle>About</CardTitle></CardHeader>
       <CardContent>
         <div
-          v-if="brand.overview"
-          v-html="brand.overview"
+          v-if="company.description"
+          v-html="company.description"
           class="externalHtml"
         />
         <p v-else>Nothing here yet.</p>
@@ -77,36 +77,21 @@
       <CardContent
         ><div class="flex divide-x">
           <ul class="flex-1 list-inside list-disc px-4">
-            <li
-              v-for="industry in [
-                'tech',
-                'finance',
-                'healthcare',
-                'retail',
-                'education',
-                'manufacturing',
-                'real estate',
-                'hospitality',
-                'media',
-                'transportation',
-              ]"
-              :key="industry"
-            >
-              {{ industry }}
+            <li v-for="industry in company.industry" :key="industry.id">
+              {{ industry.name }}
             </li>
           </ul>
-          <!--
           <ul
-            v-if="brand.industriesServed.slice(10).length"
+            v-if="company.industry.slice(10).length"
             class="flex-1 list-inside list-disc px-4"
           >
             <li
-              v-for="industry in brand.industriesServed.slice(10)"
+              v-for="industry in company.industry.slice(10)"
               :key="industry.id"
             >
               {{ industry.name }}
             </li>
-          </ul>-->
+          </ul>
         </div>
       </CardContent>
     </Card>
@@ -116,35 +101,23 @@
         <div class="flex divide-x">
           <ul class="flex-1 list-inside list-disc px-4">
             <li
-              v-for="businessType in [
-                'Small Company',
-                'Enterprise',
-                'Public Sector',
-                'Nonprofit',
-                'Startup',
-                'SME',
-                'Mid-Market',
-                'Fortune 500',
-                'Global Corporation',
-                'Local Business',
-              ]"
-              :key="businessType"
-            >
-              {{ businessType }}
-            </li>
-          </ul>
-          <!--
-          <ul
-            v-if="brand.businessTypesServed.slice(10).length"
-            class="flex-1 list-inside list-disc px-4"
-          >
-            <li
-              v-for="businessType in brand.businessTypesServed.slice(10)"
+              v-for="businessType in company.business_type"
               :key="businessType.id"
             >
               {{ businessType.name }}
             </li>
-          </ul>-->
+          </ul>
+          <ul
+            v-if="company.business_type.slice(10).length"
+            class="flex-1 list-inside list-disc px-4"
+          >
+            <li
+              v-for="businessType in company.business_type.slice(10)"
+              :key="businessType.id"
+            >
+              {{ businessType.name }}
+            </li>
+          </ul>
         </div>
       </CardContent>
     </Card>
