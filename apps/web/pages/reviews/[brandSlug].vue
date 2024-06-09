@@ -32,7 +32,11 @@
           <div>
             <BrandLogo
               class="size-24 text-xl"
-              :src="null"
+              :src="
+                company.company_image.length
+                  ? company.company_image[0].url
+                  : null
+              "
               :name="company.name"
             />
             <h1 class="mt-3.5 text-3xl font-semibold">{{ company.name }}</h1>

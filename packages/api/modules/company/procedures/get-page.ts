@@ -1,7 +1,6 @@
 import { companySchema, db } from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
-import { Prisma } from "@prisma/client";
 
 const RESULTS_PER_PAGE = 10;
 
