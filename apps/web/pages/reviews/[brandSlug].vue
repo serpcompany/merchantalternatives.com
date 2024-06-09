@@ -4,20 +4,20 @@
   const { apiCaller } = useApiCaller();
   const brandSlug = useRoute("reviews-brandSlug").params.brandSlug;
 
-  const brand = await apiCaller.brand.bySlug.query({
+  const company = await apiCaller.company.getOneBySlug.query({
     slug: brandSlug,
   });
-  const numOfEmployees = brand.numOfEmployees
-    ? getNumOfEmployeesString(brand.numOfEmployees)
+  const numOfEmployees = company.num_employees
+    ? getNumOfEmployeesString(+company.num_employees)
     : null;
   const tabs = ref([
-    { title: "Overview", to: `/reviews/${brand.slug}` },
-    { title: "Review", to: `/reviews/${brand.slug}/review` },
-    { title: "About", to: `/reviews/${brand.slug}/about` },
-    { title: "Pricing", to: `/reviews/${brand.slug}/pricing` },
-    { title: "Services", to: `/reviews/${brand.slug}/services` },
-    { title: "Advertising", to: `/reviews/${brand.slug}/advertising` },
-    { title: "Contracts", to: `/reviews/${brand.slug}/contracts` },
+    { title: "Overview", to: `/reviews/${company.slug}` },
+    { title: "Review", to: `/reviews/${company.slug}/review` },
+    { title: "About", to: `/reviews/${company.slug}/about` },
+    { title: "Pricing", to: `/reviews/${company.slug}/pricing` },
+    { title: "Services", to: `/reviews/${company.slug}/services` },
+    { title: "Advertising", to: `/reviews/${company.slug}/advertising` },
+    { title: "Contracts", to: `/reviews/${company.slug}/contracts` },
   ]);
 
   const inform = () => {
@@ -35,37 +35,39 @@
           <div>
             <BrandLogo
               class="size-24 text-xl"
-              :src="brand.logoUrl"
-              :name="brand.name"
+              :src="null"
+              :name="company.name"
             />
-            <h1 class="mt-3.5 text-3xl font-semibold">{{ brand.name }}</h1>
+            <h1 class="mt-3.5 text-3xl font-semibold">{{ company.name }}</h1>
             <p class="mt-1">
-              {{ brand.reviewOneliner }}
+              {{ company.intro }}
             </p>
             <p
-              v-if="brand.hqLocation || numOfEmployees"
+              v-if="company.hq_location || numOfEmployees"
               class="text-muted-foreground mt-1 text-sm"
             >
-              {{ brand.hqLocation || "" }}
-              {{ brand.hqLocation && numOfEmployees ? " • " : "" }}
+              {{ company.hq_location || "" }}
+              {{ company.hq_location && numOfEmployees ? " • " : "" }}
               {{ numOfEmployees || "" }}
             </p>
             <div class="mt-3 flex gap-2">
               <Button
-                v-if="brand.website"
+                v-if="company.support_url"
                 size="sm"
                 @click="
-                  navigateTo('https://' + brand.website, {
+                  navigateTo('https://' + company.support_url, {
                     external: true,
                     open: {
                       target: '_blank',
                     },
                   })
                 "
-                ><LinkIcon class="mr-2 size-4" />{{ brand.website }}</Button
+                ><LinkIcon class="mr-2 size-4" />{{
+                  company.support_url
+                }}</Button
               >
               <Button
-                v-if="brand.engaged"
+                v-if="true"
                 variant="outline"
                 size="sm"
                 @click="inform"
@@ -76,8 +78,8 @@
           </div>
           <div>
             <StarRating
-              v-if="brand.rating"
-              :rating="brand.rating"
+              v-if="company.editor_rating"
+              :rating="+company.editor_rating"
               size="lg"
               with-text
             />
@@ -89,7 +91,8 @@
           class="border-foreground/10 border-t pl-2"
         />
       </Card>
-      <NuxtPage :brand="brand" />
+      <!--
+      <NuxtPage :company="company" />-->
     </div>
     <div class="hidden w-72 flex-none flex-col gap-6 lg:flex">
       <Card class="w-full p-4">
@@ -103,9 +106,10 @@
           >See our best picks</Button
         >
       </Card>
+      <!--
       <Card v-if="brand.alternatives.length">
         <CardHeader>
-          <CardTitle>{{ brand.name }} Alternatives</CardTitle>
+          <CardTitle>{{ company.name }} Alternatives</CardTitle>
         </CardHeader>
         <CardContent class="px-0 py-0">
           <div class="flex flex-col divide-y">
@@ -130,7 +134,7 @@
             </NuxtLink>
           </div>
         </CardContent>
-      </Card>
+      </Card>-->
     </div>
   </div>
 </template>
