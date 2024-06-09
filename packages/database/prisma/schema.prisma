@@ -228,6 +228,7 @@ model author {
   slug            String  @db.VarChar
   bio             String?
   profile_picture String? @db.VarChar
+  blogs           blog[]
 }
 
 model award {
@@ -250,13 +251,15 @@ model billing_option {
 
 model blog {
   id             BigInt    @id
-  title          String    @db.VarChar
   slug           String    @db.VarChar
-  content        String
+  title          String    @db.VarChar
+  author         author?   @relation(fields: [author_fk], references: [id])
+  author_fk      BigInt?
   featured_image String?   @db.VarChar
   excerpt        String?   @db.VarChar
+  tags           tag[]
+  content        String
   updated_at     DateTime? @db.Date
-  author_fk      BigInt?
   created_at     DateTime  @db.Timestamptz(6)
 }
 
@@ -749,6 +752,7 @@ model tag {
   slug            String            @unique @db.VarChar(255)
   company_tag_map company_tag_map[]
   company         company[]         @relation("CompanyToTag")
+  blogs           blog[]
 
   @@index([name])
   @@index([slug])

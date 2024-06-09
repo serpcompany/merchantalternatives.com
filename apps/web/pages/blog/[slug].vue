@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-  import type { MarketingBlogPageFields } from "@/modules/marketing/blog/types";
-  import { joinURL } from "ufo";
+  import markdownParser from "@nuxt/content/transformers/markdown";
 
   const slug = useRoute("blog-slug").params.slug;
-  const runtimeConfig = useRuntimeConfig();
   const { formatDate } = useLocaleDate();
-  const { locale, defaultLocale } = useI18n();
+  const { apiCaller } = useApiCaller();
   const recentPosts = [
     {
       id: 1,
@@ -66,50 +64,16 @@
     },
   ];
 
-  const { data: post } = await useAsyncData(
-    slug,
-    async () => {
-      const localeExtensionPattern = /(\.[a-zA-Z\\-]{2,5})+\.md$/;
-      try {
-        return await queryContent<MarketingBlogPageFields>(`blog/${slug}`)
-          .where({
-            $and: [
-              { draft: { $not: true } },
-              locale.value === defaultLocale
-                ? { _file: { $not: { $match: localeExtensionPattern } } }
-                : {
-                    _file: { $match: localeExtensionPattern },
-                  },
-            ],
-          })
-          .findOne();
-      } catch {
-        await navigateTo("/blog");
-        return null;
-      }
-    },
-    {
-      watch: [locale],
-    },
+  const blog = await apiCaller.blog.getOneBySlug.query({ slug });
+  const formattedContent = await markdownParser.parse!(
+    blog.id.toString() || "",
+    blog.content || "",
+    {},
   );
-  if (!post.value) {
-    await navigateTo("/blog");
-    throw new Error("Post not found");
-  }
-
-  // SEO
-  useContentHead(post.value);
-
-  // Override the `ogImage` field. It is already set by `useContentHead` above, but without the base url.
-  useSeoMeta({
-    ogImage: post.value.image?.src
-      ? joinURL(runtimeConfig.public.siteUrl, post.value.image.src)
-      : undefined,
-  });
 </script>
 
 <template>
-  <ContentRenderer v-if="post" :value="post">
+  <ContentRenderer v-if="blog">
     <div class="bg-white">
       <div class="bg-primary flex h-[450px] items-center pt-20">
         <NuxtLinkLocale to="/blog" class="absolute left-20 top-20 text-white">
@@ -117,14 +81,14 @@
         </NuxtLinkLocale>
         <div class="relative px-20">
           <div class="flex gap-2">
-            <NuxtLink v-for="tag in post.tags" to="/">
-              <Badge class="bg-white/20 text-white">{{ tag }}</Badge>
+            <NuxtLink v-for="tag in blog.tags" to="/">
+              <Badge class="bg-white/20 text-white">{{ tag.name }}</Badge>
             </NuxtLink>
           </div>
           <h2
             class="stext-4xl mt-8 text-6xl font-black tracking-tight text-white"
           >
-            {{ post.title }}
+            {{ blog.title }}
           </h2>
           <p class="mt-4 text-xl leading-8 text-gray-300">
             Helpful resources for running and growing your business.
@@ -135,20 +99,20 @@
         <div
           class="flex items-end justify-between border-b pb-4 pt-8 text-lg font-medium text-gray-400"
         >
-          <div>
+          <div v-if="blog.author">
             <div>Author</div>
             <NuxtLink to="/" class="text-primary">{{
-              post.authorName
+              blog.author.name
             }}</NuxtLink>
           </div>
-          <div v-if="post.date">
-            {{ formatDate({ date: new Date(post.date) }) }}
+          <div>
+            {{ formatDate({ date: new Date(blog.created_at) }) }}
           </div>
         </div>
         <div class="mt-6 flex gap-10 pb-20 pt-8">
           <div class="flex-1">
             <ContentRendererMarkdown
-              :value="post"
+              :value="formattedContent"
               class="prose dark:prose-invert"
             />
           </div>

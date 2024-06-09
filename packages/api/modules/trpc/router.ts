@@ -7,6 +7,7 @@ import * as teamProcedures from "../team/procedures";
 import * as brandProcedures from "../brand/procedures";
 import * as uploadsProcedures from "../uploads/procedures";
 import * as glossaryProcedures from "../glossary/procedures";
+import * as blogProcedures from "../blog/procedures";
 import * as companyProcedures from "../company/procedures";
 import { router } from "./trpc";
 
@@ -19,6 +20,7 @@ export const apiRouter = router({
   uploads: router(uploadsProcedures),
   admin: router(adminProcedures),
   glossary: router(glossaryProcedures),
+  blog: router(blogProcedures),
   company: router(companyProcedures),
 });
 

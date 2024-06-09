@@ -1,6 +1,5 @@
 <script lang="ts" setup>
   const { apiCaller } = useApiCaller();
-  import type { MarketingBlogPageFields } from "@/modules/marketing/blog/types";
   import markdownParser from "@nuxt/content/transformers/markdown";
 
   const slug = useRoute("glossary-slug").params.slug;
