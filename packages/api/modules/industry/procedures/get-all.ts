@@ -23,6 +23,5 @@ export const getAll = publicProcedure
       },
     });
 
-    console.log(res);
     return res;
   });
