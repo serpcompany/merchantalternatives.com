@@ -5,11 +5,13 @@
   } from "@heroicons/vue/20/solid";
 
   const { apiCaller } = useApiCaller();
-  const route = useRoute();
+  const slug = useRoute("reviews-industry-slug").params.slug;
+  const p = useRoute("reviews-industry-slug").query.p;
 
-  const page = computed(() => (route.query.p ? +route.query.p : 1));
+  const page = computed(() => (p ? +p : 1));
 
-  const companies = await apiCaller.company.getPage.query({
+  const industry = await apiCaller.industry.getPageBySlug.query({
+    slug,
     page: page.value,
   });
   const industries = await apiCaller.industry.getAll.query();
@@ -19,8 +21,8 @@
   <div class="bg-primary flex h-[420px] items-center pt-20">
     <div class="px-20">
       <div class="max-w-5xl">
-        <h2 class="stext-4xl text-7xl font-medium tracking-tight text-white">
-          Find Your Next Partner
+        <h2 class="text-6xl font-medium tracking-tight text-white">
+          Find Your Next Partner in the {{ industry.name }} Industry
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-300">
           With over 15 years of first-hand experience in the merchant processing
@@ -30,12 +32,12 @@
       </div>
     </div>
   </div>
-  <div class="mx-auto max-w-6xl px-4 py-8">
+  <div class="mx-auto max-w-6xl px-4 py-6">
     <div class="flex gap-10 pt-6">
       <div class="flex-1">
         <div class="flex flex-col gap-4">
           <NuxtLink
-            v-for="company in companies"
+            v-for="company in industry.company"
             :key="company.id"
             :to="`/reviews/${company.slug}`"
           >
@@ -47,7 +49,7 @@
         >
           <NuxtLink
             v-if="page > 1"
-            :to="`/reviews?p=${page - 1}`"
+            :to="`/reviews/industry/${slug}?p=${page - 1}`"
             external
             class="flex items-center font-medium hover:text-gray-700"
           >
@@ -56,7 +58,7 @@
           </NuxtLink>
           <span v-if="page > 1">•</span>
           <NuxtLink
-            :to="`/reviews?p=${page + 1}`"
+            :to="`/reviews/industry/${slug}?p=${page + 1}`"
             external
             class="flex items-center font-medium hover:text-gray-700"
           >
@@ -67,7 +69,7 @@
       </div>
       <div class="hidden flex-none flex-col gap-6 md:flex">
         <Card>
-          <CardHeader><CardTitle>Filter by Industry</CardTitle></CardHeader>
+          <CardHeader><CardTitle>Try another industry</CardTitle></CardHeader>
           <CardContent>
             <ul class="flex flex-col gap-2">
               <li v-for="industry in industries">
