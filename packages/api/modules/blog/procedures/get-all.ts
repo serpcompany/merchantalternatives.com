@@ -18,6 +18,7 @@ export const getAll = publicProcedure
             .pick({
               id: true,
               name: true,
+              slug: true,
             })
             .nullable(),
           tags: z.array(
@@ -41,6 +42,7 @@ export const getAll = publicProcedure
           select: {
             id: true,
             name: true,
+            slug: true,
           },
         },
         tags: {

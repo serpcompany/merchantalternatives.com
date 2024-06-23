@@ -41,9 +41,11 @@
           <p class="mt-4 text-gray-400">
             <span v-if="blog.author">
               By
-              <NuxtLink to="/" class="text-primary hover:underline">{{
-                blog.author.name
-              }}</NuxtLink>
+              <NuxtLink
+                :to="`/blog/authors/${blog.author.slug}`"
+                class="text-primary hover:underline"
+                >{{ blog.author.name }}</NuxtLink
+              >
               on
             </span>
             <time>{{ formatDate({ date: new Date(blog.created_at) }) }}</time>
