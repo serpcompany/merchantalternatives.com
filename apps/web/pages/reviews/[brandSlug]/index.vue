@@ -29,9 +29,7 @@
     <Card v-if="company.merchant_summary">
       <CardHeader><CardTitle>Pricing</CardTitle></CardHeader>
       <CardContent>
-        <p v-if="company.pricing_details">
-          {{ company.pricing_details }}
-        </p>
+        <div v-if="company.pricing_details" v-html="company.pricing_details" />
       </CardContent>
       <CardButton @click="navigateTo(`/reviews/${company.slug}/pricing`)"
         >See all details</CardButton

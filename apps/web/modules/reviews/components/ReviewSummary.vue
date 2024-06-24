@@ -35,7 +35,10 @@
             <TrophyIcon class="size-5" />
             <h3 class="font-bold">Best For</h3>
           </div>
-          <p class="text-muted-foreground mt-1">{{ company.description }}</p>
+          <div
+            class="text-muted-foreground mt-1"
+            v-html="company.description"
+          />
           <div class="mt-5 flex items-center gap-2">
             <StarIcon class="size-5" />
             <h3 class="font-bold">Specializes In</h3>
@@ -66,24 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2.5 font-bold">
-        <div>
-          <h3>Rates and Fees | {{ 80 }}%</h3>
-          <PercentBar :percent="80" />
-        </div>
-        <div>
-          <h3>Trust in Advertising | {{ 70 }}%</h3>
-          <PercentBar :percent="70" />
-        </div>
-        <div>
-          <h3>Consumer Reviews | {{ company.consumer_reviews }}%</h3>
-          <PercentBar :percent="+company.consumer_reviews" />
-        </div>
-        <div>
-          <h3>Customer Support | {{ 60 }}%</h3>
-          <PercentBar :percent="60" />
-        </div>
-      </div>
+      <Ratings :consumer-reviews="+company.consumer_reviews" />
     </CardContent>
     <CardContent v-else>
       <p v-if="!dashboard">Our review of this company is coming soon.</p>

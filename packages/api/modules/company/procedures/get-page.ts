@@ -1,4 +1,9 @@
-import { companySchema, db } from "database";
+import {
+  companySchema,
+  company_proSchema,
+  company_conSchema,
+  db,
+} from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 
@@ -20,6 +25,8 @@ export const getPage = publicProcedure
           })
           .array()
           .nullable(),
+        company_pro: z.array(company_proSchema),
+        company_con: z.array(company_conSchema),
       }),
     ),
   )
@@ -37,6 +44,8 @@ export const getPage = publicProcedure
             url: true,
           },
         },
+        company_pro: true,
+        company_con: true,
       },
       skip: page ? (page - 1) * RESULTS_PER_PAGE : 0,
       take: RESULTS_PER_PAGE,

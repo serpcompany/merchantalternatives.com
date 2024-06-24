@@ -278,6 +278,7 @@ model company {
   name                                                                    String                           @db.VarChar(255)
   slug                                                                    String                           @unique @db.VarChar(255)
   url                                                                     String?                          @unique @db.VarChar(1024)
+  engaged                                                                 Boolean                          @default(false)
   shortlink                                                               String?                          @db.VarChar(512)
   date_founded                                                            DateTime?                        @db.Date
   year_founded                                                            String?                          @db.VarChar(255)

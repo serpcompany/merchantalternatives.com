@@ -1,5 +1,9 @@
 <script setup lang="ts">
-  import { LinkIcon, CheckBadgeIcon } from "@heroicons/vue/24/solid";
+  import {
+    LinkIcon,
+    CheckBadgeIcon,
+    QuestionMarkCircleIcon,
+  } from "@heroicons/vue/24/solid";
 
   const { apiCaller } = useApiCaller();
   const brandSlug = useRoute("reviews-brandSlug").params.brandSlug;
@@ -18,9 +22,15 @@
   ]);
 
   const inform = () => {
-    alert(
-      "This company has claimed their account and has verified their information.",
-    );
+    if (!company.engaged) {
+      alert(
+        "This company has not claimed their account and their information has not been verified.",
+      );
+    } else {
+      alert(
+        "This company has claimed their account and has verified their information.",
+      );
+    }
   };
 </script>
 
@@ -53,25 +63,38 @@
             </p>
             <div class="mt-3 flex gap-2">
               <Button
-                v-if="company.url"
+                v-if="company.shortlink"
                 size="sm"
                 @click="
-                  navigateTo('https://' + company.url, {
+                  navigateTo(company.shortlink, {
                     external: true,
                     open: {
                       target: '_blank',
                     },
                   })
                 "
-                ><LinkIcon class="mr-2 size-4" />{{ company.url }}</Button
+                ><LinkIcon class="mr-2 size-4" />{{
+                  company.url || `Visit ${company.name}`
+                }}</Button
               >
               <Button
-                v-if="true"
                 variant="outline"
                 size="sm"
                 @click="inform"
-                class="text-success border-success hover:bg-success/10"
-                ><CheckBadgeIcon class="mr-2 size-5" />Engaged Company</Button
+                :class="
+                  company.engaged
+                    ? 'text-success border-success hover:bg-success/10'
+                    : 'text-primary border-primary hover:bg-primary/10'
+                "
+                ><CheckBadgeIcon
+                  v-if="company.engaged"
+                  class="mr-2 size-5"
+                /><QuestionMarkCircleIcon
+                  v-else="company.engaged"
+                  class="mr-2 size-5"
+                />{{
+                  company.engaged ? "Engaged Company" : "Non-Engaged Company"
+                }}</Button
               >
             </div>
           </div>

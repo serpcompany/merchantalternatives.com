@@ -34,13 +34,11 @@
     <div class="flex gap-10 pt-6">
       <div class="flex-1">
         <div class="flex flex-col gap-4">
-          <NuxtLink
+          <ReviewCard
             v-for="company in companies"
             :key="company.id"
-            :to="`/reviews/${company.slug}`"
-          >
-            <ReviewCard :company="company" />
-          </NuxtLink>
+            :company="company"
+          />
         </div>
         <nav
           class="mt-4 flex items-center justify-end gap-4 border-gray-200 px-4 pt-4 text-gray-400 sm:px-0"

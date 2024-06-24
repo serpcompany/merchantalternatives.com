@@ -1,5 +1,11 @@
 import { TRPCError } from "@trpc/server";
-import { industrySchema, db, companySchema } from "database";
+import {
+  industrySchema,
+  db,
+  companySchema,
+  company_proSchema,
+  company_conSchema,
+} from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
 
@@ -23,6 +29,8 @@ export const getPageBySlug = publicProcedure
             })
             .array()
             .nullable(),
+          company_pro: z.array(company_proSchema),
+          company_con: z.array(company_conSchema),
         }),
       ),
     }),
@@ -46,6 +54,8 @@ export const getPageBySlug = publicProcedure
                 url: true,
               },
             },
+            company_pro: true,
+            company_con: true,
           },
           skip: page ? (page - 1) * RESULTS_PER_PAGE : 0,
           take: RESULTS_PER_PAGE,
