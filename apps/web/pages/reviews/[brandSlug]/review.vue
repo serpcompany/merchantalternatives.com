@@ -11,7 +11,11 @@
 
 <template>
   <div class="flex flex-col gap-6">
-    <ProsAndCons :pros="company.company_pro" :cons="company.company_con" />
+    <ProsAndCons
+      v-if="company.company_pro.length && company.company_con.length"
+      :pros="company.company_pro"
+      :cons="company.company_con"
+    />
     <ReviewSummary :company="company" />
   </div>
 </template>
