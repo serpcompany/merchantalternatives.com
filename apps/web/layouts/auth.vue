@@ -7,10 +7,6 @@
         <NuxtLinkLocale to="/" class="block">
           <Logo />
         </NuxtLinkLocale>
-
-        <div class="flex items-center justify-end gap-2">
-          <ColorModeToggle />
-        </div>
       </div>
     </div>
 

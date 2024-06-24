@@ -24,7 +24,7 @@
   <DropdownMenu v-if="user">
     <DropdownMenuTrigger asChild>
       <button
-        class="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        class="focus-visible:ring-primary rounded-full outline-none focus-visible:ring-2"
       >
         <UserAvatar :name="user.name ?? ''" :avatarUrl="user.avatarUrl" />
       </button>
@@ -37,23 +37,6 @@
           user.email
         }}</span>
       </DropdownMenuLabel>
-
-      <DropdownMenuSeparator />
-
-      <!-- Color mode selection -->
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <ColorModeToggleIcon />
-          <div class="ml-2">
-            {{ $t("dashboard.userMenu.colorMode") }}
-          </div>
-        </DropdownMenuSubTrigger>
-        <DropdownMenuPortal>
-          <DropdownMenuSubContent avoid-collisions>
-            <ColorModeToggleRadioGroup />
-          </DropdownMenuSubContent>
-        </DropdownMenuPortal>
-      </DropdownMenuSub>
 
       <DropdownMenuSeparator />
 

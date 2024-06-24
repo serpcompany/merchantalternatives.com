@@ -84,8 +84,6 @@
             {{ menuItem.label }}
           </NuxtLinkLocale>
 
-          <ColorModeToggle />
-
           <Sheet v-model:open="mobileMenuOpen">
             <SheetTrigger asChild>
               <Button class="lg:hidden" size="icon" variant="outline">
