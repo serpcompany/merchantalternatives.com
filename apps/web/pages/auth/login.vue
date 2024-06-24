@@ -11,5 +11,5 @@
 </script>
 
 <template>
-  <SaasLoginForm />
+  <SaasLoginForm class="px-4 lg:px-0" />
 </template>

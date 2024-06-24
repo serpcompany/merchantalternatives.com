@@ -35,10 +35,10 @@
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-[1100px] gap-6 pt-[88px]">
+  <div class="mx-auto max-w-[1100px] pt-20 lg:flex lg:gap-6 lg:pt-[88px]">
     <div class="flex max-w-3xl flex-1 flex-col gap-6">
       <Card class="w-full overflow-hidden">
-        <div class="flex justify-between px-6 pb-4 pt-10">
+        <div class="px-4 pb-4 pt-10 lg:flex lg:justify-between lg:px-6">
           <div>
             <BrandLogo
               class="size-24 text-xl"
@@ -104,13 +104,14 @@
               :rating="+company.editor_rating"
               size="lg"
               with-text
+              class="hidden lg:flex"
             />
           </div>
         </div>
         <PageTabs
           :tabs="tabs"
           :thin="true"
-          class="border-foreground/10 border-t pl-2"
+          class="overflow-scroll border-t pl-2"
         />
       </Card>
       <NuxtPage :company="company" />-

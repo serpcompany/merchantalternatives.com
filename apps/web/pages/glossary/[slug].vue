@@ -83,7 +83,7 @@
             </NuxtLinkLocale>
           </div>
 
-          <h1 class="text-6xl font-bold">{{ term.title }}</h1>
+          <h1 class="text-4xl font-bold lg:text-6xl">{{ term.title }}</h1>
           <p class="mt-4 text-xl text-gray-500">{{ term.one_liner }}</p>
         </div>
 
@@ -94,7 +94,7 @@
               class="prose dark:prose-invert mt-6 text-lg"
             />
           </div>
-          <div class="w-[310px] flex-none pt-10">
+          <div class="hidden w-[310px] flex-none pt-10 lg:block">
             <RecentPostsSidebar />
           </div>
         </div>

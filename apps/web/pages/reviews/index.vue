@@ -17,9 +17,9 @@
 
 <template>
   <div class="bg-primary flex h-[420px] items-center pt-20">
-    <div class="px-20">
+    <div class="px-3 lg:px-20">
       <div class="max-w-5xl">
-        <h2 class="stext-4xl text-7xl font-medium tracking-tight text-white">
+        <h2 class="text-5xl font-medium tracking-tight text-white lg:text-7xl">
           Find Your Next Partner
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-300">
@@ -30,8 +30,8 @@
       </div>
     </div>
   </div>
-  <div class="mx-auto max-w-6xl px-4 py-8">
-    <div class="flex gap-10 pt-6">
+  <div class="mx-auto max-w-6xl px-4 py-4 lg:py-8">
+    <div class="pt-4 lg:flex lg:gap-10 lg:pt-6">
       <div class="flex-1">
         <div class="flex flex-col gap-4">
           <ReviewCard

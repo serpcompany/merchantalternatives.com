@@ -24,13 +24,20 @@
 
 <template>
   <Card>
-    <CardHeader><CardTitle>Review</CardTitle></CardHeader>
+    <CardHeader class="py-6 pb-3 pt-6 lg:p-6"
+      ><CardTitle>Review</CardTitle></CardHeader
+    >
     <CardContent
       v-if="company.editor_rating && company.consumer_reviews"
       class="flex flex-col gap-6"
     >
-      <div class="flex gap-6">
+      <div class="lg:flex lg:gap-6">
         <div class="flex-1">
+          <StarRating
+            :rating="+company.editor_rating"
+            size="lg"
+            class="mb-4 w-fit lg:hidden"
+          />
           <div class="flex items-center gap-2">
             <TrophyIcon class="size-5" />
             <h3 class="font-bold">Best For</h3>
@@ -46,7 +53,12 @@
           <p class="text-muted-foreground mt-1">{{ company.specialize_in }}</p>
         </div>
         <div>
-          <StarRating :rating="+company.editor_rating" size="lg" with-text />
+          <StarRating
+            :rating="+company.editor_rating"
+            size="lg"
+            with-text
+            class="hidden lg:flex"
+          />
         </div>
       </div>
       <div>

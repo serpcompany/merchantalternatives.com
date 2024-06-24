@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useWindowScroll } from "@vueuse/core";
-  import { MenuIcon } from "lucide-vue-next";
+  import { Bars3Icon } from "@heroicons/vue/24/outline";
   import { VisuallyHidden } from "radix-vue";
 
   const route = useRoute();
@@ -62,7 +62,7 @@
     class="bg-background/80 fixed left-0 top-0 z-20 w-full backdrop-blur-lg transition-[height] duration-200"
     :class="[isTop ? 'shadow-none' : 'shadow-sm']"
   >
-    <div class="container">
+    <div class="px-4 lg:container lg:px-0">
       <div class="flex items-center justify-between gap-6 py-3">
         <div class="flex flex-1 justify-start">
           <NuxtLinkLocale
@@ -73,12 +73,12 @@
           </NuxtLinkLocale>
         </div>
 
-        <div class="hidden flex-1 items-center justify-end lg:flex">
+        <div class="flex flex-1 items-center justify-end">
           <NuxtLinkLocale
             v-for="menuItem of menuItems"
             :key="menuItem.to"
             :to="menuItem.to"
-            class="text-foreground/80 block shrink-0 px-3 py-2 text-base"
+            class="text-foreground/80 hidden shrink-0 px-3 py-2 text-base lg:block"
             :class="[isMenuItemActive(menuItem.to) ? 'font-bold' : '']"
           >
             {{ menuItem.label }}
@@ -86,8 +86,8 @@
 
           <Sheet v-model:open="mobileMenuOpen">
             <SheetTrigger asChild>
-              <Button class="lg:hidden" size="icon" variant="outline">
-                <MenuIcon class="size-4" />
+              <Button class="lg:hidden" size="icon" variant="ghost">
+                <Bars3Icon class="size-7" />
               </Button>
             </SheetTrigger>
             <SheetContent class="w-[250px]" side="right">

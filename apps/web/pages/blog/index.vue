@@ -8,8 +8,8 @@
 <template>
   <div class="bg-white">
     <div class="bg-primary flex h-[450px] items-center pt-20">
-      <div class="px-20">
-        <h2 class="stext-4xl text-7xl font-medium tracking-tight text-white">
+      <div class="px-3 lg:px-20">
+        <h2 class="text-5xl font-medium tracking-tight text-white lg:text-7xl">
           The Merchant Alternatives Blog
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-300">
@@ -17,8 +17,10 @@
         </p>
       </div>
     </div>
-    <div class="mx-auto flex max-w-7xl gap-10 px-6 pb-20 lg:px-8">
-      <div class="w-64 flex-none pt-16">
+    <div
+      class="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-20 lg:flex-row lg:px-8"
+    >
+      <div class="-mb-12 w-64 flex-none pt-6 lg:pb-0 lg:pt-16">
         <span class="text-4xl font-semibold">Our Top Picks</span>
       </div>
       <div class="flex flex-col divide-y">

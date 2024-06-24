@@ -16,21 +16,23 @@
 <template>
   <ContentRenderer v-if="blog">
     <div class="bg-white">
-      <div class="bg-primary px-14 pt-20">
+      <div class="bg-primary pt-20 lg:px-14">
         <div class="flex items-center">
           <NuxtLinkLocale
             to="/blog"
-            class="absolute left-36 top-20 z-10 text-white"
+            class="absolute left-3 top-20 z-10 text-white lg:left-36"
           >
             &larr; {{ $t("blog.backLabel") }}
           </NuxtLinkLocale>
-          <div class="relative max-w-6xl px-20 py-20">
+          <div class="max-w-6xl px-3 py-20 lg:px-20">
             <div class="flex gap-2">
               <NuxtLink v-for="tag in blog.tags" to="/">
                 <Badge class="bg-white/20 text-white">{{ tag.name }}</Badge>
               </NuxtLink>
             </div>
-            <h2 class="mt-8 text-6xl font-black tracking-tight text-white">
+            <h2
+              class="mt-8 text-4xl font-black tracking-tight text-white lg:text-6xl"
+            >
               {{ blog.title }}
             </h2>
             <p class="mt-4 text-xl leading-8 text-gray-300">
@@ -39,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-5xl px-4">
         <div
           class="flex items-end justify-between border-b pb-4 pt-8 text-lg font-medium text-gray-400"
         >
@@ -55,14 +57,14 @@
             {{ formatDate({ date: new Date(blog.created_at) }) }}
           </div>
         </div>
-        <div class="mt-6 flex gap-12 pb-20 pt-4">
-          <div class="flex-1 pl-4">
+        <div class="mt-6 pb-20 pt-4 lg:flex lg:gap-12">
+          <div class="flex-1 lg:pl-4">
             <ContentRendererMarkdown
               :value="formattedContent"
               class="prose dark:prose-invert text-lg"
             />
           </div>
-          <div class="w-[310px] flex-none">
+          <div class="hidden w-[310px] flex-none lg:block">
             <RecentPostsSidebar />
           </div>
         </div>

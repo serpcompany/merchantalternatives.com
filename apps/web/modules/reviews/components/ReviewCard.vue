@@ -13,30 +13,39 @@
 
 <template>
   <Card>
-    <div class="flex gap-3 px-4 py-5">
-      <BrandLogo
-        :src="
-          company.company_image?.length ? company.company_image[0].url : null
-        "
-        :name="company.name"
-        class="size-12 flex-none"
-      />
-      <div class="flex flex-1 flex-col items-start">
-        <NuxtLink :to="`/reviews/${company.slug}`"
-          ><h1 class="text-xl font-semibold hover:underline">
+    <NuxtLink :to="`/reviews/${company.slug}`">
+      <div class="flex gap-3 px-4 py-5">
+        <BrandLogo
+          :src="
+            company.company_image?.length ? company.company_image[0].url : null
+          "
+          :name="company.name"
+          class="size-12 flex-none"
+        />
+        <div class="flex flex-1 flex-col items-start">
+          <h1 class="text-xl font-semibold hover:underline">
             {{ company.name }}
-          </h1></NuxtLink
-        >
-        <div class="text-muted-foreground" v-html="company.merchant_summary" />
+          </h1>
+          <StarRating
+            v-if="company.editor_rating"
+            :rating="+company.editor_rating"
+            size="md"
+            class="pb-2 pt-1 lg:hidden"
+          />
+          <div
+            class="text-muted-foreground"
+            v-html="company.merchant_summary"
+          />
+        </div>
+        <StarRating
+          v-if="company.editor_rating"
+          :rating="+company.editor_rating"
+          size="lg"
+          with-text
+          class="my-auto hidden flex-none lg:flex"
+        />
       </div>
-      <StarRating
-        v-if="company.editor_rating"
-        :rating="+company.editor_rating"
-        size="lg"
-        with-text
-        class="my-auto flex-none"
-      />
-    </div>
+    </NuxtLink>
     <div class="relative bottom-0 w-full border-t">
       <Tabs>
         <div class="flex items-center justify-between border-b pr-4">
@@ -57,6 +66,7 @@
               <ChevronDownIcon class="h-4 w-4" />
             </TabsTrigger>
             <TabsTrigger
+              v-if="company.specialize_in"
               :value="`${company.id}-best-for`"
               class="data-[state=active]:bg-highlight flex items-center justify-center gap-1 rounded-none data-[state=active]:shadow-none"
             >
@@ -66,7 +76,7 @@
           </TabsList>
           <NuxtLink
             :to="`/reviews/${company.slug}`"
-            class="text-primary font-medium hover:underline"
+            class="text-primary hidden font-medium hover:underline lg:block"
           >
             See full review &rarr;
           </NuxtLink>

@@ -55,7 +55,7 @@
 </script>
 
 <template>
-  <div class="isolate bg-white">
+  <div class="isolate overflow-hidden bg-white">
     <!-- Hero section -->
     <div class="relative isolate -z-10">
       <svg
@@ -207,8 +207,10 @@
     </div>
 
     <!-- Content section -->
-    <div class="mx-auto -mt-12 flex max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
-      <div class="mx-auto max-w-xl px-14 lg:mx-0 lg:max-w-none">
+    <div
+      class="mx-auto -mt-12 flex max-w-7xl flex-col px-6 sm:mt-0 lg:flex-row lg:px-8 xl:-mt-8"
+    >
+      <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-none lg:px-14">
         <div
           class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/40 shadow-lg"
         >
@@ -232,8 +234,8 @@
           </div>
         </div>
       </div>
-      <div class="bg-border mt-[240px] h-56 w-0.5" />
-      <div class="mx-auto max-w-xl px-14 lg:mx-0 lg:max-w-none">
+      <div class="bg-border mt-[240px] hidden h-56 w-0.5 lg:block" />
+      <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-none lg:px-14">
         <div
           class="background-blur-lg border-primary/40 mx-auto my-10 flex size-32 items-center justify-center rounded-lg border bg-white/40 shadow-lg"
         >

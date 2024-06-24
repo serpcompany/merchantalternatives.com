@@ -19,9 +19,9 @@
 
 <template>
   <div class="bg-primary flex h-[420px] items-center pt-20">
-    <div class="px-20">
+    <div class="px-3 lg:px-20">
       <div class="max-w-5xl">
-        <h2 class="text-6xl font-medium tracking-tight text-white">
+        <h2 class="text-3xl font-medium tracking-tight text-white lg:text-7xl">
           Find Your Next Partner in the {{ industry.name }} Industry
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-300">

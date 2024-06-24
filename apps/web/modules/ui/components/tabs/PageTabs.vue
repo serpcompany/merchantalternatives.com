@@ -34,7 +34,7 @@
       </select>
       -->
     </div>
-    <div class="hidden w-full sm:block" :class="{ '-mb-px': thin }">
+    <div class="w-full" :class="{ '-mb-px': thin }">
       <div class="w-full border-b border-gray-200">
         <nav
           :class="[thin ? 'space-x-3' : ' space-x-8', '-mb-px flex']"
