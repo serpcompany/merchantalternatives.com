@@ -5,5 +5,5 @@
 </script>
 
 <template>
-  <AvatarImage v-bind="props" class="size-full object-contain" />
+  <AvatarImage v-bind="props" class="size-full object-contain p-1.5" />
 </template>
