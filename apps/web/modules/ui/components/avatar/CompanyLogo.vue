@@ -19,8 +19,13 @@
 </script>
 
 <template>
-  <Avatar shape="square" class="bg-primary/10 rounded-none">
+  <Avatar shape="square" class="rounded-none">
     <AvatarImage v-if="src" :src="src" />
-    <span v-else class="font-bold">{{ initials }}</span>
+    <div
+      v-else
+      class="bg-secondary flex h-full w-full items-center justify-center"
+    >
+      <span class="font-bold">{{ initials }}</span>
+    </div>
   </Avatar>
 </template>
