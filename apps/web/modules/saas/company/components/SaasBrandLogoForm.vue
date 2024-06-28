@@ -9,7 +9,7 @@
   const image = ref<File | null>(null);
   const cropDialogOpen = ref(false);
   const dropZoneRef = ref<HTMLDivElement>();
-  const { reloadUser, currentBrand } = useUser();
+  const { reloadUser, currentCompany } = useUser();
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
 
@@ -30,13 +30,13 @@
   });
 
   const onCrop = async (croppedImageData: Blob | null) => {
-    if (!croppedImageData || !currentBrand.value) {
+    if (!croppedImageData || !currentCompany.value) {
       return;
     }
 
     uploading.value = true;
     try {
-      const path = `/${currentBrand.value?.id}-${uuid()}.png`;
+      const path = `/${currentCompany.value?.id}-${uuid()}.png`;
       const uploadUrl = await getSignedUploadUrlMutation.mutate({
         path,
         bucket: "avatars",
@@ -55,7 +55,7 @@
       });
 
       await updateBrandMutation.mutate({
-        id: currentBrand.value.id,
+        id: currentCompany.value.id,
         logoUrl: path,
       });
 
@@ -86,9 +86,9 @@
         class="relative cursor-pointer rounded-full"
         @click="openFileDialog()"
       >
-        <BrandLogo
-          :src="currentBrand?.logoUrl"
-          :name="currentBrand?.name ?? ''"
+        <CompanyLogo
+          :src="currentCompany?.logoUrl"
+          :name="currentCompany?.name ?? ''"
           class="size-24 cursor-pointer text-xl"
         />
         <Button

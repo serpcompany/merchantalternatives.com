@@ -7,13 +7,13 @@
   } from "@heroicons/vue/20/solid";
 
   const localePath = useLocalePath();
-  const { teamMemberships, currentBrand, currentTeam } = useUser();
+  const { teamMemberships, currentCompany, currentTeam } = useUser();
   const { switchTeam } = useSwitchTeam();
-  const { createBrandDialogOpen } = useDashboardState();
+  const { createCompanyDialogOpen } = useDashboardState();
   const runtimeConfig = useRuntimeConfig();
 
-  const activeTeamIdModel = computed({
-    get: () => currentBrand.value?.id,
+  const activeTeamId = computed({
+    get: () => currentTeam.value?.id,
     set: async (newValue) => {
       if (newValue) {
         switchTeam(newValue);
@@ -27,20 +27,24 @@
   <Menu
     as="div"
     class="relative inline-block text-left"
-    v-if="currentBrand && currentTeam"
+    v-if="currentCompany && currentTeam"
   >
     <MenuButton
       class="border-foreground group flex w-full items-center gap-3 border-2 border-opacity-10 px-3 py-2.5 hover:border-opacity-20"
     >
-      <BrandLogo
+      <CompanyLogo
         class="size-8"
-        :name="currentBrand.name"
-        :src="currentBrand.logoUrl"
+        :name="currentCompany.name"
+        :src="
+          currentCompany.company_image.length
+            ? currentCompany.company_image[0].url
+            : null
+        "
       />
       <div
         class="block flex-1 truncate text-left text-sm font-semibold leading-6"
       >
-        {{ currentBrand.name }}
+        {{ currentCompany.name }}
       </div>
       <ChevronDownIcon
         class="h-8 w-8 flex-none opacity-15 group-hover:opacity-25"
@@ -65,24 +69,28 @@
           v-slot="{ active }"
         >
           <button
-            @click="() => switchTeam(teamMembership.team.id)"
+            @click="async () => await switchTeam(teamMembership.team.id)"
             :class="[
               active ? 'bg-highlight text-foreground' : 'text-foreground/70',
               'group flex w-full items-center gap-3 px-4 py-3 text-sm',
             ]"
           >
-            <BrandLogo
+            <CompanyLogo
               class="size-8"
-              :name="teamMembership.team.brand?.name"
-              :src="teamMembership.team.brand?.logoUrl"
+              :name="teamMembership.team.company.name"
+              :src="
+                teamMembership.team.company.company_image.length
+                  ? teamMembership.team.company.company_image[0].url
+                  : null
+              "
             />
             <div
               class="text-foreground flex-1 truncate text-left text-sm font-semibold leading-6"
             >
-              {{ teamMembership.team.brand?.name }}
+              {{ teamMembership.team.company?.name }}
             </div>
             <CheckIcon
-              v-if="activeTeamIdModel === teamMembership.team.id"
+              v-if="activeTeamId === teamMembership.team.id"
               class="h-5 w-5 flex-none text-slate-500"
               aria-hidden="true"
             />
@@ -90,7 +98,7 @@
         </MenuItem>
         <MenuItem v-slot="{ active }">
           <button
-            @click="() => (createBrandDialogOpen = true)"
+            @click="() => (createCompanyDialogOpen = true)"
             :class="[
               active ? 'bg-highlight' : '',
               'flex w-full items-center gap-3 border-t px-4 py-3 text-sm',
@@ -103,8 +111,7 @@
       </MenuItems>
     </transition>
   </Menu>
-
-  <SaasCreateBrandDialog
+  <SaasCreateCompanyDialog
     @success="
       (newTeamId: string | undefined) => {
         if (newTeamId) switchTeam(newTeamId);

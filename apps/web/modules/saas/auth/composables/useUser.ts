@@ -41,8 +41,8 @@ export const useUser = ({ initialUser }: { initialUser?: User } = {}) => {
     () => currentTeamMemberships.value?.role ?? "MEMBER",
   );
 
-  const currentBrand = computed(
-    () => currentTeamMemberships.value?.team?.brand ?? null,
+  const currentCompany = computed(
+    () => currentTeamMemberships.value?.team?.company ?? null,
   );
 
   const loadUser = async () => {
@@ -119,6 +119,6 @@ export const useUser = ({ initialUser }: { initialUser?: User } = {}) => {
     reloadUser,
     currentTeam,
     teamRole,
-    currentBrand,
+    currentCompany,
   };
 };

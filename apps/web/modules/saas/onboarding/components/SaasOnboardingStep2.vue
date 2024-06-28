@@ -12,12 +12,14 @@
 
   const { apiCaller } = useApiCaller();
   const { t } = useTranslations();
-  const createBrandMutation = apiCaller.brand.create.useMutation();
+  const createCompanyMutation = apiCaller.company.create.useMutation();
+  const claimCompanyRequest =
+    apiCaller.company.claimCompanyRequest.useMutation();
 
-  const brandType = ref<"new" | "existing">("new");
+  const companyType = ref<"new" | "existing">("new");
   const formSchema = toTypedSchema(
     z.object({
-      brandName: z.string().min(1, "Name is required"),
+      companyName: z.string().min(1, "Name is required"),
     }),
   );
   const serverError = ref<null | string>(null);
@@ -25,28 +27,30 @@
   const { isSubmitting, handleSubmit } = useForm({
     validationSchema: formSchema,
     initialValues: {
-      brandName: "",
+      companyName: "",
     },
   });
 
-  const onSubmit = handleSubmit(async ({ brandName }) => {
+  const onSubmit = handleSubmit(async ({ companyName }) => {
     serverError.value = null;
 
-    if (brandType.value === "existing") {
+    if (companyType.value === "existing") {
       try {
-        await createBrandMutation.mutate({
-          name: brandName,
+        await claimCompanyRequest.mutate({
+          companyName,
         });
 
         navigateTo("/onboarding/well-be-in-touch");
       } catch (e) {
-        serverError.value = "Failed to send brand claim request";
+        serverError.value = "Failed to send company claim request";
       }
     } else {
       try {
-        await createBrandMutation.mutate({
-          name: brandName,
+        console.log("Creating company", companyName);
+        const company = await createCompanyMutation.mutate({
+          name: companyName,
         });
+        console.log("id: ", company?.id || "null");
 
         emit("complete");
       } catch (e) {
@@ -59,30 +63,28 @@
 <template>
   <form @submit="onSubmit" class="py-3">
     <div class="mt-3">
-      <h3 className="mb-4 text-xl font-bold">Setup Your Brand</h3>
-      <Tabs v-model="brandType" class="mt-3">
+      <h3 className="mb-4 text-xl font-bold">Setup Your Company</h3>
+      <Tabs v-model="companyType" class="mt-3">
         <TabsList class="w-full">
           <TabsTrigger value="new" class="flex-1"
-            >Create a new brand</TabsTrigger
+            >Create a new company</TabsTrigger
           >
           <TabsTrigger value="existing" class="flex-1"
-            >Claim an existing brand</TabsTrigger
+            >Claim an existing company</TabsTrigger
           >
         </TabsList>
       </Tabs>
       <p class="text-muted-foreground mb-6 mt-3 text-sm">
         {{
-          brandType === "new"
-            ? "Create a new brand to list on Merchant Alternatives"
-            : "Claim an existing brand you've spotted in our listings"
+          companyType === "new"
+            ? "Create a new company to list on Merchant Alternatives"
+            : "Claim an existing company you've spotted in our listings"
         }}
       </p>
 
-      <FormField v-slot="{ componentField }" name="brandName">
+      <FormField v-slot="{ componentField }" name="companyName">
         <FormItem>
-          <FormLabel for="brandName" required>
-            {{ $t("onboarding.team.name") }}
-          </FormLabel>
+          <FormLabel for="companyName" required> Company name </FormLabel>
           <FormControl>
             <Input v-bind="componentField" autocomplete="company" />
           </FormControl>

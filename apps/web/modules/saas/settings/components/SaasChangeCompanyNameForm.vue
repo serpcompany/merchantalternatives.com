@@ -5,7 +5,7 @@
   import { useToast } from "@/modules/ui/components/toast";
 
   const props = defineProps<{
-    brandId: string;
+    companyId: string;
     initialValue: string;
   }>();
 
@@ -37,9 +37,9 @@
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      await apiCaller.brand.update.mutate({
-        id: props.brandId,
-        name: values.name,
+      await apiCaller.company.update.mutate({
+        id: +props.companyId,
+        data: { name: values.name },
       });
 
       toast({

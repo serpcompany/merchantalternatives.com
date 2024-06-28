@@ -2,20 +2,13 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { protectedProcedure } from "../../trpc";
 
-export const claimBrandRequest = protectedProcedure
+export const claimCompanyRequest = protectedProcedure
   .input(
     z.object({
-      email: z
-        .string()
-        .email()
-        .min(1)
-        .max(255)
-        .transform((v) => v.toLowerCase()),
-      name: z.string(),
-      brandName: z.string(),
+      companyName: z.string(),
     }),
   )
-  .mutation(async ({ ctx: { user }, input: { email, name, brandName } }) => {
+  .mutation(async ({ ctx: { user }, input: { companyName } }) => {
     if (!user) {
       return;
     }
@@ -29,7 +22,7 @@ export const claimBrandRequest = protectedProcedure
 
     sendEmail({
       to: process.env.MAIL_NOTIFICATIONS,
-      templateId: "claimBrandRequest",
-      context: { name, email, brandName },
+      templateId: "claimCompanyRequest",
+      context: { email: user.email, name: user.name, companyName },
     });
   });

@@ -1,24 +1,24 @@
 <script setup lang="ts">
   import type { ApiOutput } from "api";
 
-  const { createBrandDialogOpen } = useDashboardState();
+  const { createCompanyDialogOpen } = useDashboardState();
 
   const emit = defineEmits<{
     success: [newTeamId: string | undefined];
   }>();
 
-  const handleCreateBrandSuccess = async (
-    newBrand: ApiOutput["brand"]["create"],
+  const handleCreateCompanySuccess = async (
+    newCompany: ApiOutput["company"]["create"],
   ) => {
-    emit("success", newBrand.team?.id);
-    createBrandDialogOpen.value = false;
+    emit("success", newCompany.team?.id);
+    createCompanyDialogOpen.value = false;
   };
 </script>
 
 <template>
   <Dialog
-    :open="createBrandDialogOpen"
-    @update:open="(newVal) => (createBrandDialogOpen = newVal)"
+    :open="createCompanyDialogOpen"
+    @update:open="(newVal) => (createCompanyDialogOpen = newVal)"
   >
     <DialogContent>
       <DialogDescription class="sr-only">
@@ -30,10 +30,10 @@
         </DialogTitle>
       </DialogHeader>
 
-      <SaasCreateBrandForm
+      <SaasCreateCompanyForm
         @success="
-          (newBrand: ApiOutput['brand']['create']) =>
-            handleCreateBrandSuccess(newBrand)
+          (newCompany: ApiOutput['company']['create']) =>
+            handleCreateCompanySuccess(newCompany)
         "
       />
     </DialogContent>

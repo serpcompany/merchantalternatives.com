@@ -10,4 +10,3 @@ export * from "./update";
 export * from "./user";
 export * from "./verify-otp";
 export * from "./verify-token";
-export * from "./claim-brand-request";

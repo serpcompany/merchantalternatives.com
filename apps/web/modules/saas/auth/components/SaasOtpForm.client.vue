@@ -100,7 +100,7 @@
 <template>
   <div>
     <h1 class="text-3xl font-bold">{{ $t("auth.verifyOtp.title") }}</h1>
-    <p class="mb-6 mt-2 text-muted-foreground">
+    <p class="text-muted-foreground mb-6 mt-2">
       {{ $t("auth.verifyOtp.message") }}
     </p>
 

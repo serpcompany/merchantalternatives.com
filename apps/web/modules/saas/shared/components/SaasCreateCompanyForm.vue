@@ -11,7 +11,7 @@
   const { reloadUser } = useUser();
 
   const emit = defineEmits<{
-    success: [newBrand: ApiOutput["brand"]["create"]];
+    success: [newCompany: ApiOutput["company"]["create"]];
   }>();
 
   const props = defineProps<{
@@ -33,7 +33,7 @@
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      const newBrand = await apiCaller.brand.create.mutate({
+      const newCompany = await apiCaller.company.create.mutate({
         name: values.name,
       });
 
@@ -42,7 +42,7 @@
       });
 
       await reloadUser();
-      emit("success", newBrand);
+      emit("success", newCompany);
     } catch (e) {
       toast({
         title: t("createTeam.notifications.error"),

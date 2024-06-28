@@ -6,35 +6,37 @@
 
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
-  const { reloadUser, currentBrand } = useUser();
+  const { reloadUser, currentCompany } = useUser();
 
   const emit = defineEmits(["close"]);
 
   const formSchema = toTypedSchema(
     z.object({
-      reviewOneliner: z.string().max(144).optional(),
-      website: z.string().max(100).optional(),
+      specialiseIn: z.string().optional(),
+      url: z.string().max(100).optional(),
     }),
   );
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: formSchema,
     initialValues: {
-      reviewOneliner: currentBrand.value?.reviewOneliner || undefined,
-      website: currentBrand.value?.website || undefined,
+      specialiseIn: currentCompany.value?.specialize_in || undefined,
+      url: currentCompany.value?.url || undefined,
     },
   });
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      await apiCaller.brand.update.mutate({
-        id: currentBrand.value!.id,
-        reviewOneliner: values.reviewOneliner,
-        website: values.website,
+      await apiCaller.company.update.mutate({
+        id: +currentCompany.value!.id,
+        data: {
+          specialize_in: values.specialiseIn,
+          url: values.url,
+        },
       });
 
       toast({
-        title: "Your brand has been updated",
+        title: "Your company has been updated",
       });
 
       await reloadUser();
@@ -42,7 +44,7 @@
     } catch (e) {
       toast({
         title:
-          "We are sorry, but we were unable to update your brand. Please try again later.",
+          "We are sorry, but we were unable to update your company. Please try again later.",
         variant: "error",
       });
     }
@@ -53,9 +55,9 @@
   <form @submit="onSubmit" class="flex flex-col gap-4">
     <SaasBrandLogoForm />
 
-    <FormField v-slot="{ componentField }" name="reviewOneliner">
+    <FormField v-slot="{ componentField }" name="specialiseIn">
       <FormItem>
-        <FormLabel for="reviewOneliner">Tagline</FormLabel>
+        <FormLabel for="specialiseIn">Tagline</FormLabel>
         <FormControl>
           <Input v-bind="componentField" />
         </FormControl>
@@ -63,9 +65,9 @@
       </FormItem>
     </FormField>
 
-    <FormField v-slot="{ componentField }" name="website">
+    <FormField v-slot="{ componentField }" name="url">
       <FormItem>
-        <FormLabel for="website">Website</FormLabel>
+        <FormLabel for="url">Website</FormLabel>
         <FormControl>
           <Input v-bind="componentField" />
         </FormControl>

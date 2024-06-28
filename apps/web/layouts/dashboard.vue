@@ -2,7 +2,6 @@
   const { user, reloadUser } = useUser();
 
   await reloadUser();
-
   const localePath = useLocalePath();
   const currentTeamId = useCurrentTeamIdCookie();
 

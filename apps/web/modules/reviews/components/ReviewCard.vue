@@ -15,7 +15,7 @@
   <Card>
     <NuxtLink :to="`/reviews/${company.slug}`">
       <div class="flex gap-3 px-4 py-5">
-        <BrandLogo
+        <CompanyLogo
           :src="
             company.company_image?.length ? company.company_image[0].url : null
           "
@@ -33,8 +33,8 @@
             class="pb-2 pt-1 lg:hidden"
           />
           <div
-            class="text-muted-foreground"
-            v-html="company.merchant_summary"
+            class="text-muted-foreground mt-1"
+            v-html="company.specialize_in"
           />
         </div>
         <StarRating
@@ -51,6 +51,14 @@
         <div class="flex items-center justify-between border-b pr-4">
           <TabsList class="bg-card flex flex-1 justify-start rounded-none">
             <TabsTrigger
+              v-if="company.merchant_summary"
+              :value="`${company.id}-about`"
+              class="data-[state=active]:bg-highlight flex items-center justify-center gap-1 rounded-none data-[state=active]:shadow-none"
+            >
+              About
+              <ChevronDownIcon class="h-4 w-4" />
+            </TabsTrigger>
+            <TabsTrigger
               :value="`${company.id}-ratings`"
               class="data-[state=active]:bg-highlight flex items-center justify-center gap-1 rounded-none data-[state=active]:shadow-none"
             >
@@ -65,14 +73,6 @@
               Pro & Cons
               <ChevronDownIcon class="h-4 w-4" />
             </TabsTrigger>
-            <TabsTrigger
-              v-if="company.specialize_in"
-              :value="`${company.id}-best-for`"
-              class="data-[state=active]:bg-highlight flex items-center justify-center gap-1 rounded-none data-[state=active]:shadow-none"
-            >
-              Best For
-              <ChevronDownIcon class="h-4 w-4" />
-            </TabsTrigger>
           </TabsList>
           <NuxtLink
             :to="`/reviews/${company.slug}`"
@@ -81,6 +81,9 @@
             See full review &rarr;
           </NuxtLink>
         </div>
+        <TabsContent :value="`${company.id}-about`" class="px-6 pb-6 pt-3">
+          <p v-html="company.merchant_summary"></p>
+        </TabsContent>
         <TabsContent :value="`${company.id}-ratings`" class="px-6 pb-6 pt-3">
           <Ratings
             :consumer-reviews="
@@ -93,9 +96,6 @@
             :pros="company.company_pro"
             :cons="company.company_con"
           />
-        </TabsContent>
-        <TabsContent :value="`${company.id}-best-for`" class="px-6 pb-6 pt-3">
-          <p>{{ company.specialize_in }}</p>
         </TabsContent>
       </Tabs>
     </div>

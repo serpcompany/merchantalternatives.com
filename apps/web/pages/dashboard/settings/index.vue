@@ -4,7 +4,7 @@
   });
 
   const { t } = useTranslations();
-  const { currentBrand } = useUser();
+  const { currentCompany } = useUser();
 
   useSeoMeta({
     title: t("settings.team.title"),
@@ -12,10 +12,10 @@
 </script>
 
 <template>
-  <div v-if="currentBrand" class="grid gap-6">
-    <SaasChangeBrandNameForm
-      :brandId="currentBrand.id"
-      :initialValue="currentBrand.name"
+  <div v-if="currentCompany" class="grid gap-6">
+    <SaasChangeCompanyNameForm
+      :companyId="currentCompany.id"
+      :initialValue="currentCompany.name"
     />
     <SaasDeleteTeamForm />
   </div>

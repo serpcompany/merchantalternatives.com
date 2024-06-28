@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="to-primary/10 border-b bg-gradient-to-b from-transparent py-8 pb-20"
-  >
+  <nav class="to-primary/10 border-b bg-gradient-to-b from-transparent py-28">
     <div class="container text-center">
       <h1 class="mx-auto max-w-3xl text-3xl font-bold lg:text-6xl">
         Where Business Owners Go for Expert Advice On Financial Services.

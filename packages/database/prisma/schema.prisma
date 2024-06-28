@@ -84,51 +84,10 @@ model UserOneTimePassword {
   @@map("user_one_time_password")
 }
 
-model Brand {
-  id                       String   @id @default(cuid())
-  slug                     String   @unique
-  name                     String
-  logoUrl                  String?  @map("logo_url")
-  website                  String?
-  engaged                  Boolean  @default(false)
-  hqLocation               String?  @map("hq_location")
-  numOfEmployees           Int?     @map("num_of_employees")
-  yearFounded              Int?     @map("year_founded")
-  ceo                      String?
-  summary                  String?
-  overview                 String?
-  rating                   Float?
-  ratesAndFeesRating       Int?     @map("rates_and_fees_rating")
-  truthInAdvertisingRating Int?     @map("truth_in_advertising_rating")
-  consumerReviewsRating    Int?     @map("consumer_reviews_rating")
-  customerSupportRating    Int?     @map("customer_support_rating")
-  reviewOneliner           String?  @map("review_oneliner")
-  reviewSummaryPoint1      String?  @map("review_summary_point1")
-  reviewSummaryPoint2      String?  @map("review_summary_point2")
-  reviewSummaryPoint3      String?  @map("review_summary_point3")
-  reviewText               String?  @map("review_text")
-  reviewPros               String[] @map("review_pros")
-  reviewCons               String[] @map("review_cons")
-  bestFor                  String?  @map("best_for")
-  specializesIn            String?  @map("specializes_in")
-  setupFee                 String?  @map("setup_fee")
-  swipeRate                String?  @map("swipe_rate")
-  earlyTerminationFee      String?  @map("early_termination_fee")
-  monthlyFee               String?  @map("monthly_fee")
-  keyedInRate              String?  @map("keyed_in_rate")
-  contractTerms            String?  @map("contract_terms")
-  alternatives             Brand[]  @relation("Alternatives")
-  alternativeMentions      Brand[]  @relation("Alternatives")
-  team                     Team?
-
-  @@index([slug])
-  @@map("brand")
-}
-
 model Team {
   id           String           @id @default(cuid())
-  brand        Brand            @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  brandId      String           @unique @map("brand_id")
+  company      company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId    Int              @unique @map("company_id")
   name         String
   avatarUrl    String?          @map("avatar_url")
   memberships  TeamMembership[]
@@ -412,6 +371,7 @@ model company {
   tag                                                                     tag[]                            @relation("CompanyToTag")
   company_pro                                                             company_pro[]
   company_con                                                             company_con[]
+  team                                                                    Team?
 
   @@index([name])
   @@index([slug])

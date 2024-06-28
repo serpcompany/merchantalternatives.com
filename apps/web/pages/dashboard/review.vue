@@ -1,17 +1,14 @@
 <script setup lang="ts">
-  import {
-    XCircleIcon,
-    CheckCircleIcon,
-    ArrowPathIcon,
-  } from "@heroicons/vue/24/outline";
+  import { ArrowPathIcon, ClockIcon } from "@heroicons/vue/24/outline";
 
   definePageMeta({ layout: "dashboard" });
 
-  const { currentBrand } = useUser();
+  const { currentCompany } = useUser();
 </script>
 
 <template>
   <SaasPage
+    v-if="currentCompany?.editor_rating"
     heading="Our Review"
     subheading="Our review of your financial services"
     :heading-button="{
@@ -20,37 +17,27 @@
       icon: ArrowPathIcon,
     }"
   >
-    <div v-if="currentBrand" class="flex flex-col gap-6">
-      <ReviewSummary :brand="currentBrand" :dashboard="true" />
-      <div
-        v-if="currentBrand.reviewPros.length && currentBrand.reviewCons.length"
-        class="flex gap-6"
-      >
-        <Card class="flex-1">
-          <CardHeader><CardTitle>What We Like</CardTitle></CardHeader>
-          <CardContent>
-            <div class="flex flex-col gap-3.5">
-              <div v-for="pro in currentBrand.reviewPros" class="flex gap-2">
-                <CheckCircleIcon class="text-success size-6 flex-none" />{{
-                  pro
-                }}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card class="flex-1">
-          <CardHeader><CardTitle>What We Don't Like</CardTitle></CardHeader>
-          <CardContent>
-            <div class="flex flex-col gap-3.5">
-              <div v-for="con in currentBrand.reviewCons" class="flex gap-2">
-                <XCircleIcon class="text-destructive size-6 flex-none" />{{
-                  con
-                }}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    <div v-if="currentCompany" class="flex flex-col gap-6">
+      <ReviewSummary :company="currentCompany" :dashboard="true" />
+      <ProsAndCons
+        v-if="
+          currentCompany.company_pro.length && currentCompany.company_con.length
+        "
+        :pros="currentCompany.company_pro"
+        :cons="currentCompany.company_con"
+      />
     </div>
   </SaasPage>
+  <div v-else class="mt-40">
+    <div class="flex flex-col items-center">
+      <ClockIcon class="stoke-2 size-28 text-gray-500" />
+      <h1 class="mt-5 text-2xl font-medium text-gray-500">
+        Your review is on the way
+      </h1>
+      <p class="mt-4 text-center text-gray-400">
+        We are currently reviewing your financial services. Please check back
+        later.
+      </p>
+    </div>
+  </div>
 </template>

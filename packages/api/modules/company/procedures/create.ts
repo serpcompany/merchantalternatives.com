@@ -1,4 +1,4 @@
-import { TeamSchema, TeamMemberRoleSchema, db, BrandSchema } from "database";
+import { TeamSchema, TeamMemberRoleSchema, db, companySchema } from "database";
 import { z } from "zod";
 import { protectedProcedure } from "../../trpc";
 
@@ -9,7 +9,7 @@ export const create = protectedProcedure
     }),
   )
   .output(
-    BrandSchema.extend({
+    companySchema.extend({
       team: TeamSchema.extend({
         memberships: z.array(
           z.object({
@@ -22,16 +22,16 @@ export const create = protectedProcedure
     }),
   )
   .mutation(async ({ input: { name }, ctx: { user } }) => {
-    const existingBrand = await db.brand.findFirst({
+    const existingCompany = await db.company.findFirst({
       where: {
         slug: name.toLowerCase().replace(/\s/g, "-"),
       },
     });
-    const slug = existingBrand
+    const slug = existingCompany
       ? `${name.toLowerCase().replace(/\s/g, "-")}-${Date.now()}`
       : name.toLowerCase().replace(/\s/g, "-");
 
-    const brand = await db.brand.create({
+    const company = await db.company.create({
       data: {
         name,
         slug,
@@ -64,5 +64,5 @@ export const create = protectedProcedure
       },
     });
 
-    return brand;
+    return company;
   });

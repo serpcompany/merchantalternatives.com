@@ -6,32 +6,32 @@
 
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
-  const { reloadUser, currentBrand } = useUser();
+  const { reloadUser, currentCompany } = useUser();
 
   const emit = defineEmits(["close"]);
 
   const formSchema = toTypedSchema(
     z.object({
-      overview: z.string().optional(),
+      description: z.string().optional(),
     }),
   );
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: formSchema,
     initialValues: {
-      overview: currentBrand.value?.overview || undefined,
+      description: currentCompany.value?.description || undefined,
     },
   });
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      await apiCaller.brand.update.mutate({
-        id: currentBrand.value!.id,
-        overview: values.overview,
+      await apiCaller.company.update.mutate({
+        id: currentCompany.value!.id,
+        data: { description: values.description },
       });
 
       toast({
-        title: "Your brand has been updated",
+        title: "Your company has been updated",
       });
 
       await reloadUser();
@@ -39,7 +39,7 @@
     } catch (e) {
       toast({
         title:
-          "We are sorry, but we were unable to update your brand. Please try again later.",
+          "We are sorry, but we were unable to update your company. Please try again later.",
         variant: "error",
       });
     }
@@ -48,9 +48,9 @@
 
 <template>
   <form @submit="onSubmit" class="flex flex-col gap-4">
-    <FormField v-slot="{ componentField }" name="overview">
+    <FormField v-slot="{ componentField }" name="description">
       <FormItem>
-        <FormLabel for="overview">Overview</FormLabel>
+        <FormLabel for="description">Tell us about your company</FormLabel>
         <FormControl>
           <Input v-bind="componentField" />
         </FormControl>

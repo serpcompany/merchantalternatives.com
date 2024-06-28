@@ -23,8 +23,8 @@ export const mailTemplates = {
     name: "EmailChange.vue",
     subject: "Email changed",
   },
-  claimBrandRequest: {
-    name: "ClaimBrandRequest.vue",
-    subject: "Brand claim request",
+  claimCompanyRequest: {
+    name: "ClaimCompanyRequest.vue",
+    subject: "Claim company request",
   },
 };

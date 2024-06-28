@@ -40,7 +40,7 @@
       <Card class="w-full overflow-hidden">
         <div class="px-4 pb-4 pt-10 lg:flex lg:justify-between lg:px-6">
           <div>
-            <BrandLogo
+            <CompanyLogo
               class="size-24 text-xl"
               :src="
                 company.company_image.length
@@ -63,10 +63,10 @@
             </p>
             <div class="mt-3 flex gap-2">
               <Button
-                v-if="company.shortlink"
+                v-if="company.shortlink || company.url"
                 size="sm"
                 @click="
-                  navigateTo(company.shortlink, {
+                  navigateTo(company.shortlink || company.url, {
                     external: true,
                     open: {
                       target: '_blank',
@@ -141,7 +141,7 @@
               :key="alternative.id"
               class="hover:bg-highlight/20 flex items-center gap-2 px-3 py-3.5"
             >
-              <BrandLogo :src="alternative.logoUrl" :name="alternative.name" />
+              <CompanyLogo :src="alternative.logoUrl" :name="alternative.name" />
               <div class="flex flex-col items-start">
                 <h3 class="text-lg font-semibold">{{ alternative.name }}</h3>
                 <StarRating

@@ -4,7 +4,6 @@ import * as authProcedures from "../auth/procedures";
 import * as billingProcedures from "../billing/procedures";
 import * as newsletterProcedures from "../newsletter/procedures";
 import * as teamProcedures from "../team/procedures";
-import * as brandProcedures from "../brand/procedures";
 import * as uploadsProcedures from "../uploads/procedures";
 import * as glossaryProcedures from "../glossary/procedures";
 import * as blogProcedures from "../blog/procedures";
@@ -16,7 +15,6 @@ export const apiRouter = router({
   auth: router(authProcedures),
   billing: router(billingProcedures),
   team: router(teamProcedures),
-  brand: router(brandProcedures),
   newsletter: router(newsletterProcedures),
   uploads: router(uploadsProcedures),
   admin: router(adminProcedures),

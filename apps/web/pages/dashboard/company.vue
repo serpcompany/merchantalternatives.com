@@ -5,10 +5,10 @@
     layout: "dashboard",
   });
 
-  const { currentBrand } = useUser();
+  const { currentCompany } = useUser();
   const { settingsDialogOpen } = useDashboardState();
 
-  type FormType = "brand header" | "quick facts" | "about" | null;
+  type FormType = "company header" | "quick facts" | "about" | null;
   const openFormType = ref<FormType>(null);
 
   const openSettingsDialog = (formType: FormType) => {
@@ -23,13 +23,13 @@
 
 <template>
   <SaasPage
-    v-if="currentBrand"
+    v-if="currentCompany"
     heading="Company Profile"
     subheading="How your company looks in our listings"
     :heading-button="{
       label: 'Go to live profile',
       action: () =>
-        navigateTo(`/reviews/${currentBrand!.slug}`, {
+        navigateTo(`/reviews/${currentCompany!.slug}`, {
           open: { target: '_blank' },
         }),
       icon: ArrowTopRightOnSquareIcon,
@@ -39,12 +39,12 @@
       <h2 class="text-lg font-medium">Header •</h2>
       <Button
         variant="link"
-        @click="openSettingsDialog('brand header')"
+        @click="openSettingsDialog('company header')"
         class="px-2 text-lg font-medium"
         >Edit</Button
       >
     </div>
-    <SaasBrandHeaderPreview />
+    <SaasCompanyHeaderPreview />
     <div class="mt-8 flex w-full items-center">
       <h2 class="text-lg font-medium">Quick Facts •</h2>
       <Button
@@ -74,8 +74,8 @@
   </SaasPage>
 
   <SaasSettingsDialog :title="'Edit ' + openFormType">
-    <SaasBrandHeaderForm
-      v-if="openFormType === 'brand header'"
+    <SaasCompanyHeaderForm
+      v-if="openFormType === 'company header'"
       @close="closeSettingsDialog()"
     />
     <SaasQuickFactsForm

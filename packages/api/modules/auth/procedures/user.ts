@@ -3,7 +3,10 @@ import {
   TeamSchema,
   UserSchema,
   db,
-  BrandSchema,
+  companySchema,
+  company_imageSchema,
+  company_proSchema,
+  company_conSchema,
 } from "database";
 import { z } from "zod";
 import { publicProcedure } from "../../trpc";
@@ -24,7 +27,11 @@ export const user = publicProcedure
           .array(
             TeamMembershipSchema.extend({
               team: TeamSchema.extend({
-                brand: BrandSchema.nullable(),
+                company: companySchema.extend({
+                  company_image: z.array(company_imageSchema),
+                  company_pro: z.array(company_proSchema),
+                  company_con: z.array(company_conSchema),
+                }),
               }),
             }),
           )

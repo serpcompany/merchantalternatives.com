@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  const { currentBrand } = useUser();
+  const { currentCompany } = useUser();
 </script>
 
 <template>
-  <Card v-if="currentBrand">
+  <Card v-if="currentCompany">
     <CardContent class="pt-6">
       <div
-        v-if="currentBrand.overview"
-        v-html="currentBrand.overview"
+        v-if="currentCompany.description"
+        v-html="currentCompany.description"
         class="externalHtml"
       />
       <p v-else>Nothing here yet.</p>

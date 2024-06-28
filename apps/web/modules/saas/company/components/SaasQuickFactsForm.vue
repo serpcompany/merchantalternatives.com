@@ -6,41 +6,43 @@
 
   const { apiCaller } = useApiCaller();
   const { toast } = useToast();
-  const { reloadUser, currentBrand } = useUser();
+  const { reloadUser, currentCompany } = useUser();
 
   const emit = defineEmits(["close"]);
 
   const formSchema = toTypedSchema(
     z.object({
       ceo: z.string().max(100).optional(),
-      numOfEmployees: z.coerce.number().int().optional(),
+      numOfEmployees: z.coerce.string().optional(),
       hqLocation: z.string().max(100).optional(),
-      yearFounded: z.coerce.number().int().optional(),
+      yearFounded: z.coerce.string().optional(),
     }),
   );
 
   const { handleSubmit, isSubmitting } = useForm({
     validationSchema: formSchema,
     initialValues: {
-      ceo: currentBrand.value?.ceo || undefined,
-      numOfEmployees: currentBrand.value?.numOfEmployees || undefined,
-      hqLocation: currentBrand.value?.hqLocation || undefined,
-      yearFounded: currentBrand.value?.yearFounded || undefined,
+      ceo: currentCompany.value?.ceo || undefined,
+      numOfEmployees: currentCompany.value?.num_employees || undefined,
+      hqLocation: currentCompany.value?.hq_location || undefined,
+      yearFounded: currentCompany.value?.year_founded || undefined,
     },
   });
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      await apiCaller.brand.update.mutate({
-        id: currentBrand.value!.id,
-        ceo: values.ceo,
-        numOfEmployees: values.numOfEmployees,
-        hqLocation: values.hqLocation,
-        yearFounded: values.yearFounded,
+      await apiCaller.company.update.mutate({
+        id: currentCompany.value!.id,
+        data: {
+          ceo: values.ceo,
+          num_employees: values.numOfEmployees,
+          hq_location: values.hqLocation,
+          year_founded: values.yearFounded,
+        },
       });
 
       toast({
-        title: "Your brand has been updated",
+        title: "Your company has been updated",
       });
 
       await reloadUser();
@@ -48,7 +50,7 @@
     } catch (e) {
       toast({
         title:
-          "We are sorry, but we were unable to update your brand. Please try again later.",
+          "We are sorry, but we were unable to update your company. Please try again later.",
         variant: "error",
       });
     }

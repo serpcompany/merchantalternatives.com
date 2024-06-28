@@ -1,6 +1,6 @@
 <script setup lang="ts">
   const { t } = useTranslations();
-  const { currentBrand } = useUser();
+  const { currentCompany } = useUser();
 
   const tabs = [
     {
@@ -20,8 +20,8 @@
 
 <template>
   <SaasPage
-    v-if="currentBrand"
-    :heading="`${currentBrand.name} Settings`"
+    v-if="currentCompany"
+    :heading="`${currentCompany.name} Settings`"
     subheading="All your company settings"
     variant="sm"
   >
