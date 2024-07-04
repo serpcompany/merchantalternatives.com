@@ -4,6 +4,16 @@
     ArrowLongRightIcon,
   } from "@heroicons/vue/20/solid";
 
+  useHead({
+    title: "Merchant Reviews | Merchant Alternatives",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Merchant Alternatives provides independently researched un-biased reviews of merchant account providers, software & vendors.",
+      },
+    ],
+  });
   const { apiCaller } = useApiCaller();
   const route = useRoute();
 

@@ -80,8 +80,9 @@ export default defineNuxtConfig({
 
   modules: [
     // "./modules/ui/lib/module.ts",
-    "@nuxtjs/i18n", // configured here and in i18n.config.ts
-    "@nuxtjs/tailwindcss", // configured in tailwind.config.ts
+    // configured here and in i18n.config.ts
+    "@nuxtjs/i18n", // configured in tailwind.config.ts
+    "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "@nuxtjs/color-mode",
     "@nuxt/content",
@@ -89,6 +90,7 @@ export default defineNuxtConfig({
     "nuxt-simple-robots",
     "@vue-email/nuxt",
     "shadcn-nuxt",
+    "@nuxtjs/seo",
   ],
 
   // @nuxtjs/i18n
@@ -143,6 +145,12 @@ export default defineNuxtConfig({
   // nuxt-simple-robots -> nuxt-site-config
   site: {
     url: baseUrl,
+    name: "Merchant Alternatives",
+    description:
+      "Where Business Owners Go for Expert Advice On Financial Services.",
+  },
+  ogImage: {
+    enabled: false,
   },
 
   shadcn: {
