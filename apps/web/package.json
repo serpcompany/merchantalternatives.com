@@ -43,7 +43,7 @@
     "@nuxtjs/seo": "2.0.0-rc.11",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@types/uuid": "^9.0.8",
-    "@vee-validate/zod": "^4.12.6",
+    "@vee-validate/zod": "^4.13.1",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "database": "workspace:*",
