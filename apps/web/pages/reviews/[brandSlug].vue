@@ -16,9 +16,8 @@
     { title: "Review", to: `/reviews/${company.slug}/review` },
     { title: "About", to: `/reviews/${company.slug}/about` },
     { title: "Pricing", to: `/reviews/${company.slug}/pricing` },
-    { title: "Services", to: `/reviews/${company.slug}/services` },
     { title: "Advertising", to: `/reviews/${company.slug}/advertising` },
-    { title: "Contracts", to: `/reviews/${company.slug}/contracts` },
+    { title: "Reputation", to: `/reviews/${company.slug}/reputation` },
   ]);
 
   const inform = () => {
@@ -128,35 +127,6 @@
           >See our best picks</Button
         >
       </Card>
-      <!--
-      <Card v-if="brand.alternatives.length">
-        <CardHeader>
-          <CardTitle>{{ company.name }} Alternatives</CardTitle>
-        </CardHeader>
-        <CardContent class="px-0 py-0">
-          <div class="flex flex-col divide-y">
-            <NuxtLink
-              v-for="alternative in brand.alternatives"
-              :to="`/reviews/${alternative.slug}`"
-              :key="alternative.id"
-              class="hover:bg-highlight/20 flex items-center gap-2 px-3 py-3.5"
-            >
-              <CompanyLogo :src="alternative.logoUrl" :name="alternative.name" />
-              <div class="flex flex-col items-start">
-                <h3 class="text-lg font-semibold">{{ alternative.name }}</h3>
-                <StarRating
-                  v-if="alternative.rating"
-                  :rating="alternative.rating"
-                  size="sm"
-                />
-                <p class="text-muted-foreground mt-1 truncate text-sm">
-                  {{ alternative.reviewOneliner }}
-                </p>
-              </div>
-            </NuxtLink>
-          </div>
-        </CardContent>
-      </Card>-->
     </div>
   </div>
 </template>

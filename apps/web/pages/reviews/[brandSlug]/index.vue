@@ -26,10 +26,10 @@
         >See all details</CardButton
       >
     </Card>
-    <Card v-if="company.merchant_summary">
+    <Card v-if="company.pricing_details">
       <CardHeader><CardTitle>Pricing</CardTitle></CardHeader>
       <CardContent>
-        <div v-if="company.pricing_details" v-html="company.pricing_details" />
+        <div v-html="company.pricing_details" class="externalHtml" />
       </CardContent>
       <CardButton @click="navigateTo(`/reviews/${company.slug}/pricing`)"
         >See all details</CardButton

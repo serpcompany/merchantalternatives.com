@@ -11,10 +11,15 @@
 
 <template>
   <div class="flex flex-col gap-6">
-    <Card v-if="company.advertising_sales_details">
-      <CardHeader><CardTitle>Advertising & Sales</CardTitle></CardHeader>
-      <CardContent>
-        <div v-html="company.pricing_details" class="externalHtml" />
+    <Card v-if="company.ratings_reviews_complaints_details">
+      <CardHeader
+        ><CardTitle>Complaints, Ratings and Reviews</CardTitle></CardHeader
+      >
+      <CardContent
+        ><div
+          v-html="company.ratings_reviews_complaints_details"
+          class="externalHtml"
+        />
       </CardContent>
     </Card>
   </div>
