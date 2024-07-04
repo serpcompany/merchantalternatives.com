@@ -1,16 +1,5 @@
 <script setup lang="ts">
   import { RocketLaunchIcon, FlagIcon } from "@heroicons/vue/24/outline";
-
-  useHead({
-    title: "About Us | Merchant Alternatives",
-    meta: [
-      {
-        name: "description",
-        content:
-          "Merchant Alternatives provides independently researched un-biased reviews of merchant account providers, software & vendors.",
-      },
-    ],
-  });
 </script>
 
 <template>

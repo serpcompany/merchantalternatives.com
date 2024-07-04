@@ -1,24 +1,10 @@
-<script setup lang="ts">
-  import {
-    CloudIcon,
-    PaperclipIcon,
-    PhoneIcon,
-    PointerIcon,
-    StarIcon,
-    UploadIcon,
-  } from "lucide-vue-next";
-
-  const heroImage = ref("/images/hero.svg");
-  const heroDarkImage = ref("/images/hero-dark.svg");
-</script>
-
 <template>
   <section class="bg-card text-card-foreground py-24">
     <div class="container">
       <!-- Section header -->
       <div class="text-center">
         <h1 class="text-4xl font-bold lg:text-5xl">
-          Process more on sales. Save on fees. Sleep at night.
+          Process more sales. Save on fees. Sleep at night.
         </h1>
       </div>
 
