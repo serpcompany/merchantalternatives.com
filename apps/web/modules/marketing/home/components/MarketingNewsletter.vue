@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { toTypedSchema } from "@vee-validate/zod";
-  import { AlertCircleIcon, CheckCircleIcon, KeyIcon } from "lucide-vue-next";
+  import { AlertCircleIcon, CheckCircleIcon, FlameIcon } from "lucide-vue-next";
   import { useForm } from "vee-validate";
   import { z } from "zod";
 
@@ -51,11 +51,14 @@
   <section class="py-24">
     <div class="container">
       <div class="mb-12 text-center">
-        <KeyIcon class="text-primary mx-auto size-12" />
+        <FlameIcon class="text-primary mx-auto size-12" />
         <h1 class="mt-10 text-3xl font-bold lg:text-4xl">
-          {{ $t("newsletter.title") }}
+          Keep up with the latest trends
         </h1>
-        <p class="mt-3 text-lg opacity-70">{{ $t("newsletter.subtitle") }}</p>
+        <p class="mt-3 text-lg opacity-70">
+          Join thousands in getting the hottest in the payments industry to your
+          inbox.
+        </p>
       </div>
 
       <div class="mx-auto max-w-lg">

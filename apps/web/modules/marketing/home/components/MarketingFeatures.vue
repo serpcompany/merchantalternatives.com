@@ -13,122 +13,96 @@
 </script>
 
 <template>
-  <section class="bg-card py-24 text-card-foreground">
+  <section class="bg-card text-card-foreground py-24">
     <div class="container">
       <!-- Section header -->
       <div class="text-center">
         <h1 class="text-4xl font-bold lg:text-5xl">
-          Features your clients will love
+          Process more on sales. Save on fees. Sleep at night.
         </h1>
-        <p class="mt-3 text-lg opacity-70">
-          In this section you can showcase the features of your SaaS.
-        </p>
       </div>
 
       <div class="mt-20 grid grid-cols-1 gap-16">
         <!-- Feature 1 -->
         <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div class="rounded-2xl bg-primary/10 p-12">
-            <img :src="heroImage" class="block dark:hidden" alt="Feature 1" />
-            <img
-              :src="heroDarkImage"
-              class="hidden dark:block"
-              alt="Feature 1"
-            />
-          </div>
+          <NuxtImg
+            src="/images/landing/landing-3.jpg"
+            class="h-[380px] w-[550px] rounded-2xl object-cover"
+            alt="Feature 1"
+          />
 
           <div>
-            <h3 class="text-3xl font-bold">Feature A</h3>
-            <p class="mt-2 leading-normal opacity-70">
-              This is a brilliant feature. And below you can see some reasons
-              why. This is basically just a dummy text.
+            <h3 class="text-3xl font-bold">
+              Get it right when it comes to payments
+            </h3>
+            <p class="text-md mt-4">
+              Choosing the right credit card processors for your business can be
+              the difference between saving thousands of dollars on fees to
+              having your account frozen, suspended, or terminated.
             </p>
-            <Button class="mt-4 px-0" variant="link" size="sm"
-              >Learn more &rarr;</Button
-            >
-
-            <div class="mt-6 grid grid-cols-2 gap-4">
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <StarIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 1</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <PointerIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 2</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-            </div>
+            <p class="text-md mt-4">
+              Click the button below to see our top picks of the best providers
+              so you can process more sales, save on fees, and keep your
+              merchant account safe from closure.
+            </p>
+            <Button variant="outline" size="lg" class="mt-6">
+              <NuxtLink to="/reviews">Go to reviews</NuxtLink>
+            </Button>
           </div>
         </div>
         <!-- Feature 2 -->
         <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div class="rounded-2xl bg-primary/10 p-12 lg:order-2">
-            <img :src="heroImage" class="block dark:hidden" alt="Feature 2" />
-            <img
-              :src="heroDarkImage"
-              class="hidden dark:block"
-              alt="Feature 2"
-            />
-          </div>
+          <NuxtImg
+            src="/images/landing/landing-4.jpg"
+            class="h-[380px] w-[550px] rounded-2xl object-cover lg:order-2"
+            alt="Feature 1"
+          />
 
           <div class="lg:order-1">
-            <h3 class="text-3xl font-bold">Feature B</h3>
-            <p class="mt-2 leading-normal opacity-70">
-              This is a brilliant feature. And below you can see some reasons
-              why. This is basically just a dummy text.
+            <h3 class="text-3xl font-bold">
+              Find the best players in your industry
+            </h3>
+            <p class="text-md mt-4">
+              Choosing the right credit card processors for your business can be
+              the difference between saving thousands of dollars on fees to
+              having your account frozen, suspended, or terminated.
             </p>
-            <Button class="mt-4 px-0" variant="link" size="sm"
-              >Learn more &rarr;</Button
-            >
-
-            <div class="mt-6 grid grid-cols-2 gap-4">
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <UploadIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 1</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <CloudIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 2</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-            </div>
+            <p class="text-md mt-4">
+              Click the button below to see our top picks of the best providers
+              so you can process more sales, save on fees, and keep your
+              merchant account safe from closure.
+            </p>
+            <Button variant="outline" size="lg" class="mt-6">
+              <NuxtLink to="/reviews/industry">Go to industries</NuxtLink>
+            </Button>
           </div>
         </div>
         <!-- Feature 3 -->
         <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          <div class="rounded-2xl bg-primary/10 p-12">
-            <img :src="heroImage" class="block dark:hidden" alt="Feature 3" />
-            <img
-              :src="heroDarkImage"
-              class="hidden dark:block"
-              alt="Feature 3"
-            />
-          </div>
+          <NuxtImg
+            src="/images/landing/landing-5.jpg"
+            class="h-[380px] w-[550px] rounded-2xl object-cover"
+            alt="Feature 1"
+          />
 
           <div>
-            <h3 class="text-3xl font-bold">Feature C</h3>
-            <p class="mt-2 leading-normal opacity-70">
-              This is a brilliant feature. And below you can see some reasons
-              why. This is basically just a dummy text.
+            <h3 class="text-3xl font-bold">
+              Want your payments provider in front on millions of searching
+              customers?
+            </h3>
+            <p class="text-md mt-4">
+              Choosing the right credit card processors for your business can be
+              the difference between saving thousands of dollars on fees to
+              having your account frozen, suspended, or terminated.
             </p>
-            <Button class="mt-4 px-0" variant="link" size="sm"
-              >Learn more &rarr;</Button
-            >
-
-            <div class="mt-6 grid grid-cols-2 gap-4">
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <PhoneIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 1</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-              <div class="rounded-xl border bg-card p-4 text-card-foreground">
-                <PaperclipIcon class="size-6 text-3xl text-primary" />
-                <strong class="mt-2 block">Benefit 2</strong>
-                <p class="opacity-70">This is a brilliant benefit.</p>
-              </div>
-            </div>
+            <p class="text-md mt-4">
+              Click the button below to see our top picks of the best providers
+              so you can process more sales, save on fees, and keep your
+              merchant account safe from closure.
+            </p>
+            <Button variant="outline" size="lg" class="mt-6">
+              <NuxtLink to="/auth/signup">Sign up</NuxtLink>
+            </Button>
           </div>
         </div>
       </div>

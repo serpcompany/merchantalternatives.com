@@ -4,5 +4,6 @@
   <div class="bg-white pt-20">
     <MarketingHero />
     <MarketingFeatures />
+    <MarketingBlogSection />
   </div>
 </template>

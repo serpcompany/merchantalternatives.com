@@ -167,7 +167,7 @@
 
     <!-- Content section -->
     <div
-      class="mx-auto -mt-12 flex max-w-7xl flex-col px-6 pb-40 sm:mt-0 lg:flex-row lg:px-8 xl:-mt-8"
+      class="mx-auto -mt-12 flex max-w-7xl flex-col px-6 pb-32 sm:mt-0 lg:flex-row lg:px-8 xl:-mt-8"
     >
       <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-none lg:px-14">
         <div
@@ -219,5 +219,7 @@
         </div>
       </div>
     </div>
+
+    <MarketingBlogSection class="pb-24" />
   </div>
 </template>
