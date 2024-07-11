@@ -124,21 +124,11 @@
 <template>
   <div>
     <h1 class="text-3xl font-bold">{{ $t("auth.login.title") }}</h1>
-    <p class="mb-6 mt-4 text-muted-foreground">
+    <p class="text-muted-foreground mb-10 mt-4">
       {{ $t("auth.login.subtitle") }}
     </p>
 
     <SaasTeamInvitationInfo v-if="invitationCode" class="mb-6" />
-
-    <div class="flex flex-col items-stretch gap-3">
-      <SaasSocialSigninButton
-        v-for="providerId of Object.keys(oAuthProviders)"
-        :key="providerId"
-        :provider="providerId"
-      />
-    </div>
-
-    <hr class="my-8" />
 
     <form @submit.prevent="onSubmit" class="flex flex-col items-stretch gap-6">
       <SaasSigninModeSwitch class="w-full" v-model="signinMode" />
