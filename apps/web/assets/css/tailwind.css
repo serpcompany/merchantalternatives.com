@@ -1,3 +1,4 @@
+/* apps/web/assets/css/tailwind.css */
 @layer base {
   * {
     @apply border-border;
