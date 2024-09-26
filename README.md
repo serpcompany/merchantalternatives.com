@@ -7,16 +7,24 @@
 
 ## Installation Steps
 
+**1. Clone the repo & setup the `.env` file:**
 ```bash
-
 # Create .env file (in ~/apps/web/.env)
-cd apps/web && mv .env.example .env
+mv apps/web/.env.example apps/web/.env
+```
+...
+and fill out the `.env` file with the necessary environment variables.
 
-# Install dependencies
+
+**2. Install dependencies:**
+
+```bash
+# Install dependencies from project root
 pnpm install
-
-# Setup prisma
-pnpm db:generate
 ```
 
-> Note: Do NOT run `db:push` unless you're setting up a fresh development environment with an empty database and are sure you aren't connected to the main DB or youll erase everything and put a bounty on your own head of $1000.
+**3. Setup prisma:**
+```bash
+pnpm db:generate
+```
+> Note: Do NOT run `db:push` unless you're setting up a fresh development environment with an empty database and are sure you aren't connected to the main DB or youll erase everything and put a bounty on your own head of $1000, dead or alive (preferably dead).
