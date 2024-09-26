@@ -1,3 +1,4 @@
+// packages/utils/lib/base-url.ts
 export const getBaseUrl = () => {
   if (process.env.NUXT_PUBLIC_SITE_URL) {
     return process.env.NUXT_PUBLIC_SITE_URL;
