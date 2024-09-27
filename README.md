@@ -28,3 +28,8 @@ pnpm install
 pnpm db:generate
 ```
 > Note: Do NOT run `db:push` unless you're setting up a fresh development environment with an empty database and are sure you aren't connected to the main DB or youll erase everything and put a bounty on your own head of $1000, dead or alive (preferably dead).
+
+
+## Database
+
+The supabase db instance is located at https://github.com/serpcompany/supabase-merchantalternatives.com
