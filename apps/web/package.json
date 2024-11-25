@@ -20,7 +20,7 @@
     "api": "workspace:*",
     "auth": "workspace:*",
     "cropperjs": "^1.6.2",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "install": "^0.13.0",
     "mail": "workspace:*",
     "prettier": "^3.2.5",
