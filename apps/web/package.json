@@ -23,7 +23,7 @@
     "date-fns": "^3.6.0",
     "install": "^0.13.0",
     "mail": "workspace:*",
-    "prettier": "^3.2.5",
+    "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "shadcn-nuxt": "^0.10.2",
     "tailwind-config": "workspace:*",
