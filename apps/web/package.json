@@ -30,7 +30,7 @@
     "tsconfig": "workspace:*",
     "utils": "workspace:*",
     "uuid": "^9.0.1",
-    "vue-advanced-cropper": "^2.8.8",
+    "vue-advanced-cropper": "^2.8.9",
     "vue-star-rating": "^2.1.0"
   },
   "devDependencies": {
